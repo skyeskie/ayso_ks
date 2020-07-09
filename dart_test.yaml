@@ -1,0 +1,13 @@
+paths:
+  - test
+  - lib
+
+tags:
+  dao:
+
+  models:
+
+  views:
+
+  widgets:
+
