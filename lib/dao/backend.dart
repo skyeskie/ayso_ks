@@ -29,6 +29,11 @@ abstract class Backend {
 }
 
 class SettingsDataType {
-  int regionNumber;
-  List<String> savedTeams = [];
+  const SettingsDataType({
+    this.regionNumber = 49,
+    this.savedTeams = const [],
+  });
+
+  final int regionNumber;
+  final List<String> savedTeams;
 }
