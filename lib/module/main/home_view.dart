@@ -1,11 +1,10 @@
-import 'package:ayso_ks/widgets/large_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class HomeView extends StatelessWidget {
-  void _navigateSchedules() {}
+import '../../widgets/large_icon_button.dart';
 
+class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

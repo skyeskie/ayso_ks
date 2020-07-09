@@ -4,12 +4,6 @@ import 'division.dart';
 import 'region.dart';
 
 class Team {
-  String code;
-  String coach;
-  String coachTel;
-  Division division;
-  Region region;
-
   Team({
     @required this.code,
     @required this.coach,
@@ -17,4 +11,10 @@ class Team {
     this.division,
     this.region,
   });
+
+  String code;
+  String coach;
+  String coachTel;
+  Division division;
+  Region region;
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class StreetMapView extends StatelessWidget {
-  final int regionNum;
-
   StreetMapView(this.regionNum);
+
+  final int regionNum;
 
   @override
   Widget build(BuildContext context) {

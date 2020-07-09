@@ -1,8 +1,8 @@
-import 'package:ayso_ks/module/region/region_info_tile.dart';
-import 'package:ayso_ks/module/region/region_module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import '../region/region_info_tile.dart';
+import '../region/region_module.dart';
 import 'app.dart';
 import 'home_view.dart';
 

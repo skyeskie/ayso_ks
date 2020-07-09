@@ -17,25 +17,26 @@ abstract class WeekCacheDAO {
   Future init(Iterable<DateTime> starts);
 }
 
+/// @param starts - list of Date objects indicating week start
+/// Doesn't need to be in-order
 ///
-/// @param starts - list of Date objects indicating week start. Doesn't need to be in-order
-/// @throws RangeError if starts doesn't have at least one item
+///@throws RangeError if starts doesn't have at least one item
 /// @param now (optional) - defaults to getting current time
 /// @returns {number} current game week
 /// - If before season, constrain to first week
 /// - If after season, constrain to last week
 int calculateCurrentWeek(Iterable<DateTime> starts, {DateTime now}) {
   if (starts == null || starts.isEmpty) {
-    throw new RangeError('Need at least 1 date object in starts');
+    throw RangeError('Need at least 1 date object in starts');
   }
 
-  if (now == null) now = DateTime.now();
+  now ??= DateTime.now();
   if (now.isBefore(starts.first)) {
     return 1;
   }
 
-  int weekNum = 0;
-  for (var weekStart in starts) {
+  var weekNum = 0;
+  for (final weekStart in starts) {
     if (now.isBefore(weekStart)) return weekNum;
     weekNum++;
   }

@@ -9,7 +9,7 @@ abstract class GamesDAO {
   Future<Game> getGame(String id);
 
   /// Use findGames(week: week, regionId: region)
-  @deprecated
+  @Deprecated('Use findGames')
   Future<Iterable<Game>> findByWeek(int week, {int region});
 
   /// Lookup games with optional filters

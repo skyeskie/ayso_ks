@@ -5,15 +5,15 @@ import 'package:flutter/material.dart';
 /// Shows [icon] to the left of the main [label]
 /// [action] is called onPressed
 class LargeIconButton extends StatelessWidget {
-  final IconData icon;
-  final Widget label;
-  final Function action;
-
   const LargeIconButton({
     @required this.icon,
     @required this.label,
     @required this.action,
   });
+
+  final IconData icon;
+  final Widget label;
+  final Function action;
 
   @override
   Widget build(BuildContext context) {

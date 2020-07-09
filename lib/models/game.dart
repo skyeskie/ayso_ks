@@ -4,17 +4,6 @@ import 'division.dart';
 import 'region.dart';
 
 class Game implements Comparable {
-  static const BYE_TEAM = '-';
-
-  String id;
-  String home;
-  String away;
-  int weekNum;
-  DateTime startTime;
-  Region region;
-  String field;
-  Division division;
-
   Game({
     @required this.id,
     @required this.home,
@@ -26,6 +15,17 @@ class Game implements Comparable {
     this.division,
   });
 
+  static const BYE_TEAM = '-';
+
+  String id;
+  String home;
+  String away;
+  int weekNum;
+  DateTime startTime;
+  Region region;
+  String field;
+  Division division;
+
   bool hasTeam(String teamId) {
     return home == teamId || away == teamId;
   }
@@ -33,7 +33,7 @@ class Game implements Comparable {
   String getOpponent(String teamId) {
     if (teamId == home) return away;
     if (teamId == away) return home;
-    throw new RangeError('Team "$teamId" is not playing in the game');
+    throw RangeError('Team "$teamId" is not playing in the game');
   }
 
   bool isBye() {
@@ -46,7 +46,7 @@ class Game implements Comparable {
 
   //Maybe not full Comparable ?
   @override
-  int compareTo(other) {
+  int compareTo(dynamic other) {
     return startTime.millisecondsSinceEpoch -
         other.startTime.millisecondsSinceEpoch;
   }

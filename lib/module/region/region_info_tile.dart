@@ -1,8 +1,14 @@
-import 'package:ayso_ks/models/region.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 
+import '../../models/region.dart';
+
 class RegionInfoTile extends StatelessWidget {
+  const RegionInfoTile({
+    Key key,
+    this.region,
+  }) : super(key: key);
+
   final Region defaultRegion = const Region(
     id: 1,
     number: 40,
@@ -13,11 +19,6 @@ class RegionInfoTile extends StatelessWidget {
   );
 
   final Region region;
-
-  const RegionInfoTile({
-    Key key,
-    this.region,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

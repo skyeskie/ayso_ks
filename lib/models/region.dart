@@ -1,6 +1,23 @@
 import 'package:meta/meta.dart';
 
 class Region {
+  const Region({
+    @required this.id,
+    @required this.number,
+    @required this.name,
+    @required this.mapFile,
+    @required this.lat,
+    @required this.lon,
+  });
+
+  factory Region.fromNumber(int regionNumber) {
+    return REGIONS.singleWhere((r) => r.number == regionNumber);
+  }
+
+  factory Region.fromId(int id) {
+    return REGIONS.singleWhere((r) => r.id == id);
+  }
+
   // ignore: non_constant_identifier_names
   static Set<Region> REGIONS = {
     Region(
@@ -47,23 +64,6 @@ class Region {
   final String mapFile;
   final double lat;
   final double lon;
-
-  const Region({
-    @required this.id,
-    @required this.number,
-    @required this.name,
-    @required this.mapFile,
-    @required this.lat,
-    @required this.lon,
-  });
-
-  factory Region.fromNumber(int regionNumber) {
-    return REGIONS.singleWhere((r) => r.number == regionNumber);
-  }
-
-  factory Region.fromId(int id) {
-    return REGIONS.singleWhere((r) => r.id == id);
-  }
 
   //EQUALS only on ID?
 }

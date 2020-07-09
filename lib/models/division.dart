@@ -4,9 +4,6 @@ import 'age_group.dart';
 import 'gender.dart';
 
 class Division {
-  Gender gender;
-  AgeGroup age;
-
   Division({
     @required this.gender,
     @required this.age,
@@ -21,7 +18,10 @@ class Division {
     age = AgeGroup.fromCutoff(int.parse(matches.group(2)));
   }
 
-  final RegExp _fromString = RegExp(r"U?(\d+)([A-Z])", caseSensitive: false);
+  Gender gender;
+  AgeGroup age;
+
+  final RegExp _fromString = RegExp(r'U?(\d+)([A-Z])', caseSensitive: false);
 
   String getDisplayName() {
     return '$age ${gender.long}';

@@ -1,6 +1,6 @@
-import 'package:ayso_ks/models/region.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/region.dart';
 import 'region_info_tile.dart';
 
 class RegionListView extends StatelessWidget {

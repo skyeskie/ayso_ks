@@ -26,12 +26,12 @@ void main() {
 
   group('configuration', () {
     test('codes are unique', () {
-      final Set<int> codes = AgeGroup.AGES.map((e) => e.code).toList().toSet();
+      final codes = AgeGroup.AGES.map((e) => e.code).toList().toSet();
       expect(AgeGroup.AGES.length, codes.length);
     });
 
     test('cutoffs are unique', () {
-      final Set<int> vals = AgeGroup.AGES.map((e) => e.cutoff).toList().toSet();
+      final vals = AgeGroup.AGES.map((e) => e.cutoff).toList().toSet();
       expect(AgeGroup.AGES.length, vals.length);
     });
   });

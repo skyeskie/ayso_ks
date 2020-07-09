@@ -1,16 +1,16 @@
-import 'package:ayso_ks/widgets/large_icon_button.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/getwidget.dart';
 
-class SchedulesMenuView extends StatelessWidget {
-  /// Region number
-  final int region;
+import '../../widgets/large_icon_button.dart';
 
+class SchedulesMenuView extends StatelessWidget {
   const SchedulesMenuView({
     this.region = 49,
   });
+
+  /// Region number
+  final int region;
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class SchedulesMenuView extends StatelessWidget {
             Spacer(flex: 2),
             GFButton(
               icon: Icon(Icons.schedule),
-              text: "This Week",
+              text: 'This Week',
               type: GFButtonType.solid,
               onPressed: () => {},
               size: GFSize.LARGE,

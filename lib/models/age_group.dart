@@ -1,10 +1,20 @@
 import 'package:meta/meta.dart';
 
 class AgeGroup {
+  const AgeGroup({
+    @required this.code,
+    @required this.cutoff,
+  });
+
+  factory AgeGroup.fromCutoff(int cutoff) {
+    return AGES.singleWhere((ag) => ag.cutoff == cutoff);
+  }
+
   final int code;
   final int cutoff;
 
-  // ignore: non_constant_identifier_names
+  //TODO: Make Enum-like
+  //https://dart-lang.github.io/linter/lints/exhaustive_cases.html
   static const Set<AgeGroup> AGES = {
     AgeGroup(code: 1, cutoff: 19),
     AgeGroup(code: 2, cutoff: 16),
@@ -15,15 +25,6 @@ class AgeGroup {
     AgeGroup(code: 7, cutoff: 6),
     AgeGroup(code: 8, cutoff: 5),
   };
-
-  const AgeGroup({
-    @required this.code,
-    @required this.cutoff,
-  });
-
-  factory AgeGroup.fromCutoff(int cutoff) {
-    return AGES.singleWhere((ag) => ag.cutoff == cutoff);
-  }
 
   @override
   String toString() {

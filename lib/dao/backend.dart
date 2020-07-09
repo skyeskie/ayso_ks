@@ -2,9 +2,9 @@ import '../models/game.dart';
 import '../models/team.dart';
 
 abstract class Backend {
-  /// Does any necessary setup for backend requests. Update params mean subsequent
-  /// calls to `getTeams()` and `getGames()` are update requests. Otherwise request
-  /// is for full data and functions will return entire data
+  /// Does any necessary setup for backend requests. Update params mean
+  /// subsequent calls to `getTeams()` and `getGames()` are update requests.
+  /// Otherwise request is for full data and functions will return entire data
   ///
   /// @param curVersion - string version for current data version
   /// - Exact use depends on backend implementation

@@ -14,7 +14,7 @@ class AysoApp extends StatelessWidget {
       ),
       navigatorKey: Modular.navigatorKey,
       onGenerateRoute: Modular.generateRoute,
-      initialRoute: "/",
+      initialRoute: '/',
     );
   }
 }
