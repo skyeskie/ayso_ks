@@ -1,5 +1,8 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
 import '../models/team.dart';
 
 abstract class TeamsDAO {
@@ -29,4 +32,14 @@ abstract class TeamsDAO {
   Future<void> clear();
 
   Future add(Iterable<Team> teams);
+}
+
+mixin TeamsInjection<T extends StatefulWidget> on State<T> {
+  final TeamsDAO teamsDAO = Modular.get<TeamsDAO>();
+
+  @override
+  void dispose() {
+    super.dispose();
+    Modular.dispose<TeamsDAO>();
+  }
 }

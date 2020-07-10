@@ -1,7 +1,11 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
 import '../models/region.dart';
 import '../models/team.dart';
+import 'backend.dart';
 
 abstract class SettingsDAO {
   /// Gets a list of the IDs the saved teams
@@ -45,6 +49,9 @@ abstract class SettingsDAO {
   /// @param region - the region ID
   Future<void> setRegion(int regionNum);
 
+  /// Get an immutable object with all settings
+  Future<SettingsDataType> getSettingsReadonly();
+
   /// Perform any backend initialization
   /// If not required should be no-op
   /// If `isAppConfigured()===true`, should be no-op
@@ -58,4 +65,14 @@ abstract class SettingsDAO {
   /// Clear all saved settings
   /// After call, `isAppConfigured()` should return false
   Future<void> reset();
+}
+
+mixin SettingsInjection<T extends StatefulWidget> on State<T> {
+  final SettingsDAO settingsDAO = Modular.get<SettingsDAO>();
+
+  @override
+  void dispose() {
+    super.dispose();
+    Modular.dispose<SettingsDAO>();
+  }
 }

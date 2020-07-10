@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
+import '../../dao/games.dart';
+import '../../dao/settings.dart';
+import '../../dao/teams.dart';
 import '../../models/game.dart';
 import '../../models/team.dart';
 import 'single_team_game_list.dart';
@@ -10,7 +13,8 @@ class TeamScheduleView extends StatefulWidget {
   TeamScheduleState createState() => TeamScheduleState();
 }
 
-class TeamScheduleState extends State<TeamScheduleView> {
+class TeamScheduleState extends State<TeamScheduleView>
+    with GamesInjection, SettingsInjection, TeamsInjection {
   Team _team;
   List<Game> _games;
 

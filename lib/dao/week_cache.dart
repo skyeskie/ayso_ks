@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
 abstract class WeekCacheDAO {
   /// Get the number of weeks in a season
   int getMaxWeeks();
@@ -15,6 +18,16 @@ abstract class WeekCacheDAO {
 
   /// Initializes the cache
   Future init(Iterable<DateTime> starts);
+}
+
+mixin WeekCacheInjection<T extends StatefulWidget> on State<T> {
+  final WeekCacheDAO weekCache = Modular.get<WeekCacheDAO>();
+
+  @override
+  void dispose() {
+    super.dispose();
+    Modular.dispose<WeekCacheDAO>();
+  }
 }
 
 /// @param starts - list of Date objects indicating week start

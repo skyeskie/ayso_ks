@@ -1,5 +1,6 @@
 import '../../models/region.dart';
 import '../../models/team.dart';
+import '../backend.dart';
 import '../settings.dart';
 import 'data.dart';
 
@@ -62,5 +63,10 @@ class SettingsStaticDAO implements SettingsDAO {
   @override
   Future<void> unSaveTeam(String teamId) {
     return Future.value();
+  }
+
+  @override
+  Future<SettingsDataType> getSettingsReadonly() {
+    return Future.value(settings);
   }
 }

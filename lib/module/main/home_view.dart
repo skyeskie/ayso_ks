@@ -32,13 +32,15 @@ class HomeView extends StatelessWidget {
               label: Text('Schedules'),
               action: () {
                 Navigator.pushNamed(context, '/schedules');
-              }, //SchedulesMenu
+              },
             ),
             Spacer(),
             LargeIconButton(
               icon: Ionicons.md_map,
               label: Text('Region Info'),
-              action: () {}, //RegionList
+              action: () {
+                Navigator.pushNamed(context, '/region');
+              },
             ),
             Spacer(),
             LargeIconButton(
@@ -50,23 +52,16 @@ class HomeView extends StatelessWidget {
             LargeIconButton(
               icon: Ionicons.logo_twitter,
               label: Text('Cancellations'),
-              action: () {}, //TwitterView
+              action: () => Navigator.pushNamed(context, '/cancellations'),
             ),
             Spacer(),
             LargeIconButton(
               icon: Ionicons.md_settings,
               label: Text('Settings'),
-              action: () {}, //Settings
+              action: () => Navigator.pushNamed(context, '/settings'),
             ),
             Spacer(
               flex: 10,
-            ),
-            LargeIconButton(
-              icon: Icons.bug_report,
-              label: Text('DEBUG'),
-              action: () {
-                Navigator.pushNamed(context, '/DEBUG');
-              }, //Settings
             ),
           ],
         ),

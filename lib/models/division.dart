@@ -14,8 +14,8 @@ class Division {
     if (matches == null) {
       throw RangeError('Invalid format for division code: "$display"');
     }
-    gender = Gender.fromCode(matches.group(1));
-    age = AgeGroup.fromCutoff(int.parse(matches.group(2)));
+    age = AgeGroup.fromCutoff(int.parse(matches.group(1)));
+    gender = Gender.fromCode(matches.group(2));
   }
 
   Gender gender;

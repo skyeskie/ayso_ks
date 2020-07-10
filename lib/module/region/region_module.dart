@@ -10,14 +10,17 @@ class RegionModule extends ChildModule {
 
   @override
   List<Router> get routers => [
+        Router('/', child: (ctx, args) => RegionListView()),
         Router('/list', child: (ctx, args) => RegionListView()),
         Router(
           '/:regionNum/field',
-          child: (ctx, args) => FieldView(args.params['regionNum']),
+          child: (ctx, args) =>
+              FieldView(int.parse(args.params['regionNum'], radix: 10)),
         ),
         Router(
           '/:regionNum/map',
-          child: (ctx, args) => StreetMapView(args.params['regionNum']),
+          child: (ctx, args) =>
+              StreetMapView(int.parse(args.params['regionNum'], radix: 10)),
         ),
       ];
 }
