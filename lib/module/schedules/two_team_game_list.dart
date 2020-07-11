@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../models/game.dart';
+import '../../util/date_format.dart';
 
 class TwoTeamGameList extends StatelessWidget {
   TwoTeamGameList({Key key, this.games})
@@ -106,33 +107,3 @@ class RowInfo {
   final bool isDateHeader;
   final String byesListing;
 }
-
-String formatDate(DateTime dt) {
-  final sb = StringBuffer()
-    ..writeAll([
-      months[dt.month],
-      ' ',
-      dt.day,
-      ', ',
-      (dt.hour > 12) ? dt.hour - 12 : dt.hour,
-      ':',
-      if (dt.minute < 10) '0',
-      dt.minute,
-    ]);
-  return sb.toString();
-}
-
-const List<String> months = [
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'June',
-  'July',
-  'Aug',
-  'Sept',
-  'Oct',
-  'Nov',
-  'Dec',
-];
