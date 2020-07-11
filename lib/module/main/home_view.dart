@@ -46,7 +46,8 @@ class HomeView extends StatelessWidget {
             LargeIconButton(
               icon: Ionicons.md_bookmark,
               label: Text('My Teams'),
-              action: () {}, //FavoritesSchedule
+              action: () => Navigator.pushNamed(
+                  context, '/schedules/favorites'), //FavoritesSchedule
             ),
             Spacer(),
             LargeIconButton(
