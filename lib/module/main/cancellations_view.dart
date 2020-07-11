@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../widgets/nav_bar.dart';
 
@@ -8,12 +9,13 @@ class CancellationsView extends StatefulWidget {
 }
 
 class _CancellationsViewState extends State<CancellationsView> {
-  //TODO Inject Twitter
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildNavBar('Cancellations', context),
+      body: WebView(
+        initialUrl: 'https://twitter.com/AYSOKS',
+      ),
     );
   }
 }
