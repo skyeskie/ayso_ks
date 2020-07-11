@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:getwidget/components/button/gf_button.dart';
-import 'package:getwidget/getwidget.dart';
 
 import '../../dao/backend.dart';
 import '../../widgets/large_icon_button.dart';
@@ -52,14 +50,6 @@ class SchedulesMenuView extends StatelessWidget {
               ],
             ),
             Spacer(flex: 2),
-            GFButton(
-              icon: Icon(Icons.schedule),
-              text: 'This Week',
-              type: GFButtonType.solid,
-              onPressed: () => Navigator.pushNamed(context, '/schedules/week'),
-              size: GFSize.LARGE,
-              blockButton: true,
-            ),
             LargeIconButton(
               icon: Icons.schedule,
               label: Text('This Week'),
@@ -69,13 +59,13 @@ class SchedulesMenuView extends StatelessWidget {
             LargeIconButton(
               icon: Icons.search,
               label: Text('Find Team'),
-              action: () => Navigator.pushNamed(context, '/search'),
+              action: () => Navigator.pushNamed(context, '/search/teams'),
             ),
             Spacer(flex: 2),
             LargeIconButton(
               icon: Icons.search,
               label: Text('Advanced Search'),
-              action: () => Navigator.pushNamed(context, '/search/teams'),
+              action: () => Navigator.pushNamed(context, '/search'),
             ),
             Spacer(flex: 2),
             LargeIconButton(

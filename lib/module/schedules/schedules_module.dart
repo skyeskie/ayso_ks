@@ -17,6 +17,11 @@ class SchedulesModule extends ChildModule {
         Router('/game/:id', child: (ctx, args) => GameDetailView()),
         Router('/team/:id', child: (ctx, args) => TeamScheduleView()),
         Router('/week', child: (ctx, args) => WeekScheduleView()),
-        Router('/week/:num', child: (ctx, args) => WeekScheduleView()),
+        Router(
+          '/week/:num',
+          child: (ctx, args) => WeekScheduleView(
+            week: int.parse(args.params['num'], radix: 10),
+          ),
+        ),
       ];
 }
