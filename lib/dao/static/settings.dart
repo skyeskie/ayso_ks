@@ -17,17 +17,17 @@ class SettingsStaticDAO implements SettingsDAO {
 
   @override
   Future<int> getRegionNumber() {
-    return Future.value(settings.regionNumber);
+    return Future.value(StaticData.settings.regionNumber);
   }
 
   @override
   Future<Iterable<String>> getSavedTeamIDs() {
-    return Future.value(settings.savedTeams);
+    return Future.value(StaticData.settings.savedTeams);
   }
 
   @override
   Future<Iterable<Team>> getSavedTeams() {
-    return Future.value(savedTeamsFull);
+    return Future.value(StaticData.savedTeamsFull);
   }
 
   @override
@@ -42,7 +42,7 @@ class SettingsStaticDAO implements SettingsDAO {
 
   @override
   Future<bool> isTeamSaved(String teamId) {
-    return Future.value(settings.savedTeams.contains(teamId));
+    return Future.value(StaticData.settings.savedTeams.contains(teamId));
   }
 
   @override
@@ -67,6 +67,6 @@ class SettingsStaticDAO implements SettingsDAO {
 
   @override
   Future<SettingsDataType> getSettingsReadonly() {
-    return Future.value(settings);
+    return Future.value(StaticData.settings);
   }
 }

@@ -19,7 +19,7 @@ class TeamsStaticDAO implements TeamsDAO {
     String ageString,
     String genderLong,
   }) {
-    return Future.value(teams
+    return Future.value(StaticData.teams
         .where((t) => (regionNumber == null || t.region.number == regionNumber))
         .where((t) =>
             (ageString == null || t.division.age.toString() == ageString))
@@ -29,11 +29,11 @@ class TeamsStaticDAO implements TeamsDAO {
 
   @override
   Future<Team> getTeam(String id) {
-    return Future.value(teams.firstWhere((team) => team.code == id));
+    return Future.value(StaticData.teams.firstWhere((team) => team.code == id));
   }
 
   @override
   Future<Iterable<Team>> getTeams(Iterable<String> ids) {
-    return Future.value(teams);
+    return Future.value(StaticData.teams);
   }
 }

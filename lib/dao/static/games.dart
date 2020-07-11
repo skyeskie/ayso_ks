@@ -15,20 +15,20 @@ class GamesStaticDAO implements GamesDAO {
 
   @override
   Future<Iterable<Game>> findByWeek(int week, {int region}) {
-    return Future.value(games
+    return Future.value(StaticData.games
         .where((game) => (game.weekNum == week))
         .where((game) => (region == null || game.region == region)));
   }
 
   @override
   Future<Iterable<Game>> findForTeam(String teamId) {
-    return Future.value(games.where((game) => game.hasTeam(teamId)));
+    return Future.value(StaticData.games.where((game) => game.hasTeam(teamId)));
   }
 
   @override
   Future<Iterable<Game>> findForTeams(Iterable<String> teamIds) {
     final teams = teamIds.toSet();
-    return Future.value(games.where(
+    return Future.value(StaticData.games.where(
         (game) => (teams.contains(game.home) || teams.contains(game.away))));
   }
 
@@ -39,8 +39,8 @@ class GamesStaticDAO implements GamesDAO {
     String gender,
     int week,
   }) {
-    return Future.value(games
-        .where((game) => (regionId == null || game.region.id == regionId))
+    return Future.value(StaticData.games
+        .where((game) => (regionId == null || game.region.number == regionId))
         .where((game) =>
             (ageGroup == null || game.division.age.toString() == ageGroup))
         .where(
@@ -50,6 +50,6 @@ class GamesStaticDAO implements GamesDAO {
 
   @override
   Future<Game> getGame(String id) {
-    return Future.value(games.firstWhere((game) => game.id == id));
+    return Future.value(StaticData.games.firstWhere((game) => game.id == id));
   }
 }

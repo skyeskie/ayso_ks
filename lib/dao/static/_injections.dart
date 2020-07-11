@@ -20,7 +20,7 @@ final Bind DI_STATIC_WEEK_CACHE =
     Bind<WeekCacheDAO>((i) => WeekCacheStaticDAO());
 
 final Bind DI_STATIC_SETTINGS_READONLY =
-    Bind<SettingsDataType>((i) => settings, lazy: false);
+    Bind<SettingsDataType>((i) => StaticData.settings, lazy: false);
 
 final List<Bind> STATIC_DAO_INJECTIONS = [
   DI_STATIC_GAMES_DAO,

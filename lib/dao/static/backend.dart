@@ -11,22 +11,22 @@ class BackendStatic implements Backend {
 
   @override
   Future<Iterable<Game>> getGames() {
-    return Future.value(games);
+    return Future.value(StaticData.games);
   }
 
   @override
   Future<SettingsDataType> getSettings() {
-    return Future.value(settings);
+    return Future.value(StaticData.settings);
   }
 
   @override
   Future<Iterable<Team>> getTeams() {
-    return Future.value(teams);
+    return Future.value(StaticData.teams);
   }
 
   @override
   Future<Iterable<DateTime>> getWeekStarts() {
-    return Future.value(weeks);
+    return Future.value(StaticData.weeks);
   }
 
   @override
