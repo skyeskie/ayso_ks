@@ -18,6 +18,7 @@ dependencies:
   flutter_modular: ^1.2.7+1
   flutter_svg: ^0.18.0
   getwidget: ^1.1.0
+  liquid_ui: ^1.0.0+8
   #google_maps_flutter
   #photo_view - zoom/gesture widget
   shared_preferences: ^0.5.8
