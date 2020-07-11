@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../widgets/nav_bar.dart';
+
 class FieldView extends StatelessWidget {
   const FieldView(this.regionNum);
 
@@ -8,7 +10,7 @@ class FieldView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Region $regionNum')),
+      appBar: buildNavBar('Region $regionNum', context),
     );
   }
 }

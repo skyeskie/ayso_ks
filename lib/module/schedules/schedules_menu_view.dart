@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../dao/backend.dart';
 import '../../widgets/large_icon_button.dart';
+import '../../widgets/nav_bar.dart';
 
 class SchedulesMenuView extends StatelessWidget {
   SchedulesMenuView();
@@ -14,9 +15,7 @@ class SchedulesMenuView extends StatelessWidget {
 
     final theme = Theme.of(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Region $regionNumber'),
-      ),
+      appBar: buildNavBar('Region $regionNumber', context),
       body: Container(
         constraints: BoxConstraints.expand(),
         padding: EdgeInsets.symmetric(vertical: 20),

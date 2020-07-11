@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../dao/backend.dart';
 import '../../dao/settings.dart';
+import '../../widgets/nav_bar.dart';
 
 class SettingsView extends StatefulWidget {
   @override
@@ -27,9 +28,7 @@ class _SettingsViewState extends State<SettingsView> with SettingsInjection {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Settings'),
-      ),
+      appBar: buildNavBar('Settings', context),
       body: Text('Region: ${_settings?.regionNumber}'),
     );
   }

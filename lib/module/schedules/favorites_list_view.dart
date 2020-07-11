@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../dao/games.dart';
 import '../../dao/settings.dart';
 import '../../models/game.dart';
+import '../../widgets/nav_bar.dart';
 import 'two_team_game_list.dart';
 
 class FavoritesListView extends StatefulWidget {
@@ -30,11 +31,7 @@ class _FavoritesListViewState extends State<FavoritesListView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Align(
-          child: Text('My Teams'),
-        ),
-      ),
+      appBar: buildNavBar('My Teams', context),
       body: FutureBuilder(
         future: loaded,
         builder: (context, snapshot) {

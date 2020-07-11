@@ -4,6 +4,7 @@ import 'package:liquid_ui/liquid_ui.dart';
 import '../../models/age_group.dart';
 import '../../models/gender.dart';
 import '../../models/region.dart';
+import '../../widgets/nav_bar.dart';
 
 class SearchView extends StatefulWidget {
   @override
@@ -20,10 +21,7 @@ class _SearchViewState extends State<SearchView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Search Games'),
-      ),
+      appBar: buildNavBar('Search Games', context),
       body: LForm(
         manager: _formManager,
         child: SizedBox.expand(

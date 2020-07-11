@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../../dao/games.dart';
 import '../../dao/week_cache.dart';
 import '../../models/game.dart';
+import '../../widgets/nav_bar.dart';
 import 'two_team_game_list.dart';
 import 'week_bar.dart';
 
@@ -32,18 +33,14 @@ class _WeekScheduleViewState extends State<WeekScheduleView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Align(
-          alignment: Alignment.centerRight,
-          child: Text('Region 49'),
-        ),
-      ),
+      appBar: buildNavBar('Region 49 Schedule', context),
       body: Column(
         children: [
           WeekBar(
             week: week,
             maxWeeks: weekCache.getMaxWeeks(),
-            navigate: (week) => Modular.link.pushNamed('/week/$week'),
+            navigate: (week) =>
+                Modular.link.pushReplacementNamed('/week/$week'),
           ),
           FutureBuilder(
             future: games,

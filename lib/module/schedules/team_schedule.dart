@@ -6,7 +6,7 @@ import '../../dao/settings.dart';
 import '../../dao/teams.dart';
 import '../../models/game.dart';
 import '../../models/team.dart';
-import 'single_team_game_list.dart';
+import 'single_team_game_tile.dart';
 
 class TeamScheduleView extends StatefulWidget {
   @override
