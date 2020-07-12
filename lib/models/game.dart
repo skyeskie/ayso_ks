@@ -2,6 +2,7 @@ import 'package:meta/meta.dart';
 
 import 'division.dart';
 import 'region.dart';
+import 'team.dart';
 
 class Game implements Comparable {
   Game({
@@ -18,8 +19,8 @@ class Game implements Comparable {
   static const BYE_TEAM = '-';
 
   String id;
-  String home;
-  String away;
+  Team home;
+  Team away;
   int weekNum;
   DateTime startTime;
   Region region;
@@ -27,12 +28,12 @@ class Game implements Comparable {
   Division division;
 
   bool hasTeam(String teamId) {
-    return home == teamId || away == teamId;
+    return home.code == teamId || away.code == teamId;
   }
 
   String getOpponent(String teamId) {
-    if (teamId == home) return away;
-    if (teamId == away) return home;
+    if (teamId == home.code) return away.code;
+    if (teamId == away.code) return home.code;
     throw RangeError('Team "$teamId" is not playing in the game');
   }
 

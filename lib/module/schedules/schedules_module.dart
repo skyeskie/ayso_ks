@@ -14,7 +14,8 @@ class SchedulesModule extends ChildModule {
   List<Router> get routers => [
         Router('/', child: (ctx, args) => SchedulesMenuView()),
         Router('/favorites', child: (ctx, args) => FavoritesListView()),
-        Router('/game/:id', child: (ctx, args) => GameDetailView()),
+        Router('/game/:id',
+            child: (ctx, args) => GameDetailView(id: args.params['id'])),
         Router('/team/:id', child: (ctx, args) => TeamScheduleView()),
         Router('/week', child: (ctx, args) => WeekScheduleView()),
         Router(

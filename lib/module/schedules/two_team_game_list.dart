@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../models/game.dart';
 import '../../util/date_format.dart';
@@ -42,22 +43,26 @@ class TwoTeamGameList extends StatelessWidget {
 
           //Date header
           if (info.isDateHeader) {
-            return ListTile(title: Text(formatDate(info.game.startTime)));
+            return ListTile(title: Text(info.game.startTime.toMediumString()));
           }
 
           //Game Row
-          return Row(
-            children: [
-              Expanded(
-                child: Text('Region ${info.game.region.number}'),
-              ),
-              Expanded(
-                child: Text('Field ${info.game.field}'),
-              ),
-              Expanded(
-                child: Text('${info.game.home} vs ${info.game.away}'),
-              ),
-            ],
+          return GestureDetector(
+            onTap: () => Modular.link.pushNamed('/game/${info.game.id}'),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text('Region ${info.game.region.number}'),
+                ),
+                Expanded(
+                  child: Text('Field ${info.game.field}'),
+                ),
+                Expanded(
+                  child:
+                      Text('${info.game.home.code} vs ${info.game.away.code}'),
+                ),
+              ],
+            ),
           );
         },
       ),

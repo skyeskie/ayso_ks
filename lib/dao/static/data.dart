@@ -15,18 +15,18 @@ class StaticData {
     DateTime(2016, 3, 7),
   ];
 
-  static final List<Team> teams = [
-    mt('A', 'coachA', 'telA', 'U10B', 49),
-    mt('B', 'coachB', 'telB', 'U10B', 49),
-    mt('C', 'coachC', 'telC', 'U10B', 208),
-    mt('D', 'coachD', 'telD', 'U10B', 208),
-    mt('E', 'coachE', 'telE', 'U10G', 49),
-    mt('F', 'coachA', 'telA', 'U12G', 49),
-    mt('G', 'coachG', 'telG', 'U12G', 208),
-    mt('H', 'coachH', 'telH', 'U12G', 49),
-    mt('I', 'coachI', 'telI', 'U12G', 49),
-    mt('J', 'coachJ', 'telJ', 'U12B', 49),
-  ];
+  static final Map<String, Team> teams = {
+    'A': mt('A', 'coachA', 'telA', 'U10B', 49),
+    'B': mt('B', 'coachB', 'telB', 'U10B', 49),
+    'C': mt('C', 'coachC', 'telC', 'U10B', 208),
+    'D': mt('D', 'coachD', 'telD', 'U10B', 208),
+    'E': mt('E', 'coachE', 'telE', 'U10G', 49),
+    'F': mt('F', 'coachA', 'telA', 'U12G', 49),
+    'G': mt('G', 'coachG', 'telG', 'U12G', 208),
+    'H': mt('H', 'coachH', 'telH', 'U12G', 49),
+    'I': mt('I', 'coachI', 'telI', 'U12G', 49),
+    'J': mt('J', 'coachJ', 'telJ', 'U12B', 49),
+  };
 
   static final List<Game> games = [
     g('111', 'A', 'B', 1, startTime(1, 8), 49, 'map', 'U10B'),
@@ -45,17 +45,13 @@ class StaticData {
 
   static SettingsDataType settings = SettingsDataType(
     regionNumber: 49,
-    savedTeams: [
-      teams[0].code,
-      teams[1].code,
-      teams[8].code,
-    ],
+    savedTeams: ['A', 'B', 'I'],
   );
 
   static List<Team> savedTeamsFull = [
-    teams[0],
-    teams[1],
-    teams[8],
+    teams['A'],
+    teams['B'],
+    teams['I'],
   ];
 }
 
@@ -81,8 +77,8 @@ Game g(
 ) {
   return Game(
     id: id,
-    home: home,
-    away: away,
+    home: StaticData.teams[home],
+    away: StaticData.teams[away],
     weekNum: weekNum,
     startTime: time,
     region: r(regionNum),

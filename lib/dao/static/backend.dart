@@ -21,7 +21,7 @@ class BackendStatic implements Backend {
 
   @override
   Future<Iterable<Team>> getTeams() {
-    return Future.value(StaticData.teams);
+    return Future.value(StaticData.teams.values);
   }
 
   @override

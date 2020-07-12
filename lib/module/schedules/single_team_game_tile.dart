@@ -17,7 +17,7 @@ class SingleTeamGameListTile extends StatelessWidget {
       child: Row(
         children: [
           Text(game.startTime.toString()),
-          Text(game.home == teamId ? 'vs' : 'at'),
+          Text(game.home.code == teamId ? 'vs' : 'at'),
           Text(game.getOpponent(teamId)),
           Text('Region ${game.region}'),
           Text('Field ${game.field}'),
