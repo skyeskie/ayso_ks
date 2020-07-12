@@ -29,7 +29,7 @@ class TeamsStaticDAO implements TeamsDAO {
 
   @override
   Future<Team> getTeam(String id) {
-    return Future.value(StaticData.teams['id']);
+    return Future.value(StaticData.teams[id]);
   }
 
   @override

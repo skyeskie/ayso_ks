@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../models/game.dart';
+import '../../util/date_format.dart';
 
 class SingleTeamGameListTile extends StatelessWidget {
   const SingleTeamGameListTile({
@@ -13,14 +15,18 @@ class SingleTeamGameListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return GestureDetector(
+      onTap: () => Modular.link.pushNamed('game/${game.id}'),
       child: Row(
+        mainAxisSize: MainAxisSize.max,
         children: [
-          Text(game.startTime.toString()),
-          Text(game.home.code == teamId ? 'vs' : 'at'),
-          Text(game.getOpponent(teamId)),
-          Text('Region ${game.region}'),
-          Text('Field ${game.field}'),
+          Expanded(child: Text(game.startTime.toMediumString())),
+          Expanded(
+            child: Text('${game.home.code == teamId ? "vs" : "at"} '
+                '${game.getOpponent(teamId)}'),
+          ),
+          Expanded(child: Text('Region ${game.region.number}')),
+          Expanded(child: Text('Field ${game.field}')),
         ],
       ),
     );
