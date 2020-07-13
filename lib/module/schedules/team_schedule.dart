@@ -38,6 +38,22 @@ class TeamScheduleState extends State<TeamScheduleView>
     super.initState();
   }
 
+  void updateFavorite() {
+    if (_favorite) {
+      settingsDAO.unSaveTeam(_team.code).whenComplete(
+            () => setState(() {
+              _favorite = false;
+            }),
+          );
+    } else {
+      settingsDAO.saveTeamId(_team.code).whenComplete(
+            () => setState(() {
+              _favorite = true;
+            }),
+          );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,9 +82,9 @@ class TeamScheduleState extends State<TeamScheduleView>
         Row(children: [
           Text('Team ${_team?.code}'),
           OutlineButton.icon(
-            icon: Icon(Ionicons.md_star_outline), //TOGGLE, + Text
-            label: Text('Favorite'),
-            onPressed: () {},
+            icon: Icon(_favorite ? Icons.star : Icons.star_border),
+            label: Text(_favorite ? 'UnFavorite' : 'Favorite'),
+            onPressed: updateFavorite,
           ),
         ]),
         Row(
