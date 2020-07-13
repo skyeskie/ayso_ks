@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:liquid_ui/liquid_ui.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:intl/intl.dart';
 
 import '../../models/age_group.dart';
 import '../../models/gender.dart';
@@ -12,9 +13,8 @@ class SearchView extends StatefulWidget {
 }
 
 class _SearchViewState extends State<SearchView> {
-  LFormManager _formManager;
-  final GlobalKey<LDropdownState> _week = GlobalKey<LDropdownState>();
-  double _weekNum = 1;
+  final GlobalKey<FormBuilderState> _fb = GlobalKey<FormBuilderState>();
+  final Widget spacer = const SizedBox(height: 40);
 
   void submitForm() {}
 
@@ -22,79 +22,85 @@ class _SearchViewState extends State<SearchView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildNavBar('Search Games', context),
-      body: LForm(
-        manager: _formManager,
+      body: FormBuilder(
+        key: _fb,
         child: SizedBox.expand(
           child: FractionallySizedBox(
             widthFactor: 0.8,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 20),
-                Text(
-                  'Week ${_weekNum?.floor()}',
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-                SizedBox(height: 20),
-                Slider(
-                  value: _weekNum,
+                spacer,
+                FormBuilderSlider(
+                  numberFormat: NumberFormat('###'),
+                  attribute: 'week',
                   min: 1,
                   max: 4,
                   divisions: 3,
-                  onChanged: (value) {
-                    setState(() {
-                      _weekNum = value;
-                    });
-                  },
+                  decoration: InputDecoration(labelText: 'Week'),
+                  initialValue: 1,
+                  valueTransformer: (v) => v.floor(),
                 ),
                 SizedBox(height: 20),
-                Text(
-                  'Region',
-                  style: Theme.of(context).textTheme.headline6,
-                ),
-                DropdownButtonFormField(
-                  onChanged: (value) {},
+                FormBuilderDropdown(
+                  attribute: 'region',
+                  decoration: InputDecoration(labelText: 'Region'),
                   items: Region.REGIONS
-                      .map((r) => DropdownMenuItem<Region>(
-                            value: r,
-                            child: Text(r.name),
+                      .map((r) => DropdownMenuItem<int>(
+                            value: r.number,
+                            child: Text('${r.number} - ${r.name}'),
                           ))
                       .toList(growable: false),
                 ),
+                spacer,
                 Text(
                   'Division',
                   style: Theme.of(context).textTheme.headline6,
                 ),
-                FractionallySizedBox(
-                  widthFactor: .3,
-                  child: DropdownButtonFormField(
-                    onChanged: (value) {},
-                    isDense: true,
-                    items: AgeGroup.AGES
-                        .map((ag) => DropdownMenuItem<AgeGroup>(
-                              value: ag,
-                              child: Text(ag.toString()),
-                            ))
-                        .toList(growable: false),
-                  ),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Expanded(
+                      child: FormBuilderDropdown(
+                        attribute: 'age',
+                        decoration: InputDecoration(labelText: 'Age'),
+                        items: AgeGroup.AGES
+                            .map((ag) => DropdownMenuItem<String>(
+                                  value: ag.toString(),
+                                  child: Text(ag.toString()),
+                                ))
+                            .toList(growable: false),
+                      ),
+                    ),
+                    Expanded(
+                      child: FormBuilderDropdown(
+                        attribute: 'gender',
+                        decoration: InputDecoration(labelText: 'Gender'),
+                        items: Gender.GENDERS
+                            .map((g) => DropdownMenuItem<String>(
+                                  value: g.long,
+                                  child: Text(g.long),
+                                ))
+                            .toList(growable: false),
+                      ),
+                    ),
+                  ],
                 ),
-                FractionallySizedBox(
-                  widthFactor: .3,
-                  child: DropdownButtonFormField(
-                    onChanged: (value) {},
-                    isDense: true,
-                    items: Gender.GENDERS
-                        .map((g) => DropdownMenuItem<Gender>(
-                              value: g,
-                              child: Text(g.long),
-                            ))
-                        .toList(growable: false),
+                spacer,
+                Align(
+                  child: RaisedButton.icon(
+                    onPressed: () {
+                      if (_fb.currentState.saveAndValidate()) {
+                        Navigator.of(context).pushNamed(
+                          '/schedules/search',
+                          arguments: _fb.currentState.value,
+                        );
+                        print(_fb.currentState.value);
+                      }
+                    },
+                    icon: Icon(Icons.search),
+                    label: Text('Go'),
                   ),
-                ),
-                RaisedButton.icon(
-                  onPressed: submitForm,
-                  icon: Icon(Icons.search),
-                  label: Text('Go'),
                 ),
               ],
             ),
