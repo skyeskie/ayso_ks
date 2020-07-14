@@ -11,11 +11,8 @@ abstract class GamesDAO {
   /// @returns Promise<Game[]>
   Future<Game> getGame(String id);
 
-  /// Use findGames(week: week, regionId: region)
-  @Deprecated('Use findGames')
-  Future<Iterable<Game>> findByWeek(int week, {int region});
-
   /// Lookup games with optional filters
+  /// TODO: rename regionId to regionNum
   Future<Iterable<Game>> findGames({
     int regionId,
     String ageGroup,
