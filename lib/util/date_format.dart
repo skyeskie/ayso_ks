@@ -17,7 +17,7 @@ extension MediumDateFormat on DateTime {
   String toMediumString() {
     final sb = StringBuffer()
       ..writeAll([
-        monthsShort[month],
+        monthsShort[month - 1],
         ' ',
         day,
         ', ',

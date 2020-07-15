@@ -48,7 +48,7 @@ class _TeamSelectViewState extends State<TeamSelectView> with TeamsInjection {
       footer: Row(
         children: [
           Text(t.region.number.toString()),
-          Text(t.division.toJSON()),
+          Text(t.division.shortDisplayName()),
         ],
       ),
     );

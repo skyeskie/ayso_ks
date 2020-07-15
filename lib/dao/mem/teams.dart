@@ -47,6 +47,6 @@ class TeamsInMemoryDAO implements TeamsDAO {
 
   @override
   Future<Iterable<Team>> getTeams(Iterable<String> ids) {
-    return Future.value(ids.map((id) => _teams[id]));
+    return Future.value(ids.map((id) => _teams[id]).where((e) => e != null));
   }
 }

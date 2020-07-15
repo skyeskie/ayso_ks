@@ -27,7 +27,7 @@ class Division {
     return '$age ${gender.long}';
   }
 
-  String toJSON() {
-    return '$age ${gender.short}';
+  String shortDisplayName() {
+    return '$age${gender.short}';
   }
 }

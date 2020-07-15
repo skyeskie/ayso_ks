@@ -1,13 +1,14 @@
-paths:
-  - test
-  - lib
+filename: "*_test.dart"
+paths: [lib]
+
+platforms: [vm]
 
 tags:
   dao:
 
-  models:
+  model:
 
-  views:
+  view:
 
-  widgets:
+  widget:
 

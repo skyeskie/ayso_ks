@@ -34,6 +34,8 @@ class TeamsStaticDAO implements TeamsDAO {
 
   @override
   Future<Iterable<Team>> getTeams(Iterable<String> ids) {
-    return Future.value(ids.map((id) => StaticData.teams[id]));
+    return Future.value(
+      ids.map((id) => StaticData.teams[id]).where((e) => e != null),
+    );
   }
 }

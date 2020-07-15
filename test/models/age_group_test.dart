@@ -1,3 +1,5 @@
+@Tags(['model'])
+
 import 'package:ayso_ks/models/age_group.dart';
 import 'package:test/test.dart';
 

@@ -12,6 +12,10 @@ class Team {
     this.region,
   });
 
+  Team.bye() : this(code: '-', coach: '', coachTel: '');
+
+  static const String BYE_CODE = '-';
+
   String code;
   String coach;
   String coachTel;

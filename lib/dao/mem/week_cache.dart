@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import '../../util/week_calc.dart';
 import '../week_cache.dart';
 
 class WeekCacheInMemoryDAO implements WeekCacheDAO {
@@ -17,6 +18,7 @@ class WeekCacheInMemoryDAO implements WeekCacheDAO {
 
   @override
   Future<void> clear() {
+    if (_curWeek != null) _curWeek = 1;
     _weekStarts.clear();
     return Future.value();
   }
@@ -28,13 +30,13 @@ class WeekCacheInMemoryDAO implements WeekCacheDAO {
 
   @override
   int getMaxWeeks() {
-    return _weekStarts.length;
+    return _weekStarts.isEmpty ? 1 : _weekStarts.length;
   }
 
   @override
   Future init(Iterable<DateTime> starts, {bool mockCurWeek = false}) {
-    final set = SplayTreeSet.from(starts);
-    _weekStarts = set.toList(growable: false);
+    final set = SplayTreeSet<DateTime>.from(starts);
+    _weekStarts = set.toList();
     if (mockCurWeek) {
       _curWeek = (_weekStarts.length > 2) ? 2 : 1;
     }

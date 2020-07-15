@@ -12,7 +12,7 @@ class SettingsStaticDAO implements SettingsDAO {
 
   @override
   Future<Region> getRegion() {
-    return Future.value();
+    return Future.value(Region.fromNumber(StaticData.settings.regionNumber));
   }
 
   @override

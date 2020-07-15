@@ -4,7 +4,7 @@ import 'division.dart';
 import 'region.dart';
 import 'team.dart';
 
-class Game implements Comparable {
+class Game {
   Game({
     @required this.id,
     @required this.home,
@@ -45,10 +45,9 @@ class Game implements Comparable {
     return getOpponent(BYE_TEAM);
   }
 
-  //Maybe not full Comparable ?
-  @override
-  int compareTo(dynamic other) {
-    return startTime.millisecondsSinceEpoch -
-        other.startTime.millisecondsSinceEpoch;
-  }
+//TODO: Fully remove if not necessary
+//  int compareTo(dynamic other) {
+//    return startTime.millisecondsSinceEpoch -
+//        other.startTime.millisecondsSinceEpoch;
+//  }
 }
