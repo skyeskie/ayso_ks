@@ -2,7 +2,6 @@ import 'package:meta/meta.dart';
 
 import 'division.dart';
 import 'region.dart';
-import 'team.dart';
 
 class Game {
   Game({
@@ -19,8 +18,8 @@ class Game {
   static const BYE_TEAM = '-';
 
   String id;
-  Team home;
-  Team away;
+  String home;
+  String away;
   int weekNum;
   DateTime startTime;
   Region region;
@@ -28,12 +27,12 @@ class Game {
   Division division;
 
   bool hasTeam(String teamId) {
-    return home.code == teamId || away.code == teamId;
+    return home == teamId || away == teamId;
   }
 
   String getOpponent(String teamId) {
-    if (teamId == home.code) return away.code;
-    if (teamId == away.code) return home.code;
+    if (teamId == home) return away;
+    if (teamId == away) return home;
     throw RangeError('Team "$teamId" is not playing in the game');
   }
 

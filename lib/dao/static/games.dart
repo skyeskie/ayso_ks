@@ -21,8 +21,8 @@ class GamesStaticDAO implements GamesDAO {
   @override
   Future<Iterable<Game>> findForTeams(Iterable<String> teamIds) {
     final teams = teamIds.toSet();
-    return Future.value(StaticData.games.where((game) =>
-        (teams.contains(game.home.code) || teams.contains(game.away.code))));
+    return Future.value(StaticData.games.where(
+        (game) => (teams.contains(game.home) || teams.contains(game.away))));
   }
 
   @override

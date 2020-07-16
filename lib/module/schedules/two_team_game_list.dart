@@ -58,8 +58,7 @@ class TwoTeamGameList extends StatelessWidget {
                   child: Text('Field ${info.game.field}'),
                 ),
                 Expanded(
-                  child:
-                      Text('${info.game.home.code} vs ${info.game.away.code}'),
+                  child: Text('${info.game.home} vs ${info.game.away}'),
                 ),
               ],
             ),

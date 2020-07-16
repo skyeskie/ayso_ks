@@ -22,7 +22,7 @@ class SingleTeamGameListTile extends StatelessWidget {
         children: [
           Expanded(child: Text(game.startTime.toMediumString())),
           Expanded(
-            child: Text('${game.home.code == teamId ? "vs" : "at"} '
+            child: Text('${game.home == teamId ? "vs" : "at"} '
                 '${game.getOpponent(teamId)}'),
           ),
           Expanded(child: Text('Region ${game.region.number}')),

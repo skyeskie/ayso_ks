@@ -106,8 +106,8 @@ class TestData {
   ) {
     return Game(
       id: id,
-      home: (home == Team.BYE_CODE) ? Team.bye() : teams[home],
-      away: (away == Team.BYE_CODE) ? Team.bye() : teams[away],
+      home: home,
+      away: away,
       weekNum: weekNum,
       startTime: time,
       region: Region.fromNumber(regionNum),

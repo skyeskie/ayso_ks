@@ -77,8 +77,8 @@ Game g(
 ) {
   return Game(
     id: id,
-    home: StaticData.teams[home],
-    away: StaticData.teams[away],
+    home: home,
+    away: away,
     weekNum: weekNum,
     startTime: time,
     region: r(regionNum),

@@ -130,7 +130,7 @@ void gamesInterfaceWriteSpec(GamesDaoGenerator initGamesDao) {
       await dao.add([newGame]);
       final game = await dao.getGame('NEW');
       expect(game.id, 'NEW');
-      expect(game.home.code, 'B');
+      expect(game.home, 'B');
     });
 
     test('keeps existing games on add', () async {
@@ -143,15 +143,15 @@ void gamesInterfaceWriteSpec(GamesDaoGenerator initGamesDao) {
     test('replaces games instead of adding duplicate IDs', () async {
       final initLength = TestData.games.length;
       final initGame = await dao.getGame(replace.id);
-      expect(initGame.home.code, 'C');
-      expect(initGame.away.code, 'D');
+      expect(initGame.home, 'C');
+      expect(initGame.away, 'D');
       expect(initGame.field, 'map2');
       await dao.add([replace]);
       final games = await dao.findGames();
       expect(games.length, initLength);
       final repGame = await dao.getGame(replace.id);
-      expect(repGame.away.code, 'C');
-      expect(repGame.home.code, 'D');
+      expect(repGame.away, 'C');
+      expect(repGame.home, 'D');
       expect(repGame.field, 'map');
     });
 
