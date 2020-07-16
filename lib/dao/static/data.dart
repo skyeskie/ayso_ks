@@ -4,7 +4,7 @@ import '../../models/division.dart';
 import '../../models/game.dart';
 import '../../models/region.dart';
 import '../../models/team.dart';
-import '../backend.dart';
+import '../settings.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class StaticData {

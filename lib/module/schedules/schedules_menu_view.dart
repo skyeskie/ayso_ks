@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../dao/backend.dart';
+import '../../dao/settings.dart';
 import '../../widgets/large_icon_button.dart';
 import '../../widgets/nav_bar.dart';
 

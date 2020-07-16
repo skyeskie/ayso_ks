@@ -5,7 +5,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../models/region.dart';
 import '../models/team.dart';
-import 'backend.dart';
 
 abstract class SettingsDAO {
   /// Gets a list of the IDs the saved teams
@@ -65,6 +64,16 @@ abstract class SettingsDAO {
   /// Clear all saved settings
   /// After call, `isAppConfigured()` should return false
   Future<void> reset();
+}
+
+class SettingsDataType {
+  const SettingsDataType({
+    this.regionNumber = 49,
+    this.savedTeams = const [],
+  });
+
+  final int regionNumber;
+  final List<String> savedTeams;
 }
 
 mixin SettingsInjection<T extends StatefulWidget> on State<T> {

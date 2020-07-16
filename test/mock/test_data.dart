@@ -1,4 +1,4 @@
-import 'package:ayso_ks/dao/backend.dart';
+import 'package:ayso_ks/dao/settings.dart';
 import 'package:ayso_ks/models/division.dart';
 import 'package:ayso_ks/models/game.dart';
 import 'package:ayso_ks/models/region.dart';

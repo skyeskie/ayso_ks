@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../dao/backend.dart';
 import '../../dao/settings.dart';
 import '../../models/region.dart';
 import '../../widgets/nav_bar.dart';

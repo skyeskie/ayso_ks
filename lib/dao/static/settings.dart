@@ -1,6 +1,5 @@
 import '../../models/region.dart';
 import '../../models/team.dart';
-import '../backend.dart';
 import '../settings.dart';
 import 'data.dart';
 

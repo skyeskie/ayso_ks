@@ -2,7 +2,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../models/region.dart';
 import '../../models/team.dart';
-import '../backend.dart';
 import '../settings.dart';
 import '../teams.dart';
 
