@@ -7,7 +7,10 @@ class Gender {
   });
 
   factory Gender.fromCode(String code) {
-    return GENDERS.singleWhere((gender) => gender.short == code);
+    return GENDERS.singleWhere(
+      (gender) => gender.short == code,
+      orElse: () => null,
+    );
   }
 
   // ignore: non_constant_identifier_names

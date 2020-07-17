@@ -16,6 +16,21 @@ class Division {
     }
     age = AgeGroup.fromCutoff(int.parse(matches.group(1)));
     gender = Gender.fromCode(matches.group(2));
+    if (age == null || gender == null) {
+      throw RangeError('Unrecognized division: "$display"');
+    }
+  }
+
+  Division.fromIdString(String display) {
+    final matches = _fromString.firstMatch(display);
+    if (matches == null) {
+      throw RangeError('Invalid format for division code: "$display"');
+    }
+    age = AgeGroup.fromId(int.parse(matches.group(1)));
+    gender = Gender.fromCode(matches.group(2));
+    if (age == null || gender == null) {
+      throw RangeError('Unrecognized division: "$display"');
+    }
   }
 
   Gender gender;

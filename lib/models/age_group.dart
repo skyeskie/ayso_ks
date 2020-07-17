@@ -7,7 +7,11 @@ class AgeGroup {
   });
 
   factory AgeGroup.fromCutoff(int cutoff) {
-    return AGES.singleWhere((ag) => ag.cutoff == cutoff);
+    return AGES.singleWhere((ag) => ag.cutoff == cutoff, orElse: () => null);
+  }
+
+  factory AgeGroup.fromId(int id) {
+    return AGES.singleWhere((ag) => ag.code == id, orElse: () => null);
   }
 
   final int code;
