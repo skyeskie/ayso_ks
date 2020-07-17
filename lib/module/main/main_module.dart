@@ -1,16 +1,16 @@
-import 'package:ayso_ks/module/main/data_controller.dart';
-import 'package:ayso_ks/service/backend_interface.dart';
-import 'package:ayso_ks/service/backend_json_asset.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../dao/mem/_injections.dart';
 import '../../dao/static/_injections.dart';
+import '../../service/backend_interface.dart';
+import '../../service/backend_json_asset.dart';
 import '../region/region_module.dart';
 import '../schedules/schedules_module.dart';
 import '../search/search_module.dart';
 import 'app.dart';
 import 'cancellations_view.dart';
+import 'data_controller.dart';
 import 'home_view.dart';
 import 'init_view.dart';
 import 'settings_view.dart';
