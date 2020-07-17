@@ -61,6 +61,10 @@ abstract class SettingsDAO {
   /// This must be synchronous, since it's used for the route interceptor
   bool isAppConfigured();
 
+  Future<String> getDataVersion();
+
+  Future setDataVersion(String version);
+
   /// Clear all saved settings
   /// After call, `isAppConfigured()` should return false
   Future<void> reset();

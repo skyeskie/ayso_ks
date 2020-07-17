@@ -8,6 +8,8 @@ import '../settings.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class StaticData {
+  static const String dataVersion = 'static.1';
+
   static List<DateTime> weeks = [
     DateTime(2016, 1, 31),
     DateTime(2016, 2, 7),

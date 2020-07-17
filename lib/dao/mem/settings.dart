@@ -1,4 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:meta/meta.dart';
 
 import '../../models/region.dart';
 import '../../models/team.dart';
@@ -18,6 +19,7 @@ class SettingsInMemoryDAO implements SettingsDAO {
 
   final Set<String> _teams = {};
   Region _region;
+  String _dataVersion;
 
   final TeamsDAO _teamsDAO = Modular.get<TeamsDAO>();
 
@@ -48,7 +50,7 @@ class SettingsInMemoryDAO implements SettingsDAO {
   }
 
   @override
-  Future<void> init({num regionNum, Iterable<String> savedTeams}) {
+  Future<void> init({@required num regionNum, Iterable<String> savedTeams}) {
     _region = Region.fromNumber(regionNum);
     _teams
       ..clear()
@@ -81,7 +83,7 @@ class SettingsInMemoryDAO implements SettingsDAO {
 
   @override
   Future<int> setRegion(int regionNum) {
-    _region = Region.fromNumber(regionNum);
+    _region = regionNum == null ? null : Region.fromNumber(regionNum);
     return Future.value(_region.number);
   }
 
@@ -97,5 +99,16 @@ class SettingsInMemoryDAO implements SettingsDAO {
       regionNumber: _region?.number,
       savedTeams: _teams.toList(),
     ));
+  }
+
+  @override
+  Future<String> getDataVersion() {
+    return Future.value(_dataVersion);
+  }
+
+  @override
+  Future setDataVersion(String version) {
+    _dataVersion = version;
+    return Future.value();
   }
 }

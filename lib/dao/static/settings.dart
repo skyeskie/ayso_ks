@@ -68,4 +68,14 @@ class SettingsStaticDAO implements SettingsDAO {
   Future<SettingsDataType> getSettingsReadonly() {
     return Future.value(StaticData.settings);
   }
+
+  @override
+  Future<String> getDataVersion() {
+    return Future.value(StaticData.dataVersion);
+  }
+
+  @override
+  Future setDataVersion(String version) {
+    return Future.value();
+  }
 }

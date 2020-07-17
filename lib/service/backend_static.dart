@@ -5,17 +5,22 @@ import 'backend_interface.dart';
 
 class BackendStatic implements BackendInterface {
   @override
-  Future<Iterable<Game>> getGames() {
+  Future<Iterable<Game>> getGames({String pastVersion}) {
     return Future.value(StaticData.games);
   }
 
   @override
-  Future<Iterable<Team>> getTeams() {
+  Future<Iterable<Team>> getTeams({String pastVersion}) {
     return Future.value(StaticData.teams.values);
   }
 
   @override
-  Future<Iterable<DateTime>> getWeekStarts() {
+  Future<Iterable<DateTime>> getWeekStarts({String pastVersion}) {
     return Future.value(StaticData.weeks);
+  }
+
+  @override
+  Future<String> getDataVersion({String pastVersion}) {
+    return Future.value(StaticData.dataVersion);
   }
 }

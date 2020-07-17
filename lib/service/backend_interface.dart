@@ -10,12 +10,14 @@ abstract class BackendInterface {
   /// - Exact use depends on backend implementation
 //  Future init(String curVersion);
 
-  Future<Iterable<Team>> getTeams();
+  Future<Iterable<Team>> getTeams({String pastVersion});
 
-  Future<Iterable<Game>> getGames();
+  Future<Iterable<Game>> getGames({String pastVersion});
 
   /// @return Date[] - Full initialization; sets week cache with values
   /// @return empty array - Keep existing week cache
   /// @return null - Have the `DataControlService` handle the week cache
-  Future<Iterable<DateTime>> getWeekStarts();
+  Future<Iterable<DateTime>> getWeekStarts({String pastVersion});
+
+  Future<String> getDataVersion({String pastVersion});
 }
