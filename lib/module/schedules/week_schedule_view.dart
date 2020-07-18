@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:sailor/sailor.dart';
 
 import '../../dao/games.dart';
 import '../../dao/week_cache.dart';
 import '../../models/game.dart';
+import '../../routes_config.dart';
 import '../../widgets/nav_bar.dart';
 import 'two_team_game_list.dart';
 import 'week_bar.dart';
@@ -39,8 +40,11 @@ class _WeekScheduleViewState extends State<WeekScheduleView>
           WeekBar(
             week: week,
             maxWeeks: weekCache.getMaxWeeks(),
-            navigate: (week) =>
-                Modular.link.pushReplacementNamed('/week/$week'),
+            navigate: (week) => Routing.sailor(
+              'schedules/week',
+              navigationType: NavigationType.pushReplace,
+              params: {'week': week},
+            ),
           ),
           FutureBuilder(
             future: games,

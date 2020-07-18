@@ -1,7 +1,9 @@
 import 'package:ayso_ks/dao/settings.dart';
+import 'package:ayso_ks/dao/static/teams.dart';
+import 'package:ayso_ks/dao/teams.dart';
+import 'package:get_it/get_it.dart';
 import 'package:test/test.dart';
 
-import '../mock/test_app_module.dart';
 import '../mock/test_data.dart';
 
 typedef SettingsDaoGenerator = SettingsDAO Function();
@@ -11,8 +13,12 @@ void settingsInterfaceReadSpec(SettingsDaoGenerator initSettingsDao) {
 
   group('(SettingsDAO) - Read', () {
     setUp(() {
-      TestAppModuleHelper().load();
+      GetIt.I.registerSingleton<TeamsDAO>(TeamsStaticDAO());
       dao = initSettingsDao();
+    });
+
+    tearDown(() {
+      GetIt.I.unregister<TeamsDAO>();
     });
 
     test('returns saved team IDs', () async {
@@ -60,8 +66,12 @@ void settingsInterfaceWriteSpec(SettingsDaoGenerator initSettingsDao) {
 
   group('(SettingsDAO) - Write', () {
     setUp(() {
-      TestAppModuleHelper().load();
+      GetIt.I.registerSingleton<TeamsDAO>(TeamsStaticDAO());
       dao = initSettingsDao();
+    });
+
+    tearDown(() {
+      GetIt.I.unregister<TeamsDAO>();
     });
 
     test('saves a team', () async {

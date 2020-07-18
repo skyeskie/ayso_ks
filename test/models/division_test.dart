@@ -29,15 +29,15 @@ void main() {
     });
 
     test('error on invalid age portion', () {
-      expect(() => Division.fromString('U42B'), throwsStateError);
+      expect(() => Division.fromString('U42B'), throwsArgumentError);
     });
 
     test('error on invalid gender portion', () {
-      expect(() => Division.fromString('U10Z'), throwsStateError);
+      expect(() => Division.fromString('U10Z'), throwsArgumentError);
     });
 
     test('error on invalid format', () {
-      expect(() => Division.fromString('B10'), throwsRangeError);
+      expect(() => Division.fromString('B10'), throwsArgumentError);
     });
   });
 

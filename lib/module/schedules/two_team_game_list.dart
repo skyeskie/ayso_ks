@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../models/game.dart';
+import '../../routes_config.dart';
 import '../../util/date_format.dart';
 
 class TwoTeamGameList extends StatelessWidget {
@@ -48,7 +48,10 @@ class TwoTeamGameList extends StatelessWidget {
 
           //Game Row
           return GestureDetector(
-            onTap: () => Modular.link.pushNamed('/game/${info.game.id}'),
+            onTap: () => Routing.sailor(
+              '/schedules/game',
+              params: {'id': info.game.id},
+            ),
             child: Row(
               children: [
                 Expanded(

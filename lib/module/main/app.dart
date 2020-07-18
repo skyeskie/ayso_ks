@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
+import '../../routes_config.dart';
 import '../../util/ready_route_guard.dart';
 
 class AysoApp extends StatelessWidget {
@@ -14,7 +14,7 @@ class AysoApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      navigatorKey: Modular.navigatorKey,
+      navigatorKey: Routing.sailor.navigatorKey,
       onGenerateRoute: generateRoute,
       initialRoute: '/',
     );

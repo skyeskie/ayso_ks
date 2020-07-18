@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 
 import '../../models/region.dart';
+import '../../routes_config.dart';
 
 class RegionInfoTile extends StatelessWidget {
   const RegionInfoTile({
@@ -28,14 +28,18 @@ class RegionInfoTile extends StatelessWidget {
           Row(
             children: [
               GFButton(
-                onPressed: () =>
-                    Modular.link.pushNamed('/${region.number}/map'),
+                onPressed: () => Routing.sailor(
+                  'region/map',
+                  params: {'regionNum': region.number},
+                ),
                 icon: Icon(Icons.drive_eta),
                 text: 'Directions',
               ),
               GFButton(
-                onPressed: () =>
-                    Modular.link.pushNamed('/${region.number}/field'),
+                onPressed: () => Routing.sailor(
+                  'region/field',
+                  params: {'regionNum': region.number},
+                ),
                 icon: Icon(Icons.map),
                 text: 'Field Map',
               )

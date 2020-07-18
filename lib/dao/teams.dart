@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 import '../models/team.dart';
 
@@ -35,11 +35,5 @@ abstract class TeamsDAO {
 }
 
 mixin TeamsInjection<T extends StatefulWidget> on State<T> {
-  final TeamsDAO teamsDAO = Modular.get<TeamsDAO>();
-
-  @override
-  void dispose() {
-    super.dispose();
-    Modular.dispose<TeamsDAO>();
-  }
+  final TeamsDAO teamsDAO = GetIt.I.get<TeamsDAO>();
 }

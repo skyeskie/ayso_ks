@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:sailor/sailor.dart';
+
+import '../routes_config.dart';
 
 AppBar buildNavBar(String title, BuildContext context) {
   return AppBar(
@@ -7,10 +10,10 @@ AppBar buildNavBar(String title, BuildContext context) {
     actions: [
       IconButton(
         icon: const Icon(Icons.home),
-        onPressed: () => Navigator.pushNamedAndRemoveUntil(
-          context,
+        onPressed: () => Routing.sailor(
           '/',
-          (route) => false, //All routes
+          navigationType: NavigationType.pushAndRemoveUntil,
+          removeUntilPredicate: (route) => false, //All routes
         ),
       )
     ],

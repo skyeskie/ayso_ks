@@ -16,8 +16,8 @@ void main() {
   });
 
   group('fromCutoff constructor', () {
-    test('error on invalid lookup', () {
-      expect(() => AgeGroup.fromCutoff(-10), throwsStateError);
+    test('null on invalid lookup', () {
+      expect(AgeGroup.fromCutoff(-10), isNull);
     });
 
     test('should return a lookup', () {

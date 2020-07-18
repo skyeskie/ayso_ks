@@ -1,4 +1,4 @@
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 
 import '../../models/region.dart';
@@ -21,7 +21,7 @@ class SettingsInMemoryDAO implements SettingsDAO {
   Region _region;
   String _dataVersion;
 
-  final TeamsDAO _teamsDAO = Modular.get<TeamsDAO>();
+  final TeamsDAO _teamsDAO = GetIt.I.get<TeamsDAO>();
 
   @override
   Future<void> clearSavedTeams() {

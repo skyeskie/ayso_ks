@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../dao/games.dart';
 import '../../dao/settings.dart';
 import '../../models/game.dart';
+import '../../routes_config.dart';
 import '../../widgets/nav_bar.dart';
 import 'two_team_game_list.dart';
 
@@ -48,8 +49,7 @@ class _FavoritesListViewState extends State<FavoritesListView>
                   Text('Add some teams as favorites:'),
                   FlatButton(
                     child: Text('Find Team'),
-                    onPressed: () =>
-                        Navigator.pushNamed(context, 'search/teams'),
+                    onPressed: () => Routing.sailor('/search/teams'),
                   ),
                   Text('Click a team to view team page'),
                   Text('Click the star button in the top right'),
@@ -86,8 +86,10 @@ class _FavoritesListViewState extends State<FavoritesListView>
             return GridTile(
               child: OutlineButton(
                 child: Text('Team $team'),
-                onPressed: () =>
-                    Navigator.pushNamed(context, 'schedules/team/$team'),
+                onPressed: () => Routing.sailor(
+                  'schedules/team',
+                  params: {'id': team},
+                ),
               ),
             );
           },

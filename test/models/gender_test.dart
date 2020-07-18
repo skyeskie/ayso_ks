@@ -16,8 +16,8 @@ void main() {
     expect(g.long, 'Girls');
   });
 
-  test('error in fromCode on unknown code', () {
-    expect(() => Gender.fromCode('Z'), throwsStateError);
+  test('null in fromCode on unknown code', () {
+    expect(Gender.fromCode('Z'), isNull);
   });
 
   test('configured genders have short length 1', () {

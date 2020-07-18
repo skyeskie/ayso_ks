@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../models/game.dart';
+import '../../routes_config.dart';
 import '../../util/date_format.dart';
 
 class SingleTeamGameListTile extends StatelessWidget {
@@ -16,7 +16,10 @@ class SingleTeamGameListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Modular.link.pushNamed('game/${game.id}'),
+      onTap: () => Routing.sailor(
+        '/schedules/game',
+        params: {'id': game.id},
+      ),
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [

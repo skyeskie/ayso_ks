@@ -12,24 +12,24 @@ class Division {
   Division.fromString(String display) {
     final matches = _fromString.firstMatch(display);
     if (matches == null) {
-      throw RangeError('Invalid format for division code: "$display"');
+      throw ArgumentError('Invalid format for division code: "$display"');
     }
     age = AgeGroup.fromCutoff(int.parse(matches.group(1)));
     gender = Gender.fromCode(matches.group(2));
     if (age == null || gender == null) {
-      throw RangeError('Unrecognized division: "$display"');
+      throw ArgumentError('Unrecognized division: "$display"');
     }
   }
 
   Division.fromIdString(String display) {
     final matches = _fromString.firstMatch(display);
     if (matches == null) {
-      throw RangeError('Invalid format for division code: "$display"');
+      throw ArgumentError('Invalid format for division code: "$display"');
     }
     age = AgeGroup.fromId(int.parse(matches.group(1)));
     gender = Gender.fromCode(matches.group(2));
     if (age == null || gender == null) {
-      throw RangeError('Unrecognized division: "$display"');
+      throw ArgumentError('Unrecognized division: "$display"');
     }
   }
 

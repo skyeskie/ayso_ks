@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../dao/teams.dart';
 import '../../models/age_group.dart';
 import '../../models/gender.dart';
 import '../../models/region.dart';
 import '../../models/team.dart';
+import '../../routes_config.dart';
 import '../../widgets/nav_bar.dart';
 
 class TeamSelectView extends StatefulWidget {
@@ -42,7 +42,10 @@ class _TeamSelectViewState extends State<TeamSelectView> with TeamsInjection {
   Widget buildTeamTile(Team t) {
     return GridTile(
       child: RaisedButton(
-        onPressed: () => Modular.to.pushNamed('/schedules/team/${t.code}'),
+        onPressed: () => Routing.sailor(
+          '/schedules/team',
+          params: {'id': t.code},
+        ),
         child: Text(t.code),
       ),
       footer: Row(

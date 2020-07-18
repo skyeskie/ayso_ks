@@ -1,4 +1,4 @@
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:sailor/sailor.dart';
 
 import 'favorites_list_view.dart';
 import 'game_detail_view.dart';
@@ -7,37 +7,64 @@ import 'search_results_view.dart';
 import 'team_schedule.dart';
 import 'week_schedule_view.dart';
 
-class SchedulesModule extends ChildModule {
-  @override
-  List<Bind> get binds => [];
-
-  @override
-  List<Router> get routers => [
-        Router('/', child: (ctx, args) => SchedulesMenuView()),
-        Router('/favorites', child: (ctx, args) => FavoritesListView()),
-        Router('/game/:id',
-            child: (ctx, args) => GameDetailView(id: args.params['id'])),
-        Router(
-          '/search',
-          child: (ctx, args) => SearchResultsView(
-            week: args.data['week'],
-            ageGroup: args.data['age'],
-            gender: args.data['gender'],
-            regionNum: args.data['region'],
-          ),
-        ),
-        Router(
-          '/team/:id',
-          child: (ctx, args) => TeamScheduleView(
-            teamId: args.params['id'],
-          ),
-        ),
-        Router('/week', child: (ctx, args) => WeekScheduleView()),
-        Router(
-          '/week/:num',
-          child: (ctx, args) => WeekScheduleView(
-            week: int.parse(args.params['num'], radix: 10),
-          ),
-        ),
-      ];
-}
+final List<SailorRoute> scheduleModuleRoutes = <SailorRoute>[
+  SailorRoute(
+    name: '/schedules',
+    params: [
+      SailorParam<int>(name: 'regionNum', isRequired: true),
+    ],
+    builder: (ctx, args, params) => SchedulesMenuView(
+      params.param('regionNum'),
+    ),
+  ),
+  SailorRoute(
+    name: '/schedules/favorites',
+    builder: (ctx, args, params) => FavoritesListView(),
+  ),
+  SailorRoute(
+    name: '/schedules/game',
+    params: [
+      SailorParam<String>(name: 'id', isRequired: true),
+    ],
+    builder: (ctx, args, params) => GameDetailView(id: params.param('id')),
+  ),
+  SailorRoute(
+    name: '/schedules/filtered',
+    params: [
+      SailorParam<int>(name: 'week'),
+      SailorParam<String>(name: 'age'),
+      SailorParam<String>(name: 'gender'),
+      SailorParam<int>(name: 'regionNum'),
+    ],
+    builder: (ctx, args, params) => SearchResultsView(
+      week: params.param<int>('week'),
+      ageGroup: params.param<String>('age'),
+      gender: params.param<String>('gender'),
+      regionNum: params.param<int>('regionNum'),
+    ),
+  ),
+  SailorRoute(
+    name: '/schedules/team',
+    params: [
+      SailorParam<String>(name: 'id', isRequired: true),
+    ],
+    builder: (ctx, args, params) => TeamScheduleView(
+      teamId: params.param<String>('id'),
+    ),
+  ),
+  //TODO: Combine two week routes once null params options fixed
+  // ( https://github.com/gurleensethi/sailor/pull/44 )
+  SailorRoute(
+    name: '/schedules/week',
+    params: [
+      SailorParam<int>(name: 'weekNum'),
+    ],
+    builder: (ctx, args, params) => WeekScheduleView(
+      week: params?.param<int>('weekNum'),
+    ),
+  ),
+  SailorRoute(
+    name: '/schedules/week_current',
+    builder: (ctx, args, params) => WeekScheduleView(),
+  ),
+];

@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
-import '../../dao/settings.dart';
+import '../../routes_config.dart';
 import '../../widgets/large_icon_button.dart';
 import '../../widgets/nav_bar.dart';
 
 class SchedulesMenuView extends StatelessWidget {
-  SchedulesMenuView();
+  SchedulesMenuView(this.regionNumber);
+
+  final int regionNumber;
 
   @override
   Widget build(BuildContext context) {
-    final settings = Modular.get<SettingsDataType>();
-    final regionNumber = settings.regionNumber;
-
     final theme = Theme.of(context);
     return Scaffold(
       appBar: buildNavBar('Region $regionNumber', context),
@@ -43,7 +41,7 @@ class SchedulesMenuView extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  ' Region ${settings.regionNumber}',
+                  ' Region $regionNumber',
                   style: Theme.of(context).textTheme.headline5,
                 ),
               ],
@@ -52,33 +50,37 @@ class SchedulesMenuView extends StatelessWidget {
             LargeIconButton(
               icon: Icons.schedule,
               label: Text('This Week'),
-              action: () => Navigator.pushNamed(context, '/schedules/week'),
+              action: () => Routing.sailor('/schedules/week_current'),
             ),
             Spacer(flex: 2),
             LargeIconButton(
               icon: Icons.search,
               label: Text('Find Team'),
-              action: () => Navigator.pushNamed(context, '/search/teams'),
+              action: () => Routing.sailor('/search/teams'),
             ),
             Spacer(flex: 2),
             LargeIconButton(
               icon: Icons.search,
               label: Text('Advanced Search'),
-              action: () => Navigator.pushNamed(context, '/search'),
+              action: () => Routing.sailor('/search'),
             ),
             Spacer(flex: 2),
             LargeIconButton(
               icon: Icons.directions,
               label: Text('Directions'),
-              action: () =>
-                  Navigator.pushNamed(context, '/region/$regionNumber/map'),
+              action: () => Routing.sailor(
+                '/region/map',
+                params: {'regionNum': regionNumber},
+              ),
             ),
             Spacer(flex: 2),
             LargeIconButton(
               icon: Icons.map,
               label: Text('Field Map'),
-              action: () =>
-                  Navigator.pushNamed(context, '/region/$regionNumber/field'),
+              action: () => Routing.sailor(
+                '/region/field',
+                params: {'regionNum': regionNumber},
+              ),
             ),
             Spacer(flex: 20),
           ],

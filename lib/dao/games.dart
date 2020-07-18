@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:get_it/get_it.dart';
 
 import '../models/game.dart';
 
@@ -38,11 +38,5 @@ abstract class GamesDAO {
 }
 
 mixin GamesInjection<T extends StatefulWidget> on State<T> {
-  final GamesDAO gamesDAO = Modular.get<GamesDAO>();
-
-  @override
-  void dispose() {
-    super.dispose();
-    Modular.dispose<GamesDAO>();
-  }
+  final GamesDAO gamesDAO = GetIt.I.get<GamesDAO>();
 }

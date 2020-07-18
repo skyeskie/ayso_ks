@@ -3,6 +3,7 @@ import 'package:test/test.dart';
 
 void main() {
   test('toMediumString() - 6 cases', () {
+    // ignore: unused_local_variable
     final testCases = {
       '2020-02-10 08:30': 'Feb 10, 8:30',
       '2020-02-10 10:30': 'Feb 10, 10:30',

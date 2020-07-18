@@ -1,10 +1,12 @@
+// ignore_for_file: implementation_imports
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:get_it/get_it.dart';
 import 'package:getwidget/components/card/gf_card.dart';
 import 'package:getwidget/components/list_tile/gf_list_tile.dart';
 import 'package:getwidget/getwidget.dart';
 
 import '../../models/region.dart';
+import '../../routes_config.dart';
 import 'data_controller.dart';
 
 class InitView extends StatefulWidget {
@@ -16,7 +18,9 @@ class InitView extends StatefulWidget {
   _InitViewState createState() => _InitViewState();
 }
 
-class _InitViewState extends ModularState<InitView, DataController> {
+class _InitViewState extends State<InitView> {
+  final DataController controller = GetIt.I.get<DataController>();
+
   bool _showConfig = false;
   int _regionNum;
   bool _finishDisabled = true;
@@ -33,7 +37,9 @@ class _InitViewState extends ModularState<InitView, DataController> {
   }
 
   void _resumeNavigation() {
-    Modular.to.pushNamed(
+    //Fallback to using default navigation method since we hijacked the
+    //  Sailor routing mechanisms in util/ready_route_guard.dart
+    Routing.sailor.navigatorKey.currentState.pushReplacementNamed(
       widget.interruptedRoute?.name ?? '/',
       arguments: widget.interruptedRoute?.arguments,
     );

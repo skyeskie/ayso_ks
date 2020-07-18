@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 import '../models/region.dart';
 import '../models/team.dart';
@@ -81,11 +81,5 @@ class SettingsDataType {
 }
 
 mixin SettingsInjection<T extends StatefulWidget> on State<T> {
-  final SettingsDAO settingsDAO = Modular.get<SettingsDAO>();
-
-  @override
-  void dispose() {
-    super.dispose();
-    Modular.dispose<SettingsDAO>();
-  }
+  final SettingsDAO settingsDAO = GetIt.I.get<SettingsDAO>();
 }

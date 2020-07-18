@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import '../../models/age_group.dart';
 import '../../models/gender.dart';
 import '../../models/region.dart';
+import '../../routes_config.dart';
 import '../../widgets/nav_bar.dart';
 
 class SearchView extends StatefulWidget {
@@ -91,9 +92,9 @@ class _SearchViewState extends State<SearchView> {
                   child: RaisedButton.icon(
                     onPressed: () {
                       if (_fb.currentState.saveAndValidate()) {
-                        Navigator.of(context).pushNamed(
-                          '/schedules/search',
-                          arguments: _fb.currentState.value,
+                        Routing.sailor(
+                          '/schedules/filtered',
+                          params: _fb.currentState.value,
                         );
                         print(_fb.currentState.value);
                       }

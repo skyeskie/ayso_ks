@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:get_it/get_it.dart';
 
 abstract class WeekCacheDAO {
   /// Get the number of weeks in a season
@@ -22,11 +22,5 @@ abstract class WeekCacheDAO {
 }
 
 mixin WeekCacheInjection<T extends StatefulWidget> on State<T> {
-  final WeekCacheDAO weekCache = Modular.get<WeekCacheDAO>();
-
-  @override
-  void dispose() {
-    super.dispose();
-    Modular.dispose<WeekCacheDAO>();
-  }
+  final WeekCacheDAO weekCache = GetIt.I.get<WeekCacheDAO>();
 }

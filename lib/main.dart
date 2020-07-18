@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
-import 'module/main/main_module.dart';
+import 'di_config.dart';
+import 'module/main/app.dart';
+import 'routes_config.dart';
 
 void main() {
-  runApp(ModularApp(module: AysoAppModule()));
+  setupDependencyInjection();
+  Routing.createRoutes();
+  runApp(AysoApp());
 }

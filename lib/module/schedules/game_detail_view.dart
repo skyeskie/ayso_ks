@@ -6,6 +6,7 @@ import '../../dao/games.dart';
 import '../../dao/teams.dart';
 import '../../models/game.dart';
 import '../../models/team.dart';
+import '../../routes_config.dart';
 import '../../util/date_format.dart';
 import '../../widgets/nav_bar.dart';
 import 'team_card.dart';
@@ -96,16 +97,18 @@ class _GameDetailViewState extends State<GameDetailView>
         SizedBox(height: 5),
         Text('Region ${_game.region.number}'),
         RaisedButton.icon(
-          onPressed: () => Navigator.of(context).pushNamed(
-            '/region/${_game.region.id}/map',
+          onPressed: () => Routing.sailor(
+            '/region/map',
+            params: {'regionNum': _game.region.number},
           ),
           icon: Icon(Icons.directions_car),
           label: Text('Directions'),
         ),
         Text('Field ${_game.field}'),
         RaisedButton.icon(
-          onPressed: () => Navigator.of(context).pushNamed(
-            '/region/${_game.region.id}/field',
+          onPressed: () => Routing.sailor(
+            '/region/field',
+            params: {'regionNum': _game.region.number},
           ),
           icon: Icon(Icons.map),
           label: Text('Field map'),

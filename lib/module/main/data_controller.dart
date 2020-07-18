@@ -1,4 +1,4 @@
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:get_it/get_it.dart';
 
 import '../../dao/games.dart';
 import '../../dao/settings.dart';
@@ -6,12 +6,12 @@ import '../../dao/teams.dart';
 import '../../dao/week_cache.dart';
 import '../../service/backend_interface.dart';
 
-class DataController extends Disposable {
-  final _backend = Modular.get<BackendInterface>();
-  final _gamesDao = Modular.get<GamesDAO>();
-  final _settingsDao = Modular.get<SettingsDAO>();
-  final _teamsDao = Modular.get<TeamsDAO>();
-  final _weekCacheDao = Modular.get<WeekCacheDAO>();
+class DataController {
+  final _backend = GetIt.I.get<BackendInterface>();
+  final _gamesDao = GetIt.I.get<GamesDAO>();
+  final _settingsDao = GetIt.I.get<SettingsDAO>();
+  final _teamsDao = GetIt.I.get<TeamsDAO>();
+  final _weekCacheDao = GetIt.I.get<WeekCacheDAO>();
 
   Future refreshData({bool updateAll = false}) async {
     final dv = updateAll ? null : (await _settingsDao.getDataVersion());
@@ -26,9 +26,4 @@ class DataController extends Disposable {
   bool get isAppConfigured => _settingsDao.isAppConfigured();
 
   Future configureRegion(int regionNum) => _settingsDao.setRegion(regionNum);
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-  }
 }

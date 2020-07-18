@@ -1,26 +1,34 @@
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:sailor/sailor.dart';
 
 import 'field_view.dart';
 import 'region_list_view.dart';
 import 'street_map_view.dart';
 
-class RegionModule extends ChildModule {
-  @override
-  List<Bind> get binds => [];
-
-  @override
-  List<Router> get routers => [
-        Router('/', child: (ctx, args) => RegionListView()),
-        Router('/list', child: (ctx, args) => RegionListView()),
-        Router(
-          '/:regionNum/field',
-          child: (ctx, args) =>
-              FieldView(int.parse(args.params['regionNum'], radix: 10)),
-        ),
-        Router(
-          '/:regionNum/map',
-          child: (ctx, args) =>
-              StreetMapView(int.parse(args.params['regionNum'], radix: 10)),
-        ),
-      ];
-}
+final List<SailorRoute> regionModuleRoutes = <SailorRoute>[
+  SailorRoute(
+    name: '/region',
+    builder: (ctx, args, params) => RegionListView(),
+  ),
+  SailorRoute(
+    name: '/region/list',
+    builder: (ctx, args, params) => RegionListView(),
+  ),
+  SailorRoute(
+    name: '/region/field',
+    params: [
+      SailorParam<int>(name: 'regionNum', isRequired: true),
+    ],
+    builder: (ctx, args, params) {
+      return FieldView(params.param<int>('regionNum'));
+    },
+  ),
+  SailorRoute(
+    name: '/region/map',
+    params: [
+      SailorParam<int>(name: 'regionNum', isRequired: true),
+    ],
+    builder: (ctx, args, params) {
+      return StreetMapView(params.param<int>('regionNum'));
+    },
+  ),
+];
