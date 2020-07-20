@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sailor/sailor.dart';
 
 import '../../dao/games.dart';
+import '../../dao/settings.dart';
 import '../../dao/week_cache.dart';
 import '../../models/game.dart';
 import '../../routes_config.dart';
@@ -19,31 +20,37 @@ class WeekScheduleView extends StatefulWidget {
 }
 
 class _WeekScheduleViewState extends State<WeekScheduleView>
-    with GamesInjection, WeekCacheInjection {
+    with GamesInjection, WeekCacheInjection, SettingsInjection {
   Future<Iterable<Game>> games;
 
   int week;
+  int regionNum;
 
   @override
   void initState() {
     week = widget._week ?? weekCache.getCurrentWeek();
-    games = gamesDAO.findGames(week: week);
+    games = settingsDAO.getRegionNumber().then((value) {
+      setState(() {
+        regionNum = value;
+      });
+      return gamesDAO.findGames(week: week, regionId: value);
+    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildNavBar('Region 49 Schedule', context),
+      appBar: buildNavBar('Region ${regionNum ?? ""} Schedule', context),
       body: Column(
         children: [
           WeekBar(
             week: week,
             maxWeeks: weekCache.getMaxWeeks(),
-            navigate: (week) => Routing.sailor(
-              'schedules/week',
+            navigate: (newWeek) => Routing.sailor(
+              '/schedules/week',
               navigationType: NavigationType.pushReplace,
-              params: {'week': week},
+              params: {'week': newWeek},
             ),
           ),
           FutureBuilder(
@@ -59,7 +66,7 @@ class _WeekScheduleViewState extends State<WeekScheduleView>
                 return TwoTeamGameList(games: snapshot.data);
               }
 
-              return Text('Loading');
+              return Text('Loading...');
             },
           ),
         ],

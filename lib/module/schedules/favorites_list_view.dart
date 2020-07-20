@@ -87,7 +87,7 @@ class _FavoritesListViewState extends State<FavoritesListView>
               child: OutlineButton(
                 child: Text('Team $team'),
                 onPressed: () => Routing.sailor(
-                  'schedules/team',
+                  '/schedules/team',
                   params: {'id': team},
                 ),
               ),

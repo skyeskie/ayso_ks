@@ -20,13 +20,14 @@ class SchedulesMenuView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Spacer(flex: 20),
             Image.asset(
               'img/HomeText.png',
               alignment: Alignment.center,
               fit: BoxFit.fitWidth,
               semanticLabel: 'AYSO Kansas',
             ),
-            Spacer(flex: 2),
+            Spacer(flex: 5),
             Row(
               crossAxisAlignment: CrossAxisAlignment.baseline,
               textBaseline: TextBaseline.alphabetic,
@@ -34,19 +35,20 @@ class SchedulesMenuView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Schedules ',
+                  'Schedules',
                   style: theme.textTheme.headline4.copyWith(
                     color: theme.primaryColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                SizedBox(width: 15),
                 Text(
-                  ' Region $regionNumber',
+                  'Region $regionNumber',
                   style: Theme.of(context).textTheme.headline5,
                 ),
               ],
             ),
-            Spacer(flex: 2),
+            Spacer(flex: 5),
             LargeIconButton(
               icon: Icons.schedule,
               label: Text('This Week'),

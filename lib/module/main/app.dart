@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sailor/sailor.dart';
 
 import '../../routes_config.dart';
 import '../../util/ready_route_guard.dart';
@@ -17,6 +18,9 @@ class AysoApp extends StatelessWidget {
       navigatorKey: Routing.sailor.navigatorKey,
       onGenerateRoute: generateRoute,
       initialRoute: '/',
+      navigatorObservers: [
+        SailorLoggingObserver(),
+      ],
     );
   }
 }

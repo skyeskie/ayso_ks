@@ -22,7 +22,7 @@ class WeekBar extends StatelessWidget {
                 icon: Icon(Icons.arrow_back),
                 onPressed: () => navigate(week - 1),
               )
-            : const SizedBox(),
+            : const SizedBox(height: 48, width: 48),
         title: Align(
           child: Text('Week #$week'),
         ),
@@ -31,7 +31,7 @@ class WeekBar extends StatelessWidget {
                 icon: Icon(Icons.arrow_forward),
                 onPressed: () => navigate(week + 1),
               )
-            : const SizedBox(),
+            : const SizedBox(height: 48, width: 48),
       ),
     );
   }

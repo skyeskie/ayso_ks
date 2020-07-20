@@ -40,6 +40,8 @@ class TestData {
     mkGame('322', 'H', 'J', 1, startTime(1, 10), 49, 'map2', 'U12G'),
     mkGame('431', 'E', 'J', 2, startTime(2, 12), 208, 'map', 'U12G'),
     mkGame('432', 'I', 'H', 2, startTime(2, 12), 208, 'map2', 'U12G'),
+    mkGame('501', 'A', '-', 3, startTime(3, 8), 49, null, 'U10B'),
+    mkGame('502', '-', 'B', 3, startTime(3, 8), 49, null, 'U10B'),
   ];
 
   static SettingsDataType settings = SettingsDataType(
@@ -87,11 +89,11 @@ class TestData {
   static DateTime startTime(int week, int hour) {
     final start = weeks[week - 1];
     final end = weeks[week] ?? start + 7.days;
-    final sat = start.to(end).firstWhere(
-          (d) => d.weekday == DateTime.saturday,
-          orElse: () => start,
-        );
-    return sat + hour.hours;
+    var diffSat = DateTime.saturday - start.weekday;
+    if (diffSat < 0) diffSat += 7;
+    var day = start + diffSat.days;
+    if (end.isBefore(day)) day = start;
+    return day + hour.hours;
   }
 
   static Game mkGame(

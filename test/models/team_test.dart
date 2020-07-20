@@ -1,4 +1,5 @@
 import 'package:ayso_ks/models/division.dart';
+import 'package:ayso_ks/models/game.dart';
 import 'package:ayso_ks/models/region.dart';
 import 'package:ayso_ks/models/team.dart';
 @Tags(['model'])
@@ -27,5 +28,10 @@ void main() {
     expect(t.coachTel, 'tel');
     expect(t.division.shortDisplayName(), 'U10B');
     expect(t.region.number, 49);
+  });
+
+  test('bye constructor', () {
+    final t = Team.bye();
+    expect(t.code, Game.BYE_TEAM);
   });
 }

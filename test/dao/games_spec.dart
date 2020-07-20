@@ -27,7 +27,7 @@ void gamesInterfaceReadSpec(GamesDaoGenerator initGamesDao) {
     group('findGames', () {
       test('filter on region', () async {
         final games = await dao.findGames(regionId: 49);
-        expect(games.length, 8);
+        expect(games.length, 10);
         for (final game in games) {
           expect(game.region.number, 49);
         }
@@ -35,7 +35,7 @@ void gamesInterfaceReadSpec(GamesDaoGenerator initGamesDao) {
 
       test('filter on age', () async {
         final games = await dao.findGames(ageGroup: 'U10');
-        expect(games.length, 6);
+        expect(games.length, 8);
         for (final game in games) {
           expect(game.division.age.cutoff, 10);
         }
@@ -43,7 +43,7 @@ void gamesInterfaceReadSpec(GamesDaoGenerator initGamesDao) {
 
       test('filter on gender', () async {
         final games = await dao.findGames(gender: 'Boys');
-        expect(games.length, 6);
+        expect(games.length, 8);
         for (final game in games) {
           expect(game.division.gender.short, 'B');
         }
@@ -66,7 +66,7 @@ void gamesInterfaceReadSpec(GamesDaoGenerator initGamesDao) {
     group('findForTeam', () {
       test('returns games', () async {
         final games = await dao.findForTeam('A');
-        expect(games.length, 3);
+        expect(games.length, 4);
         for (final game in games) {
           expect(game.hasTeam('A'), true);
         }
@@ -81,7 +81,7 @@ void gamesInterfaceReadSpec(GamesDaoGenerator initGamesDao) {
     group('findForTeams', () {
       test('returns games for 1 team', () async {
         final games = await dao.findForTeams(['B']);
-        expect(games.length, 3);
+        expect(games.length, 4);
         for (final game in games) {
           expect(game.hasTeam('B'), true);
         }
@@ -89,7 +89,7 @@ void gamesInterfaceReadSpec(GamesDaoGenerator initGamesDao) {
 
       test('returns games for 3 teams', () async {
         final games = await dao.findForTeams(['A', 'B', 'C']);
-        expect(games.length, 6);
+        expect(games.length, 8);
         for (final game in games) {
           expect(
             game.hasTeam('A') || game.hasTeam('B') || game.hasTeam('C'),
@@ -105,7 +105,7 @@ void gamesInterfaceReadSpec(GamesDaoGenerator initGamesDao) {
 
       test('return ignores invalid teams', () async {
         final games = await dao.findForTeams(['B', 'NotATeam']);
-        expect(games.length, 3);
+        expect(games.length, 4);
         for (final game in games) {
           expect(game.hasTeam('B'), true);
         }

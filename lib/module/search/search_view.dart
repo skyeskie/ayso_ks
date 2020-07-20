@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 
+import '../../dao/week_cache.dart';
 import '../../models/age_group.dart';
 import '../../models/gender.dart';
 import '../../models/region.dart';
@@ -13,11 +14,22 @@ class SearchView extends StatefulWidget {
   _SearchViewState createState() => _SearchViewState();
 }
 
-class _SearchViewState extends State<SearchView> {
-  final GlobalKey<FormBuilderState> _fb = GlobalKey<FormBuilderState>();
+class _SearchViewState extends State<SearchView> with WeekCacheInjection {
+  final GlobalKey<FormBuilderState> _fb =
+      GlobalKey<FormBuilderState>(debugLabel: 'SearchForm');
   final Widget spacer = const SizedBox(height: 40);
 
-  void submitForm() {}
+  int get _maxWeeks => weekCache.getMaxWeeks();
+
+  void submitForm() {
+    if (_fb.currentState.saveAndValidate()) {
+      Routing.sailor(
+        '/schedules/filtered',
+        params: _fb.currentState.value,
+      );
+      print(_fb.currentState.value);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,18 +43,22 @@ class _SearchViewState extends State<SearchView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                spacer,
+                Spacer(flex: 5),
                 FormBuilderSlider(
                   numberFormat: NumberFormat('###'),
                   attribute: 'week',
                   min: 1,
-                  max: 4,
-                  divisions: 3,
-                  decoration: InputDecoration(labelText: 'Week'),
+                  max: _maxWeeks.toDouble(),
+                  divisions: _maxWeeks - 1,
+                  decoration: InputDecoration(
+                    labelText: 'Week',
+                    labelStyle: Theme.of(context).textTheme.headline6,
+                    border: InputBorder.none,
+                  ),
                   initialValue: 1,
                   valueTransformer: (v) => v.floor(),
                 ),
-                SizedBox(height: 20),
+                Spacer(),
                 FormBuilderDropdown(
                   attribute: 'region',
                   decoration: InputDecoration(labelText: 'Region'),
@@ -53,7 +69,7 @@ class _SearchViewState extends State<SearchView> {
                           ))
                       .toList(growable: false),
                 ),
-                spacer,
+                Spacer(flex: 2),
                 Text(
                   'Division',
                   style: Theme.of(context).textTheme.headline6,
@@ -73,6 +89,7 @@ class _SearchViewState extends State<SearchView> {
                             .toList(growable: false),
                       ),
                     ),
+                    SizedBox(width: 30),
                     Expanded(
                       child: FormBuilderDropdown(
                         attribute: 'gender',
@@ -87,22 +104,15 @@ class _SearchViewState extends State<SearchView> {
                     ),
                   ],
                 ),
-                spacer,
+                Spacer(),
                 Align(
                   child: RaisedButton.icon(
-                    onPressed: () {
-                      if (_fb.currentState.saveAndValidate()) {
-                        Routing.sailor(
-                          '/schedules/filtered',
-                          params: _fb.currentState.value,
-                        );
-                        print(_fb.currentState.value);
-                      }
-                    },
+                    onPressed: submitForm,
                     icon: Icon(Icons.search),
                     label: Text('Go'),
                   ),
                 ),
+                Spacer(flex: 8),
               ],
             ),
           ),

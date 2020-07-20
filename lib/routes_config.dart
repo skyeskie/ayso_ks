@@ -7,7 +7,7 @@ import 'module/search/search_module.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class Routing {
-  static final Sailor sailor = Sailor();
+  static Sailor sailor = Sailor();
 
   static void createRoutes() {
     sailor

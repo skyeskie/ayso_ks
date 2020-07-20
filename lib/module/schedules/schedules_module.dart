@@ -57,10 +57,10 @@ final List<SailorRoute> scheduleModuleRoutes = <SailorRoute>[
   SailorRoute(
     name: '/schedules/week',
     params: [
-      SailorParam<int>(name: 'weekNum'),
+      SailorParam<int>(name: 'week'),
     ],
     builder: (ctx, args, params) => WeekScheduleView(
-      week: params?.param<int>('weekNum'),
+      week: params?.param<int>('week'),
     ),
   ),
   SailorRoute(

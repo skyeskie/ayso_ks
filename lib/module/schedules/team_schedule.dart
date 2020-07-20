@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
+import 'package:getwidget/getwidget.dart';
 
 import '../../dao/games.dart';
 import '../../dao/settings.dart';
@@ -58,19 +58,22 @@ class TeamScheduleState extends State<TeamScheduleView>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildNavBar('Team Schedule', context),
-      body: FutureBuilder(
-        future: loaded,
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Text(snapshot.error.toString());
-          }
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        child: FutureBuilder(
+          future: loaded,
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Text(snapshot.error.toString());
+            }
 
-          if (snapshot.hasData) {
-            return _build(context);
-          }
+            if (snapshot.hasData) {
+              return _build(context);
+            }
 
-          return Text('Loading');
-        },
+            return Text('Loading...');
+          },
+        ),
       ),
     );
   }
@@ -79,34 +82,27 @@ class TeamScheduleState extends State<TeamScheduleView>
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
-        Row(children: [
-          Text('Team ${_team?.code}'),
-          OutlineButton.icon(
-            icon: Icon(_favorite ? Icons.star : Icons.star_border),
-            label: Text(_favorite ? 'UnFavorite' : 'Favorite'),
-            onPressed: updateFavorite,
+        GFCard(
+          title: GFListTile(
+            titleText: 'Team ${_team?.code}',
+            description: Text('Region ${_team.region.number} -'
+                ' ${_team.division.getDisplayName()}'),
           ),
-        ]),
-        Row(
-          children: [
-            Expanded(
-              child: Text('Coach'),
-              flex: 1,
-            ),
-            Expanded(
-              child: Text(_team?.coach ?? 'To Be Determined'),
-              flex: 2,
-            ),
-          ],
-        ),
-        FractionallySizedBox(
-          child: OutlineButton.icon(
-            onPressed: () {},
-            icon: Icon(Ionicons.md_call),
-            label: Text(_team?.coachTel ?? ''),
+          content: Text('Coach ${_team?.coach ?? "To Be Determined"}'),
+          buttonBar: GFButtonBar(
+            children: [
+              OutlineButton.icon(
+                icon: Icon(_favorite ? Icons.star : Icons.star_border),
+                label: Text(_favorite ? 'UnFavorite' : 'Favorite'),
+                onPressed: updateFavorite,
+              ),
+              OutlineButton.icon(
+                onPressed: null,
+                icon: Icon(Icons.call),
+                label: Text(_team?.coachTel ?? ''),
+              ),
+            ],
           ),
-          widthFactor: .667,
-          alignment: Alignment.centerRight,
         ),
         ListView.builder(
           shrinkWrap: true,

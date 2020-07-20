@@ -1,9 +1,8 @@
-import 'package:ayso_ks/dao/settings.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../dao/settings.dart';
 import '../../routes_config.dart';
 import '../../widgets/large_icon_button.dart';
 
@@ -16,6 +15,7 @@ class HomeView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Spacer(flex: 4),
             SvgPicture.asset(
               //TODO: Fix SVG (Only shows KS border, no other elements)
               'img/KansasSoccerBall.svg',
@@ -31,7 +31,7 @@ class HomeView extends StatelessWidget {
             ),
             Spacer(flex: 2),
             LargeIconButton(
-              icon: Ionicons.md_calendar,
+              icon: Icons.calendar_today,
               label: Text('Schedules'),
               action: () => GetIt.I.get<SettingsDAO>().getRegionNumber().then(
                     (value) => Routing.sailor(
@@ -42,25 +42,25 @@ class HomeView extends StatelessWidget {
             ),
             Spacer(),
             LargeIconButton(
-              icon: Ionicons.md_map,
+              icon: Icons.map,
               label: Text('Region Info'),
               action: () => Routing.sailor('/region'),
             ),
             Spacer(),
             LargeIconButton(
-              icon: Ionicons.md_bookmark,
+              icon: Icons.bookmark,
               label: Text('My Teams'),
               action: () => Routing.sailor('/schedules/favorites'),
             ),
             Spacer(),
             LargeIconButton(
-              icon: Ionicons.logo_twitter,
+              icon: Icons.rss_feed,
               label: Text('Cancellations'),
               action: () => Routing.sailor('/cancellations'),
             ),
             Spacer(),
             LargeIconButton(
-              icon: Ionicons.md_settings,
+              icon: Icons.settings,
               label: Text('Settings'),
               action: () => Routing.sailor('/settings'),
             ),

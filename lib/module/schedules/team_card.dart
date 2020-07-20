@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:getwidget/getwidget.dart';
 
 import '../../models/team.dart';
-import '../../widgets/large_icon_button.dart';
 
 enum VS {
   Home,
@@ -19,23 +19,17 @@ class TeamCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Card(
-        margin: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text('$teamLabel Team'),
-            Text('${team.code}'),
-            Row(
-              children: [Text('Coach'), Text('${team.coach}')],
-            ),
-            LargeIconButton(
-              icon: Icons.call,
-              label: const Text('Call'),
-              action: () {},
-            )
-          ],
+    return GFCard(
+      title: GFListTile(
+        titleText: teamLabel,
+        subtitleText: team.code,
+        description: Row(
+          children: [Text('Coach: '), Text('${team.coach}')],
+        ),
+        icon: GFButton(
+          icon: Icon(Icons.call),
+          child: Text('Call'),
+          onPressed: () {},
         ),
       ),
     );
@@ -44,11 +38,11 @@ class TeamCard extends StatelessWidget {
   static String formatVS(VS vs) {
     switch (vs) {
       case VS.Home:
-        return 'Home';
+        return 'Home Team';
       case VS.Away:
-        return 'Away';
+        return 'Away Team';
       case VS.Ignore:
     }
-    return '';
+    return 'Team';
   }
 }

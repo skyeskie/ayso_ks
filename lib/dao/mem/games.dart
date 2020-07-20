@@ -46,11 +46,11 @@ class GamesInMemoryDAO implements GamesDAO {
     int week,
   }) {
     return Future.value(_games.values
-        .where((game) => (regionId == null || game.region.number == regionId))
+        .where((game) => (regionId == null || game.region?.number == regionId))
         .where((game) =>
-            (ageGroup == null || game.division.age.toString() == ageGroup))
+            (ageGroup == null || game.division?.age?.toString() == ageGroup))
         .where(
-            (game) => (gender == null || game.division.gender.long == gender))
+            (game) => (gender == null || game.division?.gender?.long == gender))
         .where((game) => (week == null || game.weekNum == week)));
   }
 

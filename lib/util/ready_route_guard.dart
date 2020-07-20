@@ -1,3 +1,5 @@
+// ignore_for_file: implementation_imports
+// Note: Workaround until https://github.com/gurleensethi/sailor/issues/28
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sailor/sailor.dart';

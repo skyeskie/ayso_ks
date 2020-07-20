@@ -26,6 +26,17 @@ void main() {
     });
   });
 
+  group('fromId constructor', () {
+    test('null on invalid lookup', () {
+      expect(AgeGroup.fromId(-10), isNull);
+    });
+
+    test('should return a lookup', () {
+      final ag = AgeGroup.AGES.first;
+      expect(AgeGroup.fromId(ag.code), ag);
+    });
+  });
+
   group('configuration', () {
     test('codes are unique', () {
       final codes = AgeGroup.AGES.map((e) => e.code).toList().toSet();

@@ -41,6 +41,33 @@ void main() {
     });
   });
 
+  group('create fromIdString', () {
+    test('create object', () {
+      final divis = Division.fromIdString('5B');
+      expect(divis.getDisplayName(), 'U10 Boys');
+
+      final divis2 = Division.fromIdString('4G');
+      expect(divis2.getDisplayName(), 'U12 Girls');
+    });
+
+    test('create without "U" prefix', () {
+      final divis = Division.fromIdString('7C');
+      expect(divis.getDisplayName(), 'U6 Coed');
+    });
+
+    test('error on invalid age portion', () {
+      expect(() => Division.fromIdString('9B'), throwsArgumentError);
+    });
+
+    test('error on invalid gender portion', () {
+      expect(() => Division.fromIdString('5Z'), throwsArgumentError);
+    });
+
+    test('error on invalid format', () {
+      expect(() => Division.fromIdString('B5'), throwsArgumentError);
+    });
+  });
+
   group('display name', () {
     final divisU10B =
         Division(gender: Gender.fromCode('B'), age: AgeGroup.fromCutoff(10));

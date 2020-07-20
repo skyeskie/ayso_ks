@@ -52,7 +52,7 @@ class _SearchResultsViewState extends State<SearchResultsView>
             week: widget.week,
             maxWeeks: weekCache.getMaxWeeks(),
             navigate: (week) => Routing.sailor(
-              '/schedules/search',
+              '/schedules/filtered',
               navigationType: NavigationType.pushReplace,
               params: {
                 'week': week,

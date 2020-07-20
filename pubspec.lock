@@ -133,14 +133,7 @@ packages:
       name: effective_dart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.2.3"
-  enum_to_string:
-    dependency: "direct main"
-    description:
-      name: enum_to_string
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.9"
+    version: "1.2.4"
   fake_async:
     dependency: transitive
     description:
@@ -161,7 +154,7 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_chips_input:
-    dependency: "direct main"
+    dependency: "direct overridden"
     description:
       name: flutter_chips_input
       url: "https://pub.dartlang.org"
@@ -180,14 +173,7 @@ packages:
       name: flutter_form_builder
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.11.4"
-  flutter_icons:
-    dependency: "direct main"
-    description:
-      name: flutter_icons
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.0"
+    version: "3.11.6"
   flutter_keyboard_visibility:
     dependency: transitive
     description:
@@ -227,7 +213,7 @@ packages:
       name: flutter_typeahead
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.5"
+    version: "1.8.6"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -338,13 +324,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.1"
-  liquid_ui:
-    dependency: "direct main"
-    description:
-      name: liquid_ui
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0+8"
   logging:
     dependency: transitive
     description:
@@ -678,21 +657,21 @@ packages:
       name: test
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.14.4"
+    version: "1.14.7"
   test_api:
     dependency: transitive
     description:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.15"
+    version: "0.2.16"
   test_core:
     dependency: transitive
     description:
       name: test_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.4"
+    version: "0.3.7"
   time:
     dependency: "direct main"
     description:

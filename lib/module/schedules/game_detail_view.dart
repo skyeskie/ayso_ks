@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:getwidget/components/button/gf_button.dart';
 
 import '../../dao/games.dart';
 import '../../dao/teams.dart';
@@ -30,11 +31,30 @@ class _GameDetailViewState extends State<GameDetailView>
   @override
   void initState() {
     gamesDAO.getGame(widget.id).then((value) {
+      if (value == null) {
+        return _ready.completeError(ArgumentError());
+      }
+
       _game = value;
-      return Future.wait([
-        teamsDAO.getTeam(value.home).then((team) => _homeTeam = team),
-        teamsDAO.getTeam(value.away).then((team) => _awayTeam = team),
-      ]).then((_) {
+      final teamCalls = <Future>[];
+
+      if (value.home == Game.BYE_TEAM) {
+        _homeTeam = Team.bye();
+      } else {
+        teamCalls.add(
+          teamsDAO.getTeam(value.home).then((team) => _homeTeam = team),
+        );
+      }
+
+      if (value.away == Game.BYE_TEAM) {
+        _awayTeam = Team.bye();
+      } else {
+        teamCalls.add(
+          teamsDAO.getTeam(value.away).then((team) => _awayTeam = team),
+        );
+      }
+
+      Future.wait(teamCalls).then((_) {
         _ready.complete('done');
       });
     });
@@ -76,43 +96,67 @@ class _GameDetailViewState extends State<GameDetailView>
     );
   }
 
-  //TODO: Handle byes
   Widget _build(BuildContext context) {
+    final haveHomeTeam = _homeTeam.code != Game.BYE_TEAM;
+    final haveAwayTeam = _awayTeam.code != Game.BYE_TEAM;
     return Column(
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        Spacer(),
         Text(
-          'Week #${_game.weekNum} - ${_game.startTime.toMediumString()}',
-          style: Theme.of(context).textTheme.headline4,
+          'Week #${_game.weekNum}',
+          style: Theme.of(context).textTheme.headline6,
         ),
-        SizedBox(height: 5),
-        Row(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            TeamCard(team: _homeTeam, type: VS.Home),
-            TeamCard(team: _awayTeam, type: VS.Away),
-          ],
+        Text(
+          '${_game.startTime?.toMediumString() ?? ""}',
+          style: Theme.of(context).textTheme.headline5,
         ),
-        SizedBox(height: 5),
-        Text('Region ${_game.region.number}'),
-        RaisedButton.icon(
+        if (_game.isBye()) Spacer(),
+        if (_game.isBye())
+          Text(
+            'BYE',
+            style: Theme.of(context).textTheme.headline4,
+          ),
+        Spacer(),
+        if (haveHomeTeam)
+          TeamCard(
+            team: _homeTeam,
+            type: haveAwayTeam ? VS.Home : VS.Ignore,
+          ),
+        if (haveHomeTeam) Spacer(),
+        if (haveAwayTeam)
+          TeamCard(
+            team: _awayTeam,
+            type: haveHomeTeam ? VS.Away : VS.Ignore,
+          ),
+        if (haveAwayTeam) Spacer(),
+        Text(
+          'Region ${_game.region.number}',
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        GFButton(
           onPressed: () => Routing.sailor(
             '/region/map',
             params: {'regionNum': _game.region.number},
           ),
           icon: Icon(Icons.directions_car),
-          label: Text('Directions'),
+          child: Text('Directions'),
         ),
-        Text('Field ${_game.field}'),
-        RaisedButton.icon(
+        Spacer(),
+        Text(
+          'Field ${_game.field}',
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        GFButton(
           onPressed: () => Routing.sailor(
             '/region/field',
             params: {'regionNum': _game.region.number},
           ),
           icon: Icon(Icons.map),
-          label: Text('Field map'),
+          child: Text('Field Map'),
         ),
+        Spacer(flex: 5),
       ],
     );
   }
