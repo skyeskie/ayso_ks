@@ -40,6 +40,9 @@ class TestIt {
     if (!I.isRegistered<TeamsDAO>()) {
       registerTeamsDAO();
     }
+    if (I.isRegistered<SettingsDAO>()) {
+      I.unregister<SettingsDAO>();
+    }
     I.registerSingleton<SettingsDAO>(SettingsInMemoryDAO(
       initData: SettingsDataType(
         regionNumber: regionNumber,

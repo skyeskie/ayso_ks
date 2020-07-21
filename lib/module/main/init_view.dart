@@ -1,5 +1,6 @@
 // ignore_for_file: implementation_imports
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get_it/get_it.dart';
 import 'package:getwidget/getwidget.dart';
 
@@ -25,7 +26,8 @@ class _InitViewState extends State<InitView> {
   bool _dataLoaded = false;
   Future _dataLoading;
 
-  void _setRegionNum(int regionNum) {
+  void _setRegionNum(dynamic regionNum) {
+    print('_setRegionNum( $regionNum )');
     controller.configureRegion(regionNum).then(
           (value) => setState(() {
             _regionNum = regionNum;
@@ -45,6 +47,7 @@ class _InitViewState extends State<InitView> {
 
   @override
   void initState() {
+    print('_initState');
     _showConfig = !controller.isAppConfigured;
     _dataLoading = controller.refreshData().whenComplete(() {
       _dataLoaded = true;
@@ -119,21 +122,20 @@ class _InitViewState extends State<InitView> {
         titleText: 'Setup App',
         subtitleText: 'One-time setup to prepare the app for use',
       ),
-      content: DropdownButton(
-        value: _regionNum,
+      content: FormBuilderDropdown(
+        attribute: 'region',
         onChanged: _setRegionNum,
-        items: [
-          DropdownMenuItem(
-            value: null,
-            child: Text('Select your region...'),
-          ),
-          ...Region.REGIONS.map(
-            (r) => DropdownMenuItem(
-              value: r.number,
-              child: Text('Region ${r.number} (${r.name})'),
-            ),
-          ),
-        ],
+        decoration: InputDecoration(
+          hintText: 'Select your home region...',
+          helperText:
+              'Used to filter to a single region most places in the app',
+        ),
+        items: Region.REGIONS
+            .map((r) => DropdownMenuItem<int>(
+                  value: r.number,
+                  child: Text('Region ${r.number} (${r.name})'),
+                ))
+            .toList(growable: false),
       ),
       buttonBar: GFButtonBar(
         children: [

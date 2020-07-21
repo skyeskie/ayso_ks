@@ -31,6 +31,7 @@ class _SearchViewState extends State<SearchView> with WeekCacheInjection {
     }
   }
 
+//TODO: Add cancel selection buttons
   @override
   Widget build(BuildContext context) {
     return Scaffold(
