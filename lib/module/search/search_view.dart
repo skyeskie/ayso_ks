@@ -60,7 +60,7 @@ class _SearchViewState extends State<SearchView> with WeekCacheInjection {
                 ),
                 Spacer(),
                 FormBuilderDropdown(
-                  attribute: 'region',
+                  attribute: 'regionNum',
                   decoration: InputDecoration(labelText: 'Region'),
                   items: Region.REGIONS
                       .map((r) => DropdownMenuItem<int>(

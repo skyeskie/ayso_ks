@@ -74,14 +74,14 @@ class SailorFake extends Fake implements Sailor {
     final routeParams = _routeParamsMappings[name];
     if (routeParams != null) {
       routeParams.forEach((key, value) {
-        // Type of paramter passed should be the same
+        // Type of parameter passed should be the same
         // when type is declared.
         if (params.containsKey(value.name) && params[value.name] != null) {
           final passedParamType = params[value.name].runtimeType;
           assert(passedParamType == value.paramType);
         }
 
-        // All paramters that are 'required' should be passed.
+        // All parameters that are 'required' should be passed.
         final isMissingRequiredParam = value.isRequired &&
             (params == null || !params.containsKey(value.name));
 
@@ -99,7 +99,7 @@ class SailorFake extends Fake implements Sailor {
       customTransition: customTransition,
     );
 
-    // Evaluate if the route can be opend using route guard.
+    // Evaluate if the route can be opened using route guard.
     final route = _routeNameMappings[name];
 
     // Skip route guards. We just care about routing attempt
@@ -124,6 +124,8 @@ class SailorFake extends Fake implements Sailor {
 
   // MOCK ACCESS POINTS
   List<RoutingAttempt> attempts = [];
+
+  Iterable<SailorRoute> get allRoutes => _routeNameMappings.values;
 
   void clear() {
     _routeNameMappings.clear();

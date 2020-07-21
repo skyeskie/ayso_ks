@@ -28,7 +28,7 @@ void main() {
     );
     expect(week.max, 4);
     expect(week.divisions, 3);
-    expect(find.formBuilderAttribute('region'), findsOneWidget);
+    expect(find.formBuilderAttribute('regionNum'), findsOneWidget);
     expect(find.formBuilderAttribute('age'), findsOneWidget);
     expect(find.formBuilderAttribute('gender'), findsOneWidget);
   });

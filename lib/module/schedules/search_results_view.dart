@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:getwidget/getwidget.dart';
 import 'package:sailor/sailor.dart';
 
 import '../../dao/games.dart';
@@ -12,10 +13,10 @@ import 'week_bar.dart';
 class SearchResultsView extends StatefulWidget {
   const SearchResultsView({
     key,
-    @required this.regionNum,
+    this.regionNum,
     @required this.week,
-    @required this.ageGroup,
-    @required this.gender,
+    this.ageGroup,
+    this.gender,
   }) : super(key: key);
 
   final int regionNum;
@@ -58,10 +59,11 @@ class _SearchResultsViewState extends State<SearchResultsView>
                 'week': week,
                 'age': widget.ageGroup,
                 'gender': widget.gender,
-                'region': widget.regionNum,
+                'regionNum': widget.regionNum,
               },
             ),
           ),
+          if (hasFilter()) _buildFilterDescription(context),
           FutureBuilder(
             future: games,
             builder: (ctx, snapshot) {
@@ -70,16 +72,36 @@ class _SearchResultsViewState extends State<SearchResultsView>
               }
 
               if (snapshot.hasData) {
-                print('Data:');
-                print(snapshot.data);
                 return TwoTeamGameList(games: snapshot.data);
               }
 
-              return Text('Loading');
+              return Text('Loading...');
             },
           ),
         ],
       ),
     );
+  }
+
+  Widget _buildFilterDescription(BuildContext context) {
+    final fRegion = widget.regionNum != null;
+    final fAge = widget.ageGroup != null;
+    final fGender = widget.gender != null;
+    return GFListTile(
+      titleText: 'Filters',
+      description: Row(
+        children: [
+          if (fRegion) Text('Region ${widget.regionNum}'),
+          if (fRegion) const SizedBox(width: 15),
+          if (fAge) Text('Age ${widget.ageGroup}'),
+          if (fAge) const SizedBox(width: 15),
+          if (fGender) Text(widget.gender),
+        ],
+      ),
+    );
+  }
+
+  bool hasFilter() {
+    return (widget.regionNum ?? widget.ageGroup ?? widget.gender) != null;
   }
 }

@@ -1,8 +1,6 @@
 // ignore_for_file: implementation_imports
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:getwidget/components/card/gf_card.dart';
-import 'package:getwidget/components/list_tile/gf_list_tile.dart';
 import 'package:getwidget/getwidget.dart';
 
 import '../../models/region.dart';

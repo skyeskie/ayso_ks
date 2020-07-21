@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:getwidget/components/button/gf_button.dart';
-import 'package:getwidget/components/button/gf_button_bar.dart';
-import 'package:getwidget/components/card/gf_card.dart';
-import 'package:getwidget/components/list_tile/gf_list_tile.dart';
 import 'package:getwidget/getwidget.dart';
 
 import '../../models/region.dart';

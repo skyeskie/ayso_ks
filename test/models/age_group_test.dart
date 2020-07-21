@@ -44,8 +44,8 @@ void main() {
     });
 
     test('cutoffs are unique', () {
-      final vals = AgeGroup.AGES.map((e) => e.cutoff).toList().toSet();
-      expect(AgeGroup.AGES.length, vals.length);
+      final values = AgeGroup.AGES.map((e) => e.cutoff).toList().toSet();
+      expect(AgeGroup.AGES.length, values.length);
     });
   });
 }

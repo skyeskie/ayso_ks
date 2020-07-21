@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:getwidget/components/button/gf_button.dart';
+import 'package:getwidget/getwidget.dart';
 
 import '../../dao/games.dart';
 import '../../dao/teams.dart';

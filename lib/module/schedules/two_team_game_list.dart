@@ -5,7 +5,7 @@ import '../../routes_config.dart';
 import '../../util/date_format.dart';
 
 class TwoTeamGameList extends StatelessWidget {
-  TwoTeamGameList({Key key, this.games})
+  TwoTeamGameList({Key key, @required this.games})
       : listViewData = generateRows(games),
         super(key: key);
 

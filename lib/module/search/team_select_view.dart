@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:getwidget/components/list_tile/gf_list_tile.dart';
+import 'package:getwidget/getwidget.dart';
 
 import '../../dao/teams.dart';
 import '../../models/age_group.dart';
