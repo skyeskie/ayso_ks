@@ -22,7 +22,6 @@ jobs:
         java-version: '12.x'
     - uses: subosito/flutter-action@v1
       with:
-        flutter-version: '1.12.x' # you can use 1.12
         channel: 'beta' # optional, default to: 'stable'
     # Setup
     - name: Install packages
