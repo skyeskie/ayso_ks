@@ -1,0 +1,38 @@
+name: Flutter CI
+
+on:
+  push:
+    branches: [ mainline, dev ]
+  pull_request:
+    branches: [ mainline, dev ]
+
+jobs:
+  build-analyze-test:
+    name: Static analysis and unit/widget testing
+    runs-on: ubuntu-latest
+
+    # Maybe add back in?
+    #container:
+    #  image:  google/dart:latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-java@v1
+      with:
+        java-version: '12.x'
+    - uses: subosito/flutter-action@v1
+      with:
+        flutter-version: '1.12.x' # you can use 1.12
+        channel: 'beta' # optional, default to: 'stable'
+    # Setup
+    - name: Install packages
+      run: flutter pub get
+    # Static analysis
+    - name: Static analysis/linting
+      run: flutter analyze
+    # Build
+    - name: Compilation AoT check
+      run: flutter build aot
+    # Tests
+    - name: Unit and widget testing
+      run: flutter test
