@@ -1,5 +1,5 @@
 import 'package:ayso_ks/util/date_format.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('toMediumString() - 6 cases', () {

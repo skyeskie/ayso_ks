@@ -1,5 +1,5 @@
 import 'package:ayso_ks/dao/games.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 import '../mock/test_data.dart';
 

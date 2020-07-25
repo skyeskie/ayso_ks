@@ -1,8 +1,8 @@
 import 'package:ayso_ks/dao/settings.dart';
 import 'package:ayso_ks/dao/static/teams.dart';
 import 'package:ayso_ks/dao/teams.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:test/test.dart';
 
 import '../mock/test_data.dart';
 

@@ -1,5 +1,5 @@
 import 'package:ayso_ks/dao/week_cache.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 import '../mock/test_data.dart';
 

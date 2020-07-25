@@ -1,5 +1,5 @@
 import 'package:ayso_ks/util/week_calc.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   final dates = [

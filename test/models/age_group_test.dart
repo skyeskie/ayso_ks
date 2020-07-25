@@ -1,7 +1,7 @@
 @Tags(['model'])
 
 import 'package:ayso_ks/models/age_group.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('create group', () {

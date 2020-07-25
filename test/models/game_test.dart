@@ -1,7 +1,7 @@
 @Tags(['model'])
 
 import 'package:ayso_ks/models/team.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 import '../mock/test_data.dart';
 

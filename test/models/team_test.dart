@@ -1,9 +1,10 @@
+@Tags(['model'])
+
 import 'package:ayso_ks/models/division.dart';
 import 'package:ayso_ks/models/game.dart';
 import 'package:ayso_ks/models/region.dart';
 import 'package:ayso_ks/models/team.dart';
-@Tags(['model'])
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('constructs minimally', () {
