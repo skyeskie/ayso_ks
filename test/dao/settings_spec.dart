@@ -24,13 +24,13 @@ void settingsInterfaceReadSpec(SettingsDaoGenerator initSettingsDao) {
     test('returns saved team IDs', () async {
       final teams = await dao.getSavedTeamIDs();
       expect(teams, containsAll(['A', 'B', 'I']));
-      expect(teams.length, 3);
+      expect(teams, hasLength(3));
     });
 
     test('returns saved teams', () async {
       final teams = await dao.getSavedTeams();
       expect(teams.map((t) => t.code), containsAll(['A', 'B', 'I']));
-      expect(teams.length, 3);
+      expect(teams, hasLength(3));
     });
 
     test('returns saved region number', () {
@@ -146,10 +146,10 @@ void settingsInterfaceWriteSpec(SettingsDaoGenerator initSettingsDao) {
         regionNum: 208,
         savedTeams: ['D', 'F'],
       );
-      expect(dao.isAppConfigured(), true);
+      expect(dao.isAppConfigured(), isTrue);
       expect(await dao.getRegionNumber(), newSettings.regionNumber);
       final newTeams = await dao.getSavedTeamIDs();
-      expect(newTeams.length, newSettings.savedTeams.length);
+      expect(newTeams, hasLength(newSettings.savedTeams.length));
       expect(newTeams, containsAll(newSettings.savedTeams));
     });
   });

@@ -27,7 +27,7 @@ void gamesInterfaceReadSpec(GamesDaoGenerator initGamesDao) {
     group('findGames', () {
       test('filter on region', () async {
         final games = await dao.findGames(regionId: 49);
-        expect(games.length, 10);
+        expect(games, hasLength(10));
         for (final game in games) {
           expect(game.region.number, 49);
         }
@@ -35,7 +35,7 @@ void gamesInterfaceReadSpec(GamesDaoGenerator initGamesDao) {
 
       test('filter on age', () async {
         final games = await dao.findGames(ageGroup: 'U10');
-        expect(games.length, 8);
+        expect(games, hasLength(8));
         for (final game in games) {
           expect(game.division.age.cutoff, 10);
         }
@@ -43,7 +43,7 @@ void gamesInterfaceReadSpec(GamesDaoGenerator initGamesDao) {
 
       test('filter on gender', () async {
         final games = await dao.findGames(gender: 'Boys');
-        expect(games.length, 8);
+        expect(games, hasLength(8));
         for (final game in games) {
           expect(game.division.gender.short, 'B');
         }
@@ -51,7 +51,7 @@ void gamesInterfaceReadSpec(GamesDaoGenerator initGamesDao) {
 
       test('filter on week', () async {
         final games = await dao.findGames(week: 2);
-        expect(games.length, 4);
+        expect(games, hasLength(4));
         for (final game in games) {
           expect(game.weekNum, 2);
         }
@@ -59,16 +59,16 @@ void gamesInterfaceReadSpec(GamesDaoGenerator initGamesDao) {
 
       test('returns all games on null filters', () async {
         final games = await dao.findGames();
-        expect(games.length, TestData.games.length);
+        expect(games, hasLength(TestData.games.length));
       });
     });
 
     group('findForTeam', () {
       test('returns games', () async {
         final games = await dao.findForTeam('A');
-        expect(games.length, 4);
+        expect(games, hasLength(4));
         for (final game in games) {
-          expect(game.hasTeam('A'), true);
+          expect(game.hasTeam('A'), isTrue);
         }
       });
 
@@ -81,19 +81,19 @@ void gamesInterfaceReadSpec(GamesDaoGenerator initGamesDao) {
     group('findForTeams', () {
       test('returns games for 1 team', () async {
         final games = await dao.findForTeams(['B']);
-        expect(games.length, 4);
+        expect(games, hasLength(4));
         for (final game in games) {
-          expect(game.hasTeam('B'), true);
+          expect(game.hasTeam('B'), isTrue);
         }
       });
 
       test('returns games for 3 teams', () async {
         final games = await dao.findForTeams(['A', 'B', 'C']);
-        expect(games.length, 8);
+        expect(games, hasLength(8));
         for (final game in games) {
           expect(
             game.hasTeam('A') || game.hasTeam('B') || game.hasTeam('C'),
-            true,
+            isTrue,
           );
         }
       });
@@ -105,9 +105,9 @@ void gamesInterfaceReadSpec(GamesDaoGenerator initGamesDao) {
 
       test('return ignores invalid teams', () async {
         final games = await dao.findForTeams(['B', 'NotATeam']);
-        expect(games.length, 4);
+        expect(games, hasLength(4));
         for (final game in games) {
-          expect(game.hasTeam('B'), true);
+          expect(game.hasTeam('B'), isTrue);
         }
       });
     });
@@ -137,7 +137,7 @@ void gamesInterfaceWriteSpec(GamesDaoGenerator initGamesDao) {
       final initLength = TestData.games.length;
       await dao.add([newGame]);
       final games = await dao.findGames();
-      expect(games.length, initLength + 1);
+      expect(games, hasLength(initLength + 1));
     });
 
     test('replaces games instead of adding duplicate IDs', () async {
@@ -148,7 +148,7 @@ void gamesInterfaceWriteSpec(GamesDaoGenerator initGamesDao) {
       expect(initGame.field, 'map2');
       await dao.add([replace]);
       final games = await dao.findGames();
-      expect(games.length, initLength);
+      expect(games, hasLength(initLength));
       final repGame = await dao.getGame(replace.id);
       expect(repGame.away, 'C');
       expect(repGame.home, 'D');

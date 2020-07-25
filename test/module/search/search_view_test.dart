@@ -50,7 +50,7 @@ void main() {
 //    await tester.pump();
 
     await tester.tap(find.text('Go'));
-    expect(nav.attempts.length, 1);
+    expect(nav.attempts, hasLength(1));
     final navAttempt = nav.attempts.first;
     expect(navAttempt.name, '/schedules/filtered');
     expect(navAttempt.params['week'], 1);

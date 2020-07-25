@@ -28,7 +28,7 @@ void main() {
     expect(find.text('at A'), findsOneWidget);
 
     await tester.tap(find.text('at A'));
-    expect(nav.attempts.length, 1);
+    expect(nav.attempts, hasLength(1));
     expect(nav.attempts.first.name, '/schedules/game');
     expect(nav.attempts.first.params['id'], '111');
   });

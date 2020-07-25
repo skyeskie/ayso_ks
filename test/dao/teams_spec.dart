@@ -27,19 +27,19 @@ void teamsInterfaceReadSpec(TeamsDaoGenerator initTeamsDao) {
       test('returns a list of teams', () async {
         final teams = await dao.getTeams(['C', 'A']);
         expect(teams.map((e) => e.code), containsAll(['A', 'C']));
-        expect(teams.length, 2);
+        expect(teams, hasLength(2));
       });
 
       test('handles single item', () async {
         final teams = await dao.getTeams(['E']);
-        expect(teams.length, 1);
+        expect(teams, hasLength(1));
         expect(teams.first.code, 'E');
       });
 
       test('ignores invalid teams', () async {
         final teams = await dao.getTeams(['C', 'NotATeam', 'A']);
         expect(teams.map((e) => e.code), containsAll(['A', 'C']));
-        expect(teams.length, 2);
+        expect(teams, hasLength(2));
       });
 
       test('empty list on no results', () {
@@ -51,7 +51,7 @@ void teamsInterfaceReadSpec(TeamsDaoGenerator initTeamsDao) {
   group('findTeams', () {
     test('filters on region', () async {
       final teams = await dao.findTeams(regionNumber: 49);
-      expect(teams.length, 7);
+      expect(teams, hasLength(7));
       for (final team in teams) {
         expect(team.region.number, 49);
       }
@@ -59,7 +59,7 @@ void teamsInterfaceReadSpec(TeamsDaoGenerator initTeamsDao) {
 
     test('filters on age', () async {
       final teams = await dao.findTeams(ageString: 'U12');
-      expect(teams.length, 5);
+      expect(teams, hasLength(5));
       for (final team in teams) {
         expect(team.division.age.cutoff, 12);
       }
@@ -67,7 +67,7 @@ void teamsInterfaceReadSpec(TeamsDaoGenerator initTeamsDao) {
 
     test('filters on gender', () async {
       final teams = await dao.findTeams(genderLong: 'Girls');
-      expect(teams.length, 5);
+      expect(teams, hasLength(5));
       for (final team in teams) {
         expect(team.division.gender.short, 'G');
       }
@@ -75,7 +75,7 @@ void teamsInterfaceReadSpec(TeamsDaoGenerator initTeamsDao) {
 
     test('returns all with null filter', () async {
       final teams = await dao.findTeams();
-      expect(teams.length, TestData.teams.length);
+      expect(teams, hasLength(TestData.teams.length));
     });
   });
 }

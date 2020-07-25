@@ -14,14 +14,14 @@ void main() {
     expect(find.text(region.name), findsOneWidget);
 
     await tester.tap(find.text('Directions'));
-    expect(nav.attempts.length, 1);
+    expect(nav.attempts, hasLength(1));
     var navAttempt = nav.attempts.first;
     expect(navAttempt.name, '/region/map');
     expect(navAttempt.params['regionNum'], region.number);
     nav.attempts.clear();
 
     await tester.tap(find.text('Field Map'));
-    expect(nav.attempts.length, 1);
+    expect(nav.attempts, hasLength(1));
     navAttempt = nav.attempts.first;
     expect(navAttempt.name, '/region/field');
     expect(navAttempt.params['regionNum'], region.number);

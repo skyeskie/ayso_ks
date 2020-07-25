@@ -22,7 +22,7 @@ void main() {
 
   test('configured genders have short length 1', () {
     for (final gender in Gender.GENDERS) {
-      expect(gender.short.length, 1);
+      expect(gender.short, hasLength(1));
     }
   });
 }
