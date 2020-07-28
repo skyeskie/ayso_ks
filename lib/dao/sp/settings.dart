@@ -14,7 +14,7 @@ class SettingsSpDao implements SettingsDAO {
       });
   }
 
-  Future<SharedPreferences> prefsFuture = GetIt.I.getAsync<SharedPreferences>();
+  Future<SharedPreferences> prefsFuture;
   SharedPreferences prefs;
   TeamsDAO teamsDAO = GetIt.I.get<TeamsDAO>();
 

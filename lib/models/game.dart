@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:meta/meta.dart';
 
 import 'division.dart';
@@ -14,6 +16,36 @@ class Game {
     @required this.field,
     this.division,
   });
+
+  factory Game.fromJson(Map<String, dynamic> map) {
+    return Game(
+      id: map['id'] as String,
+      home: map['home'] as String,
+      away: map['away'] as String,
+      weekNum: map['weekNum'] as int,
+      startTime: DateTime.fromMicrosecondsSinceEpoch(map['startTime'] as int),
+      region: Region.fromNumber(map['region'] as int),
+      field: map['field'] as String,
+      division: Division.fromString(map['division']),
+    );
+  }
+
+  // ignore: prefer_constructors_over_static_methods
+  static Game fromJsonString(String jsonString) {
+    final jsonMap = jsonDecode(jsonString);
+    return Game.fromJson(jsonMap);
+  }
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'home': home,
+        'away': away,
+        'weekNum': weekNum,
+        'startTime': startTime.millisecondsSinceEpoch,
+        'region': region.number,
+        'field': field,
+        'division': division?.shortDisplayName(),
+      };
 
   static const BYE_TEAM = '-';
 
@@ -43,10 +75,4 @@ class Game {
   String getTeamWithBye() {
     return getOpponent(BYE_TEAM);
   }
-
-//TODO: Fully remove if not necessary
-//  int compareTo(dynamic other) {
-//    return startTime.millisecondsSinceEpoch -
-//        other.startTime.millisecondsSinceEpoch;
-//  }
 }
