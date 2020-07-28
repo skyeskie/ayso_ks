@@ -74,10 +74,12 @@ class SettingsDataType {
   const SettingsDataType({
     this.regionNumber = 49,
     this.savedTeams = const [],
+    this.dataVersion = 'no-version',
   });
 
   final int regionNumber;
   final List<String> savedTeams;
+  final String dataVersion;
 }
 
 mixin SettingsInjection<T extends StatefulWidget> on State<T> {

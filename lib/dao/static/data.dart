@@ -50,6 +50,7 @@ class StaticData {
   static SettingsDataType settings = SettingsDataType(
     regionNumber: 49,
     savedTeams: ['A', 'B', 'I'],
+    dataVersion: 'static',
   );
 
   static List<Team> savedTeamsFull = [
