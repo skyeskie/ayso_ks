@@ -21,7 +21,7 @@ void main() {
     //Test Team buttons
     expect(find.text('Team A'), findsOneWidget);
     await tester.tap(find.text('Team A'));
-    expect(nav.attempts.length, 1);
+    expect(nav.attempts, hasLength(1));
     expect(nav.attempts.first.name, '/schedules/team');
     expect(nav.attempts.first.params['id'], 'A');
   });
@@ -38,7 +38,7 @@ void main() {
     expect(find.text('Find Team'), findsOneWidget);
 
     await tester.tap(find.text('Find Team'));
-    expect(nav.attempts.length, 1);
+    expect(nav.attempts, hasLength(1));
     expect(nav.attempts.first.name, '/search/teams');
   });
 }

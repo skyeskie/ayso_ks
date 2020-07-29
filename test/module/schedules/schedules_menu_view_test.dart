@@ -33,7 +33,7 @@ void main() {
       await tester.tap(find.text(text));
     }
 
-    expect(nav.attempts.length, buttonText.length);
+    expect(nav.attempts, hasLength(buttonText.length));
     expect(nav.attempts[0].name, '/schedules/week_current');
     expect(nav.attempts[1].name, '/search/teams');
     expect(nav.attempts[2].name, '/search');

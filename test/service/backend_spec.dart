@@ -1,5 +1,5 @@
 import 'package:ayso_ks/service/backend_interface.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 typedef BackendInterfaceGenerator = BackendInterface Function();
 

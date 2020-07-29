@@ -1,7 +1,7 @@
 @Tags(['model'])
 
 import 'package:ayso_ks/models/gender.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('constructor', () {
@@ -22,7 +22,7 @@ void main() {
 
   test('configured genders have short length 1', () {
     for (final gender in Gender.GENDERS) {
-      expect(gender.short.length, 1);
+      expect(gender.short, hasLength(1));
     }
   });
 }

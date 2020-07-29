@@ -1,7 +1,7 @@
 @Tags(['model'])
 
 import 'package:ayso_ks/models/region.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('constructs', () {
@@ -44,12 +44,12 @@ void main() {
   group('configuration tests', () {
     test('ids unique', () {
       final ids = Region.REGIONS.map((e) => e.id).toSet();
-      expect(ids.length, Region.REGIONS.length);
+      expect(ids, hasLength(Region.REGIONS.length));
     });
 
     test('region numbers unique positive integers', () {
       final numbers = Region.REGIONS.map((e) => e.id).toSet();
-      expect(numbers.length, Region.REGIONS.length);
+      expect(numbers, hasLength(Region.REGIONS.length));
 
       for (final n in numbers) {
         expect(n > 0, true, reason: 'Region $n');

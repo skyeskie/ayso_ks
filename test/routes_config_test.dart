@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:sailor/sailor.dart';
-import 'package:test/test.dart';
 
 import 'mock/test_it.dart';
 

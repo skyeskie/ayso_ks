@@ -1,7 +1,7 @@
 @Tags(['model'])
 
 import 'package:ayso_ks/models/age_group.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('create group', () {
@@ -40,12 +40,12 @@ void main() {
   group('configuration', () {
     test('codes are unique', () {
       final codes = AgeGroup.AGES.map((e) => e.code).toList().toSet();
-      expect(AgeGroup.AGES.length, codes.length);
+      expect(AgeGroup.AGES, hasLength(codes.length));
     });
 
     test('cutoffs are unique', () {
       final values = AgeGroup.AGES.map((e) => e.cutoff).toList().toSet();
-      expect(AgeGroup.AGES.length, values.length);
+      expect(AgeGroup.AGES, hasLength(values.length));
     });
   });
 }

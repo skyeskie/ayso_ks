@@ -47,6 +47,7 @@ class TestData {
   static SettingsDataType settings = SettingsDataType(
     regionNumber: 49,
     savedTeams: ['A', 'B', 'I'],
+    dataVersion: 'test-version',
   );
 
   static List<Team> savedTeamsFull = [

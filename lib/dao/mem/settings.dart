@@ -15,6 +15,10 @@ class SettingsInMemoryDAO implements SettingsDAO {
     if (initData?.regionNumber != null) {
       _region = Region.fromNumber(initData.regionNumber);
     }
+
+    if (initData?.dataVersion != null) {
+      _dataVersion = initData.dataVersion;
+    }
   }
 
   final Set<String> _teams = {};

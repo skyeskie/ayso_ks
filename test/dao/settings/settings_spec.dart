@@ -1,10 +1,11 @@
 import 'package:ayso_ks/dao/settings.dart';
+import 'package:ayso_ks/dao/static/data.dart';
 import 'package:ayso_ks/dao/static/teams.dart';
 import 'package:ayso_ks/dao/teams.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
-import 'package:test/test.dart';
 
-import '../mock/test_data.dart';
+import '../../mock/test_data.dart';
 
 typedef SettingsDaoGenerator = SettingsDAO Function();
 
@@ -24,13 +25,13 @@ void settingsInterfaceReadSpec(SettingsDaoGenerator initSettingsDao) {
     test('returns saved team IDs', () async {
       final teams = await dao.getSavedTeamIDs();
       expect(teams, containsAll(['A', 'B', 'I']));
-      expect(teams.length, 3);
+      expect(teams, hasLength(3));
     });
 
     test('returns saved teams', () async {
       final teams = await dao.getSavedTeams();
       expect(teams.map((t) => t.code), containsAll(['A', 'B', 'I']));
-      expect(teams.length, 3);
+      expect(teams, hasLength(3));
     });
 
     test('returns saved region number', () {
@@ -58,6 +59,11 @@ void settingsInterfaceReadSpec(SettingsDaoGenerator initSettingsDao) {
       expect(settings.savedTeams, containsAll(TestData.settings.savedTeams));
       expect(settings.savedTeams.length, TestData.settings.savedTeams.length);
     });
+
+    test('retrieve data version', () async {
+      final expectedValues = {'test-version', StaticData.dataVersion};
+      expect(expectedValues.contains(await dao.getDataVersion()), isTrue);
+    });
   });
 }
 
@@ -82,11 +88,29 @@ void settingsInterfaceWriteSpec(SettingsDaoGenerator initSettingsDao) {
       expect(endSaved, isTrue);
     });
 
+    test('saves an already existing team', () async {
+      final initSaved = await dao.isTeamSaved('A');
+      expect(initSaved, isTrue);
+      await dao.saveTeamId('A');
+      final endSaved = await dao.isTeamSaved('A');
+      expect(endSaved, isTrue);
+      final teams = await dao.getSavedTeamIDs();
+      expect(teams.where((id) => id == 'A'), hasLength(1));
+    });
+
     test('unsaves a team', () async {
       final initSaved = await dao.isTeamSaved('A');
       expect(initSaved, isTrue);
       await dao.unSaveTeam('A');
       final endSaved = await dao.isTeamSaved('A');
+      expect(endSaved, isFalse);
+    });
+
+    test('unsaves a team not saved', () async {
+      final initSaved = await dao.isTeamSaved('E');
+      expect(initSaved, isFalse);
+      await dao.unSaveTeam('E');
+      final endSaved = await dao.isTeamSaved('E');
       expect(endSaved, isFalse);
     });
 
@@ -146,11 +170,17 @@ void settingsInterfaceWriteSpec(SettingsDaoGenerator initSettingsDao) {
         regionNum: 208,
         savedTeams: ['D', 'F'],
       );
-      expect(dao.isAppConfigured(), true);
+      expect(dao.isAppConfigured(), isTrue);
       expect(await dao.getRegionNumber(), newSettings.regionNumber);
       final newTeams = await dao.getSavedTeamIDs();
-      expect(newTeams.length, newSettings.savedTeams.length);
+      expect(newTeams, hasLength(newSettings.savedTeams.length));
       expect(newTeams, containsAll(newSettings.savedTeams));
+    });
+
+    test('set data version', () async {
+      expect(await dao.getDataVersion(), 'test-version');
+      await dao.setDataVersion('new-test-version');
+      expect(dao.getDataVersion(), completion('new-test-version'));
     });
   });
 }

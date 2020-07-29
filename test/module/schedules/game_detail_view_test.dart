@@ -35,7 +35,7 @@ void main() {
     expect(find.text('Field Map'), findsOneWidget);
     await tester.tap(find.text('Directions'));
     await tester.tap(find.text('Field Map'));
-    expect(nav.attempts.length, 2);
+    expect(nav.attempts, hasLength(2));
     expect(nav.attempts.first.name, '/region/map');
     expect(nav.attempts.first.params['regionNum'], 49);
     expect(nav.attempts.last.name, '/region/field');

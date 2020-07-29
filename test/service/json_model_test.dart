@@ -1,5 +1,5 @@
 import 'package:ayso_ks/service/json_model.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:tuple/tuple.dart';
 
 void main() {

@@ -78,14 +78,14 @@ void main() {
     await tester.pumpAndSettle();
 
     await tester.tap(find.text('A'));
-    expect(nav.attempts.length, 1);
+    expect(nav.attempts, hasLength(1));
     var navAttempt = nav.attempts.first;
     expect(navAttempt.name, '/schedules/team');
     expect(navAttempt.params['id'], 'A');
     nav.attempts.clear();
 
     await tester.tap(find.text('E'));
-    expect(nav.attempts.length, 1);
+    expect(nav.attempts, hasLength(1));
     navAttempt = nav.attempts.first;
     expect(navAttempt.name, '/schedules/team');
     expect(navAttempt.params['id'], 'E');

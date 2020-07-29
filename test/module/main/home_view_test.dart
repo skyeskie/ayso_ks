@@ -30,7 +30,7 @@ void main() {
     for (final text in buttonText.keys) {
       await tester.tap(find.text(text));
     }
-    expect(nav.attempts.length, buttonText.length);
+    expect(nav.attempts, hasLength(buttonText.length));
     final navTargets = buttonText.values.toList();
     for (var i = 1; i < buttonText.length; i++) {
       expect(nav.attempts[i].name, navTargets[i]);
