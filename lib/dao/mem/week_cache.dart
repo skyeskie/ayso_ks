@@ -3,7 +3,14 @@ import 'dart:collection';
 import '../../util/week_calc.dart';
 import '../week_cache.dart';
 
+/// In-memory implementation of the Week Cache
+///
+/// Does not persist between app runs
 class WeekCacheInMemoryDAO implements WeekCacheDAO {
+  /// Initialize WeekCache
+  ///
+  /// Optional [initStarts] makes ready for use, while [mockCurWeek] will
+  /// force the currentWeek to be 2 (if >1 week) or 1 (if 0-1 weeks)
   WeekCacheInMemoryDAO({
     Iterable<DateTime> initStarts,
     bool mockCurWeek = false,

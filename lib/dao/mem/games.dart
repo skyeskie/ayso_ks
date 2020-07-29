@@ -1,7 +1,11 @@
 import '../../models/game.dart';
 import '../games.dart';
 
+/// In-memory implementation of the Games DAO
+///
+/// Does not persist between app runs
 class GamesInMemoryDAO implements GamesDAO {
+  /// Can optionally create with [init] list of games
   GamesInMemoryDAO({Iterable<Game> init}) {
     if (init != null) {
       _games.addEntries(toEntries(init));
@@ -10,6 +14,7 @@ class GamesInMemoryDAO implements GamesDAO {
 
   final Map<String, Game> _games = {};
 
+  /// Transforms games so can put into a map, with Game ID as key
   static Iterable<MapEntry<String, Game>> toEntries(Iterable<Game> games) {
     return games.map((game) => MapEntry<String, Game>(game.id, game));
   }

@@ -2,8 +2,6 @@ include: package:effective_dart/analysis_options.yaml
 
 analyzer:
   errors:
-    # Temporary disabled for high code churn
-    public_member_api_docs: ignore
     # Actually prefer ALL_CAPS
     constant_identifier_names: ignore
 
