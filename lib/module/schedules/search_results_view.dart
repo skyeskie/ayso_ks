@@ -35,7 +35,7 @@ class _SearchResultsViewState extends State<SearchResultsView>
   @override
   void initState() {
     games = gamesDAO.findGames(
-      regionId: widget.regionNum,
+      regionNum: widget.regionNum,
       week: widget.week,
       ageGroup: widget.ageGroup,
       gender: widget.gender,

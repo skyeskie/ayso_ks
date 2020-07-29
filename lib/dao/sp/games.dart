@@ -56,11 +56,11 @@ class GamesSpDAO implements GamesDAO {
 
   @override
   Future<Iterable<Game>> findGames(
-      {int regionId, String ageGroup, String gender, int week}) {
+      {int regionNum, String ageGroup, String gender, int week}) {
     final games = prefs.getStringList(GAMES_KEY)?.map(Game.fromJsonString);
     if (games == null) return Future.value([]);
     return Future.value(games.where((game) =>
-        (regionId == null || game.region?.number == regionId) &&
+        (regionNum == null || game.region?.number == regionNum) &&
         (ageGroup == null || game.division?.age?.toString() == ageGroup) &&
         (gender == null || game.division?.gender?.long == gender) &&
         (week == null || game.weekNum == week)));

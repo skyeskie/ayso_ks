@@ -27,13 +27,13 @@ class GamesStaticDAO implements GamesDAO {
 
   @override
   Future<Iterable<Game>> findGames({
-    int regionId,
+    int regionNum,
     String ageGroup,
     String gender,
     int week,
   }) {
     return Future.value(StaticData.games
-        .where((game) => (regionId == null || game.region.number == regionId))
+        .where((game) => (regionNum == null || game.region.number == regionNum))
         .where((game) =>
             (ageGroup == null || game.division.age.toString() == ageGroup))
         .where(

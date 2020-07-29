@@ -33,7 +33,7 @@ class _WeekScheduleViewState extends State<WeekScheduleView>
       setState(() {
         regionNum = value;
       });
-      return gamesDAO.findGames(week: week, regionId: value);
+      return gamesDAO.findGames(week: week, regionNum: value);
     });
     super.initState();
   }

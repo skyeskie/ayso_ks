@@ -26,7 +26,7 @@ void gamesInterfaceReadSpec(GamesDaoGenerator initGamesDao) {
 
     group('findGames', () {
       test('filter on region', () async {
-        final games = await dao.findGames(regionId: 49);
+        final games = await dao.findGames(regionNum: 49);
         expect(games, hasLength(10));
         for (final game in games) {
           expect(game.region.number, 49);
