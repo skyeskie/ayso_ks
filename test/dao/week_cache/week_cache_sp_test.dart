@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:time/time.dart';
 
-import '../mock/test_data.dart';
-import '../mock/test_it.dart';
+import '../../mock/test_data.dart';
+import '../../mock/test_it.dart';
 import 'week_cache_spec.dart';
 
 void main() {

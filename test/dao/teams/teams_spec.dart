@@ -1,7 +1,7 @@
 import 'package:ayso_ks/dao/teams.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import '../mock/test_data.dart';
+import '../../mock/test_data.dart';
 
 typedef TeamsDaoGenerator = TeamsDAO Function();
 

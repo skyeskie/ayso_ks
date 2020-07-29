@@ -3,8 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../mock/test_data.dart';
-import '../mock/test_it.dart';
+import '../../mock/test_data.dart';
+import '../../mock/test_it.dart';
 import 'settings_spec.dart';
 
 void main() {

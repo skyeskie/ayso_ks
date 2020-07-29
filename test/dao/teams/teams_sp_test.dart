@@ -4,8 +4,8 @@ import 'package:ayso_ks/dao/sp/teams.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../mock/test_data.dart';
-import '../mock/test_it.dart';
+import '../../mock/test_data.dart';
+import '../../mock/test_it.dart';
 import 'teams_spec.dart';
 
 void main() {
