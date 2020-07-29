@@ -12,7 +12,6 @@ abstract class WeekCacheDAO {
   int getCurrentWeek();
 
   /// Clears underlying data
-  //TODO: Make sync?
   Future<void> clear();
 
   bool isInit();

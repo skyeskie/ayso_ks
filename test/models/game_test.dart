@@ -76,6 +76,4 @@ void main() {
       expect(() => gameAvB.getOpponent('C'), throwsRangeError);
     });
   });
-
-  //TODO: Test compare ?
 }
