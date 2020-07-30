@@ -1,6 +1,10 @@
 import 'package:meta/meta.dart';
 
+/// Data class for information on a region
 class Region {
+  /// Constant constructor
+  ///
+  /// Avoid using in-app, since this is a configuration class
   const Region({
     @required this.id,
     @required this.number,
@@ -10,14 +14,19 @@ class Region {
     @required this.lon,
   });
 
+  /// Return configured region for given region number
   factory Region.fromNumber(int regionNumber) {
     return REGIONS.singleWhere((r) => r.number == regionNumber);
   }
 
+  /// Return configured region for given ID
   factory Region.fromId(int id) {
     return REGIONS.singleWhere((r) => r.id == id);
   }
 
+  /// Enumeration of all regions
+  ///
+  /// This is the configuration for the app over which regions to handle
   // ignore: non_constant_identifier_names
   static Set<Region> REGIONS = {
     Region(
@@ -58,11 +67,29 @@ class Region {
         lon: -97.490616),
   };
 
+  /// Short ID number
+  ///
+  /// No inherent property, but a single-digit number for identifying the
+  /// regions in the Wichita area. Avoid using if adapting for other areas
   final int id;
+
+  /// National AYSO region number
+  ///
+  /// This is a country-wide unique positive integer given to each region
   final int number;
+
+  /// Description of a region
+  ///
+  /// Usually a short description of where the fields are
   final String name;
+
+  /// Asset SVG that shows the map of the fields
   final String mapFile;
+
+  /// Latitude where the fields are located
   final double lat;
+
+  /// Longitude where the fields are located
   final double lon;
 
   //EQUALS only on ID?
