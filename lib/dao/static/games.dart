@@ -2,6 +2,9 @@ import '../../models/game.dart';
 import '../games.dart';
 import 'data.dart';
 
+/// Static, read-only implementation of Games DAO
+///
+/// Uses [StaticData] for values
 class GamesStaticDAO implements GamesDAO {
   @override
   Future add(Iterable<Game> games) {

@@ -5,6 +5,10 @@ import 'package:get_it/get_it.dart';
 
 import '../models/team.dart';
 
+/// Interface for accessing Team objects
+///
+/// While async access means this can be direct remote access,
+/// this is primarily intended for local caching
 abstract class TeamsDAO {
   /// Gets single team
   /// @param id - `Team.code`
@@ -29,11 +33,17 @@ abstract class TeamsDAO {
   });
 
   /// Clears all saved data.
+  ///
+  /// No-op if implementation is read-only
   Future<void> clear();
 
+  /// Add game objects, replacing duplicate IDs
+  ///
+  /// No-op if implementation is read-only
   Future add(Iterable<Team> teams);
 }
 
 mixin TeamsInjection<T extends StatefulWidget> on State<T> {
+  /// Access for Team objects
   final TeamsDAO teamsDAO = GetIt.I.get<TeamsDAO>();
 }

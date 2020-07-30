@@ -2,6 +2,9 @@ import '../../models/team.dart';
 import '../teams.dart';
 import 'data.dart';
 
+/// Static, read-only implementation of Teams DAO
+///
+/// Uses [StaticData] for values
 class TeamsStaticDAO implements TeamsDAO {
   @override
   Future add(Iterable<Team> teams) {

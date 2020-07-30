@@ -6,34 +6,40 @@ import '../../models/team.dart';
 import '../settings.dart';
 import '../teams.dart';
 
+/// Implementation of Settings DAO using shared_preferences library
+///
+/// Suitable for Android and iOS
 class SettingsSpDao implements SettingsDAO {
+  /// Create object, initializing the SharedPreferences link
   SettingsSpDao() {
     prefsFuture = GetIt.I.getAsync<SharedPreferences>()
       ..then((sp) {
-        prefs = sp;
+        _prefs = sp;
       });
   }
 
+  /// Future for obtaining the SharedPreferences handle
   Future<SharedPreferences> prefsFuture;
-  SharedPreferences prefs;
-  TeamsDAO teamsDAO = GetIt.I.get<TeamsDAO>();
+  SharedPreferences _prefs;
+  final TeamsDAO _teamsDAO = GetIt.I.get<TeamsDAO>();
 
+  /// Shared preferences key used for storing favorite teams
   static const String TEAMS_KEY = 'favoriteTeams';
 
+  /// Shared preferences key used for storing user region number
   static const String REGION_KEY = 'regionNumber';
 
+  /// Shared preferences key used for storing data version
   static const String VERSION_KEY = 'dataVersion';
-
-  bool appInit = false;
 
   @override
   Future<void> clearSavedTeams() {
-    return Future.value(prefs.setStringList(TEAMS_KEY, []));
+    return Future.value(_prefs.setStringList(TEAMS_KEY, []));
   }
 
   @override
   Future<String> getDataVersion() {
-    return Future.value(prefs.getString(VERSION_KEY));
+    return Future.value(_prefs.getString(VERSION_KEY));
   }
 
   @override
@@ -45,18 +51,18 @@ class SettingsSpDao implements SettingsDAO {
 
   @override
   Future<int> getRegionNumber() {
-    if (!prefs.containsKey(REGION_KEY)) return Future.value(null);
-    return Future.value(prefs.getInt(REGION_KEY));
+    if (!_prefs.containsKey(REGION_KEY)) return Future.value(null);
+    return Future.value(_prefs.getInt(REGION_KEY));
   }
 
   @override
   Future<Iterable<String>> getSavedTeamIDs() {
-    return Future.value(prefs.getStringList(TEAMS_KEY));
+    return Future.value(_prefs.getStringList(TEAMS_KEY));
   }
 
   @override
   Future<Iterable<Team>> getSavedTeams() {
-    return getSavedTeamIDs().then((ids) => teamsDAO.getTeams(ids));
+    return getSavedTeamIDs().then(_teamsDAO.getTeams);
   }
 
   @override
@@ -70,37 +76,37 @@ class SettingsSpDao implements SettingsDAO {
   @override
   Future<void> init({num regionNum, Iterable<String> savedTeams}) {
     return Future.wait([
-      prefs.setInt(REGION_KEY, regionNum),
-      prefs.setStringList(TEAMS_KEY, savedTeams),
+      _prefs.setInt(REGION_KEY, regionNum),
+      _prefs.setStringList(TEAMS_KEY, savedTeams),
     ]);
   }
 
   @override
   bool isAppConfigured() {
-    return prefs.getInt(REGION_KEY) != null;
+    return _prefs.getInt(REGION_KEY) != null;
   }
 
   @override
   Future<bool> isTeamSaved(String teamId) {
-    return Future.value(prefs.getStringList(TEAMS_KEY).contains(teamId));
+    return Future.value(_prefs.getStringList(TEAMS_KEY).contains(teamId));
   }
 
   @override
   Future<void> reset() {
     return Future.wait([
-      prefs.remove(REGION_KEY),
-      prefs.remove(VERSION_KEY),
+      _prefs.remove(REGION_KEY),
+      _prefs.remove(VERSION_KEY),
       clearSavedTeams(),
     ]);
   }
 
   @override
   Future<void> saveTeamId(String teamId) {
-    final teams = prefs.getStringList(TEAMS_KEY);
+    final teams = _prefs.getStringList(TEAMS_KEY);
 
     if (!teams.contains(teamId)) {
       teams.add(teamId);
-      return prefs.setStringList(TEAMS_KEY, teams);
+      return _prefs.setStringList(TEAMS_KEY, teams);
     }
 
     return Future.value();
@@ -108,7 +114,7 @@ class SettingsSpDao implements SettingsDAO {
 
   @override
   Future setDataVersion(String version) {
-    return prefs.setString(VERSION_KEY, version);
+    return _prefs.setString(VERSION_KEY, version);
   }
 
   @override
@@ -116,15 +122,15 @@ class SettingsSpDao implements SettingsDAO {
     //Make sure can create the region
     Region.fromNumber(regionNum);
 
-    return prefs.setInt(REGION_KEY, regionNum);
+    return _prefs.setInt(REGION_KEY, regionNum);
   }
 
   @override
   Future<void> unSaveTeam(String teamId) async {
-    final teams = prefs.getStringList(TEAMS_KEY);
+    final teams = _prefs.getStringList(TEAMS_KEY);
 
     if (teams.remove(teamId)) {
-      return prefs.setStringList(TEAMS_KEY, teams);
+      return _prefs.setStringList(TEAMS_KEY, teams);
     }
 
     return Future.value();
