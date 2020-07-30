@@ -4,6 +4,7 @@ import 'field_view.dart';
 import 'region_list_view.dart';
 import 'street_map_view.dart';
 
+/// Navigation/routing configuration for the Region module
 final List<SailorRoute> regionModuleRoutes = <SailorRoute>[
   SailorRoute(
     name: '/region',

@@ -4,12 +4,15 @@ import 'package:getwidget/getwidget.dart';
 import '../../models/region.dart';
 import '../../routes_config.dart';
 
+/// Display tile/card for a region
 class RegionInfoTile extends StatelessWidget {
+  /// Constant constructor
   const RegionInfoTile({
     Key key,
     this.region,
   }) : super(key: key);
 
+  /// Information for the current region
   final Region region;
 
   @override

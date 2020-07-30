@@ -5,6 +5,7 @@ import '../../dao/settings.dart';
 import '../../models/region.dart';
 import '../../widgets/nav_bar.dart';
 
+/// View for configuring app-wide settings
 class SettingsView extends StatefulWidget {
   @override
   _SettingsViewState createState() => _SettingsViewState();

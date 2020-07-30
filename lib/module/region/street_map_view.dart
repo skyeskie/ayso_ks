@@ -3,9 +3,12 @@ import 'package:photo_view/photo_view.dart';
 
 import '../../widgets/nav_bar.dart';
 
+/// View for showing road maps to specific regions
 class StreetMapView extends StatelessWidget {
-  StreetMapView(this.regionNum);
+  /// Constructor based on the region number
+  const StreetMapView(this.regionNum);
 
+  /// Region number for the current view
   final int regionNum;
 
   @override

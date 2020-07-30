@@ -8,9 +8,16 @@ import '../../models/region.dart';
 import '../../routes_config.dart';
 import 'data_controller.dart';
 
+/// Initializing view
+///
+/// This view will load data if necessary and provides configuration for the
+/// home region if the app hasn't been configured yet
 class InitView extends StatefulWidget {
+  /// Constructor with interrupted route
   const InitView({Key key, @required this.interruptedRoute}) : super(key: key);
 
+  /// This view is reached by intercepting a route, so the original route
+  /// information is provided here
   final RouteSettings interruptedRoute;
 
   @override

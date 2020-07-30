@@ -9,6 +9,7 @@ import '../../models/region.dart';
 import '../../routes_config.dart';
 import '../../widgets/nav_bar.dart';
 
+/// Advanced search form
 class SearchView extends StatefulWidget {
   @override
   _SearchViewState createState() => _SearchViewState();

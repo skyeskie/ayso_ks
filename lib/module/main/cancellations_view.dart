@@ -3,6 +3,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../widgets/nav_bar.dart';
 
+/// View for showing cancellations or other remote news
 class CancellationsView extends StatefulWidget {
   @override
   _CancellationsViewState createState() => _CancellationsViewState();

@@ -6,6 +6,7 @@ import '../../dao/settings.dart';
 import '../../routes_config.dart';
 import '../../widgets/large_icon_button.dart';
 
+/// Home menu view - initial displayed view for the app
 class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
