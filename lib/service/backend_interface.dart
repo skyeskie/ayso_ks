@@ -1,23 +1,23 @@
 import '../models/game.dart';
 import '../models/team.dart';
 
+/// Interface for getting non-cached data, whether static or remote
 abstract class BackendInterface {
-  /// Does any necessary setup for backend requests. Update params mean
-  /// subsequent calls to `getTeams()` and `getGames()` are update requests.
-  /// Otherwise request is for full data and functions will return entire data
+  /// Get teams and/or updates returned from backend
   ///
-  /// @param curVersion - string version for current data version
-  /// - Exact use depends on backend implementation
-//  Future init(String curVersion);
-
+  /// Depending on implementation, [pastVersion] may be used to send partial
+  /// updates. Without it, the full list of teams will be returned
   Future<Iterable<Team>> getTeams({String pastVersion});
 
+  /// Get games and/or updates returned from backend
+  ///
+  /// Depending on implementation, [pastVersion] may be used to send partial
+  /// updates. Without it, the full list of games will be returned
   Future<Iterable<Game>> getGames({String pastVersion});
 
   /// @return Date[] - Full initialization; sets week cache with values
-  /// @return empty array - Keep existing week cache
-  /// @return null - Have the `DataControlService` handle the week cache
   Future<Iterable<DateTime>> getWeekStarts({String pastVersion});
 
+  /// Get the version of the current data
   Future<String> getDataVersion({String pastVersion});
 }
