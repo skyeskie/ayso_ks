@@ -7,6 +7,7 @@ import '../../routes_config.dart';
 import '../../widgets/nav_bar.dart';
 import 'two_team_game_list.dart';
 
+/// View showing whole-season schedule for saved teams
 class FavoritesListView extends StatefulWidget {
   @override
   _FavoritesListViewState createState() => _FavoritesListViewState();

@@ -4,9 +4,12 @@ import '../../routes_config.dart';
 import '../../widgets/large_icon_button.dart';
 import '../../widgets/nav_bar.dart';
 
+/// Menu for different schedule/info listings for the configured region
 class SchedulesMenuView extends StatelessWidget {
+  /// Constructor specifying region
   SchedulesMenuView(this.regionNumber);
 
+  /// Region number - see [Region.number]
   final int regionNumber;
 
   @override

@@ -10,7 +10,9 @@ import '../../widgets/nav_bar.dart';
 import 'two_team_game_list.dart';
 import 'week_bar.dart';
 
+/// Show all games for a single week
 class WeekScheduleView extends StatefulWidget {
+  /// Construct a view based on the current [week]
   const WeekScheduleView({int week}) : _week = week;
 
   final int _week;

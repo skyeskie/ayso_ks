@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// Header widget displaying the current week, with navigation to adjacent weeks
 class WeekBar extends StatelessWidget {
+  /// Construct for the current [week] with callback function [navigate].
   const WeekBar({
     Key key,
     @required this.week,
@@ -8,8 +10,15 @@ class WeekBar extends StatelessWidget {
     @required this.navigate,
   }) : super(key: key);
 
+  /// Current week displayed
   final int week;
+
+  /// Maximum number of weeks, for determining if to show next week button
   final int maxWeeks;
+
+  /// Navigation callback function on week change
+  ///
+  /// The function takes the new week as the parameter
   final Function(int) navigate;
 
   @override
