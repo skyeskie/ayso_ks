@@ -6,6 +6,7 @@ import 'package:get_it/get_it.dart';
 import '../models/region.dart';
 import '../models/team.dart';
 
+/// Object for accessing user settings and app configuration
 abstract class SettingsDAO {
   /// Gets a list of the IDs the saved teams
   /// List will have no duplicates
@@ -61,8 +62,12 @@ abstract class SettingsDAO {
   /// This must be synchronous, since it's used for the route interceptor
   bool isAppConfigured();
 
+  /// DataVersion is used to feed backends that get incremental updates
+  ///
+  /// Returns null if not set
   Future<String> getDataVersion();
 
+  /// Persist DataVersion. See BackendInterface for format
   Future setDataVersion(String version);
 
   /// Clear all saved settings
@@ -70,18 +75,30 @@ abstract class SettingsDAO {
   Future<void> reset();
 }
 
+/// Data wrapper class for settings, so can be passed as single object
 class SettingsDataType {
+  /// Create immutable settings object
+  ///
+  /// Create a new one if need to change
   const SettingsDataType({
     this.regionNumber = 49,
     this.savedTeams = const [],
     this.dataVersion = 'no-version',
   });
 
+  /// Region number - positive integer uniquely identifying region in US
   final int regionNumber;
+
+  /// List of Team IDs that the user has marked as favorite
   final List<String> savedTeams;
+
+  /// Version string of the data from BackendInterface
+  ///
+  /// See specific interfaces for what this structure means
   final String dataVersion;
 }
 
 mixin SettingsInjection<T extends StatefulWidget> on State<T> {
+  /// Object to access settings
   final SettingsDAO settingsDAO = GetIt.I.get<SettingsDAO>();
 }

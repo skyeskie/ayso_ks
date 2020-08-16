@@ -12,6 +12,10 @@ import 'module/main/data_controller.dart';
 import 'service/backend_interface.dart';
 import 'service/backend_json_asset.dart';
 
+/// Function that sets up all dependency injection in the app
+///
+/// This should be called once in the main app configuration and not repeated.
+/// Select versions of the different DAO implementations here
 void setupDependencyInjection() {
   GetIt.instance
     ..registerSingleton<GamesDAO>(GamesInMemoryDAO())

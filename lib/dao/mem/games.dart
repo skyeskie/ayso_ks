@@ -1,7 +1,11 @@
 import '../../models/game.dart';
 import '../games.dart';
 
+/// In-memory implementation of the Games DAO
+///
+/// Does not persist between app runs
 class GamesInMemoryDAO implements GamesDAO {
+  /// Can optionally create with [init] list of games
   GamesInMemoryDAO({Iterable<Game> init}) {
     if (init != null) {
       _games.addEntries(toEntries(init));
@@ -10,6 +14,7 @@ class GamesInMemoryDAO implements GamesDAO {
 
   final Map<String, Game> _games = {};
 
+  /// Transforms games so can put into a map, with Game ID as key
   static Iterable<MapEntry<String, Game>> toEntries(Iterable<Game> games) {
     return games.map((game) => MapEntry<String, Game>(game.id, game));
   }
@@ -40,18 +45,16 @@ class GamesInMemoryDAO implements GamesDAO {
 
   @override
   Future<Iterable<Game>> findGames({
-    int regionId,
+    int regionNum,
     String ageGroup,
     String gender,
     int week,
   }) {
-    return Future.value(_games.values
-        .where((game) => (regionId == null || game.region?.number == regionId))
-        .where((game) =>
-            (ageGroup == null || game.division?.age?.toString() == ageGroup))
-        .where(
-            (game) => (gender == null || game.division?.gender?.long == gender))
-        .where((game) => (week == null || game.weekNum == week)));
+    return Future.value(_games.values.where((game) =>
+        (regionNum == null || game.region?.number == regionNum) &&
+        (ageGroup == null || game.division?.age?.toString() == ageGroup) &&
+        (gender == null || game.division?.gender?.long == gender) &&
+        (week == null || game.weekNum == week)));
   }
 
   @override

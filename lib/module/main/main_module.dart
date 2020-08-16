@@ -6,6 +6,7 @@ import 'home_view.dart';
 import 'init_view.dart';
 import 'settings_view.dart';
 
+/// Navigation/Routing configuration for the main module
 final List<SailorRoute> mainModuleRoutes = <SailorRoute>[
   SailorRoute(
     name: '/',

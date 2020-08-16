@@ -11,6 +11,7 @@ import '../../models/team.dart';
 import '../../routes_config.dart';
 import '../../widgets/nav_bar.dart';
 
+/// Search form for selecting a team
 class TeamSelectView extends StatefulWidget {
   @override
   _TeamSelectViewState createState() => _TeamSelectViewState();

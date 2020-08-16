@@ -8,6 +8,9 @@ import '../models/team.dart';
 import 'backend_interface.dart';
 import 'json_model.dart';
 
+/// Data implementation that extracts data from a Json file in Assets
+///
+/// Specific file is configured as "res/data.json"
 class BackendJsonAsset implements BackendInterface {
   JsonModel _json;
 
@@ -45,11 +48,16 @@ class BackendJsonAsset implements BackendInterface {
   }
 }
 
-extension DateOnly on DateTime {
+/// Extensions on [DateTime] to assist in calculating week starts
+extension WeekStartCalc on DateTime {
+  /// Returns the date portion, with time values zeroed out
   DateTime dateOnly() {
     return DateTime(year, month, day);
   }
 
+  /// Changes the day so that it is the closest Wednesday, going backwards
+  ///
+  /// When called on a Wednesday, returns an exact copy
   DateTime previousWednesday() {
     var diff = weekday - DateTime.wednesday;
     if (diff < 0) diff += 7;

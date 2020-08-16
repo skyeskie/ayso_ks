@@ -4,13 +4,20 @@ import '../../models/game.dart';
 import '../../routes_config.dart';
 import '../../util/date_format.dart';
 
+/// Widget ListTile showing a single game for use in a single-team listing
 class SingleTeamGameListTile extends StatelessWidget {
+  /// Constant constructor
   const SingleTeamGameListTile({
     @required this.game,
     @required this.teamId,
   });
 
+  /// Game information for display
   final Game game;
+
+  /// Team ID for the team that the listing is for
+  ///
+  /// This is used for finding the opponent and vs/at display
   final String teamId;
 
   @override

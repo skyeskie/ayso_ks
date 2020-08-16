@@ -4,13 +4,20 @@ import 'package:sailor/sailor.dart';
 
 import '../../dao/games.dart';
 import '../../dao/week_cache.dart';
+import '../../models/age_group.dart';
 import '../../models/game.dart';
+import '../../models/gender.dart';
+import '../../models/region.dart';
 import '../../routes_config.dart';
 import '../../widgets/nav_bar.dart';
 import 'two_team_game_list.dart';
 import 'week_bar.dart';
 
+/// View displaying games found by search results
 class SearchResultsView extends StatefulWidget {
+  /// View is constructed by providing search parameters
+  ///
+  /// Week is required since it shows results in a per-week format
   const SearchResultsView({
     key,
     this.regionNum,
@@ -19,9 +26,16 @@ class SearchResultsView extends StatefulWidget {
     this.gender,
   }) : super(key: key);
 
+  /// (Optional) region filter on [Region.number]
   final int regionNum;
+
+  /// Week number filter
   final int week;
+
+  /// (Optional) Age grouping filter. See [AgeGroup.toString]
   final String ageGroup;
+
+  /// (Optional) Gender filter. See [Gender.long]
   final String gender;
 
   @override
@@ -35,7 +49,7 @@ class _SearchResultsViewState extends State<SearchResultsView>
   @override
   void initState() {
     games = gamesDAO.findGames(
-      regionId: widget.regionNum,
+      regionNum: widget.regionNum,
       week: widget.week,
       ageGroup: widget.ageGroup,
       gender: widget.gender,

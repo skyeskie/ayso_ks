@@ -7,6 +7,7 @@ import 'search_results_view.dart';
 import 'team_schedule.dart';
 import 'week_schedule_view.dart';
 
+/// Navigation/routing configuration for the schedules module
 final List<SailorRoute> scheduleModuleRoutes = <SailorRoute>[
   SailorRoute(
     name: '/schedules',

@@ -6,7 +6,13 @@ import '../../models/team.dart';
 import '../settings.dart';
 import '../teams.dart';
 
+/// In-memory implementation of the Settings DAO
+///
+/// Does not persist between app runs
 class SettingsInMemoryDAO implements SettingsDAO {
+  /// Create DAO, optionally initializing with specific data
+  ///
+  /// isAppInitialized is determined on whether [regionNumber] is set
   SettingsInMemoryDAO({SettingsDataType initData}) {
     if (initData?.savedTeams != null) {
       _teams.addAll(initData.savedTeams);

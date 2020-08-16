@@ -9,16 +9,19 @@ import '../../models/team.dart';
 import '../../widgets/nav_bar.dart';
 import 'single_team_game_tile.dart';
 
+/// View that shows all the games and info for a single team
 class TeamScheduleView extends StatefulWidget {
+  /// Constructor
   const TeamScheduleView({Key key, @required this.teamId}) : super(key: key);
 
+  ///  Identifier for a team (see [Team.code])
   final String teamId;
 
   @override
-  TeamScheduleState createState() => TeamScheduleState();
+  _TeamScheduleState createState() => _TeamScheduleState();
 }
 
-class TeamScheduleState extends State<TeamScheduleView>
+class _TeamScheduleState extends State<TeamScheduleView>
     with GamesInjection, SettingsInjection, TeamsInjection {
   Team _team;
   List<Game> _games;

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
+/// Interface for accessing Week Cache
+///
+/// This is intended for fast, synchronous access to common functions that
+/// could be computationally intensive. (Figuring out week starts from scratch,
+/// for example, would require iterating over all games)
 abstract class WeekCacheDAO {
   /// Get the number of weeks in a season
   int getMaxWeeks();
@@ -12,9 +17,9 @@ abstract class WeekCacheDAO {
   int getCurrentWeek();
 
   /// Clears underlying data
-  //TODO: Make sync?
   Future<void> clear();
 
+  /// Returns true iff this is initialized with week starts
   bool isInit();
 
   /// Initializes the cache
@@ -22,5 +27,6 @@ abstract class WeekCacheDAO {
 }
 
 mixin WeekCacheInjection<T extends StatefulWidget> on State<T> {
+  /// Access for week cache
   final WeekCacheDAO weekCache = GetIt.I.get<WeekCacheDAO>();
 }

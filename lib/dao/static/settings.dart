@@ -3,6 +3,9 @@ import '../../models/team.dart';
 import '../settings.dart';
 import 'data.dart';
 
+/// Static, read-only implementation of Settings DAO
+///
+/// Uses [StaticData] for values
 class SettingsStaticDAO implements SettingsDAO {
   @override
   Future<void> clearSavedTeams() {

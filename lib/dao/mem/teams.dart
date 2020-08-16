@@ -1,7 +1,11 @@
 import '../../models/team.dart';
 import '../teams.dart';
 
+/// In-memory implementation of the Teams DAO
+///
+/// Does not persist between app runs
 class TeamsInMemoryDAO implements TeamsDAO {
+  /// Can optionally create with [init] list of teams
   TeamsInMemoryDAO({Iterable<Team> init}) {
     if (init != null) {
       _teams.addEntries(toEntries(init));
@@ -10,6 +14,7 @@ class TeamsInMemoryDAO implements TeamsDAO {
 
   final Map<String, Team> _teams = {};
 
+  /// Make Team listing suitable for map, where Team ID is the key
   static Iterable<MapEntry<String, Team>> toEntries(Iterable<Team> teams) {
     return teams.map((e) => MapEntry<String, Team>(e.code, e));
   }

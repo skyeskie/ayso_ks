@@ -7,9 +7,12 @@ import '../../models/team.dart';
 import '../settings.dart';
 
 // ignore: avoid_classes_with_only_static_members
+/// Data used by static DAO classes
 class StaticData {
+  /// DataVersion - fixed for static and not really used
   static const String dataVersion = 'static.1';
 
+  /// Week starts, used by WeekCacheStaticDAO
   static List<DateTime> weeks = [
     DateTime(2016, 1, 31),
     DateTime(2016, 2, 7),
@@ -17,6 +20,7 @@ class StaticData {
     DateTime(2016, 3, 7),
   ];
 
+  /// Dummy teams that are used by TeamsStaticDAO
   static final Map<String, Team> teams = {
     'A': mt('A', 'coachA', 'telA', 'U10B', 49),
     'B': mt('B', 'coachB', 'telB', 'U10B', 49),
@@ -30,6 +34,7 @@ class StaticData {
     'J': mt('J', 'coachJ', 'telJ', 'U12B', 49),
   };
 
+  /// Games that are used by GamesStaticDAO
   static final List<Game> games = [
     g('111', 'A', 'B', 1, startTime(1, 8), 49, 'map', 'U10B'),
     g('112', 'C', 'D', 1, startTime(1, 8), 49, 'map2', 'U10B'),
@@ -47,12 +52,14 @@ class StaticData {
     g('502', '-', 'B', 3, startTime(3, 8), 49, null, 'U10B'),
   ];
 
+  /// Settings that are used by SettingsStaticDAO
   static SettingsDataType settings = SettingsDataType(
     regionNumber: 49,
     savedTeams: ['A', 'B', 'I'],
     dataVersion: 'static',
   );
 
+  /// Full definition of the saved teams, used by SettingsStaticDAO
   static List<Team> savedTeamsFull = [
     teams['A'],
     teams['B'],
@@ -60,6 +67,10 @@ class StaticData {
   ];
 }
 
+/// Calculate the start time given week number and hour
+///
+/// Will try to put it on Saturday, but if there isn't a Saturday between
+/// two starts, will set it to the same day as the week start
 DateTime startTime(int week, int hour) {
   final start = StaticData.weeks[week - 1];
   final end = StaticData.weeks[week] ?? start + 7.days;
@@ -70,6 +81,7 @@ DateTime startTime(int week, int hour) {
   return day + hour.hours;
 }
 
+/// Utility function for creating a Game
 Game g(
   String id,
   String home,
@@ -92,6 +104,7 @@ Game g(
   );
 }
 
+/// Utility function for creating a Team
 Team mt(
   String code,
   String coach,
@@ -108,5 +121,8 @@ Team mt(
   );
 }
 
+/// Utility function for creating a region from region number
 Region r(int number) => Region.fromNumber(number);
+
+/// Utility function for creating a Division from string code
 Division d(String code) => Division.fromString(code);

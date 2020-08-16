@@ -12,9 +12,12 @@ import '../../util/date_format.dart';
 import '../../widgets/nav_bar.dart';
 import 'team_card.dart';
 
+/// View showing details for a single game
 class GameDetailView extends StatefulWidget {
+  /// Constructor
   const GameDetailView({Key key, this.id}) : super(key: key);
 
+  /// Game unique identified used for retrieving the game
   final String id;
 
   @override

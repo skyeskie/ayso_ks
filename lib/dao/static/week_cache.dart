@@ -1,5 +1,8 @@
 import '../week_cache.dart';
 
+/// Static, read-only implementation of Week Cache
+///
+/// Fixes current week to 2 and max weeks to 4 (in-line with data.dart)
 class WeekCacheStaticDAO implements WeekCacheDAO {
   @override
   Future<void> clear() {
