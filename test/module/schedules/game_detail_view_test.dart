@@ -19,7 +19,7 @@ void main() {
     expect(find.text('Away Team'), findsOneWidget);
     expect(find.text('A'), findsOneWidget);
     expect(find.text('B'), findsOneWidget);
-    expect(find.text('Call'), findsNWidgets(2));
+    expect(find.byIcon(Icons.call), findsNWidgets(2));
     expect(find.text('Field map'), findsOneWidget);
     expect(find.text('Region 49'), findsOneWidget);
   });
@@ -49,7 +49,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('BYE'), findsOneWidget);
-    expect(find.text('Call'), findsOneWidget);
+    expect(find.byIcon(Icons.call), findsOneWidget);
     expect(find.text('Home Team'), findsNothing);
     expect(find.text('Away Team'), findsNothing);
     expect(find.text('Team'), findsOneWidget);
@@ -64,7 +64,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('BYE'), findsOneWidget);
-    expect(find.text('Call'), findsOneWidget);
+    expect(find.byIcon(Icons.call), findsOneWidget);
     expect(find.text('Home Team'), findsNothing);
     expect(find.text('Away Team'), findsNothing);
     expect(find.text('Team'), findsOneWidget);

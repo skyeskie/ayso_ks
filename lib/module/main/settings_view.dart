@@ -54,9 +54,9 @@ class _SettingsViewState extends State<SettingsView> with SettingsInjection {
   Widget _build(BuildContext context) {
     return Column(
       children: [
-        FormBuilderRadio(
+        FormBuilderRadioGroup(
           attribute: 'region',
-          leadingInput: true,
+          orientation: GroupedRadioOrientation.vertical,
           initialValue: _settings.regionNumber,
           decoration: InputDecoration(
             labelText: 'Home Region',

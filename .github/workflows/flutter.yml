@@ -3,8 +3,6 @@ name: Flutter CI
 on:
   push:
     branches: [ mainline, dev ]
-  pull_request:
-    branches: [ mainline, dev ]
 
 jobs:
   build-analyze-test:

@@ -37,10 +37,10 @@ class TeamCard extends StatelessWidget {
         description: Row(
           children: [Text('Coach: '), Text('${team.coach}')],
         ),
-        icon: GFButton(
+        icon: GFIconButton(
           icon: Icon(Icons.call),
-          child: Text('Call'),
           onPressed: () {},
+          shape: GFIconButtonShape.circle,
         ),
       ),
     );

@@ -23,7 +23,7 @@ class FormBuilderFinder extends MatchFinder {
     if (widget is FormBuilderCheckbox) {
       return widget.attribute == attribute;
     }
-    if (widget is FormBuilderCheckboxList) {
+    if (widget is FormBuilderCheckboxGroup) {
       return widget.attribute == attribute;
     }
     if (widget is FormBuilderChipsInput) {
@@ -53,7 +53,7 @@ class FormBuilderFinder extends MatchFinder {
     if (widget is FormBuilderPhoneField) {
       return widget.attribute == attribute;
     }
-    if (widget is FormBuilderRadio) {
+    if (widget is FormBuilderRadioGroup) {
       return widget.attribute == attribute;
     }
     if (widget is FormBuilderRadioGroup) {
