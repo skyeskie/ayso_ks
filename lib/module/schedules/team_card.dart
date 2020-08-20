@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../models/team.dart';
 
@@ -39,11 +40,19 @@ class TeamCard extends StatelessWidget {
         ),
         icon: GFIconButton(
           icon: Icon(Icons.call),
-          onPressed: () {},
+          onPressed: _launchCall,
           shape: GFIconButtonShape.circle,
         ),
       ),
     );
+  }
+
+  Future<void> _launchCall() async {
+    final url = 'tel:${team.coachTel}';
+    if (await canLaunch(url)) {
+      await launch(url);
+    }
+    //TODO: Fallback to popup phone number
   }
 
   /// Auxiliary function to convert the [VS] type to [teamLabel] string

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../dao/games.dart';
 import '../../dao/settings.dart';
@@ -81,6 +82,14 @@ class _TeamScheduleState extends State<TeamScheduleView>
     );
   }
 
+  Future<void> _launchCall() async {
+    final url = 'tel:${_team.coachTel}';
+    if (await canLaunch(url)) {
+      await launch(url);
+    }
+    //TODO: Fallback to popup phone number
+  }
+
   Widget _build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.max,
@@ -100,7 +109,7 @@ class _TeamScheduleState extends State<TeamScheduleView>
                 onPressed: updateFavorite,
               ),
               OutlineButton.icon(
-                onPressed: null,
+                onPressed: _launchCall,
                 icon: Icon(Icons.call),
                 label: Text(_team?.coachTel ?? ''),
               ),

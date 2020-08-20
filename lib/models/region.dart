@@ -24,6 +24,10 @@ class Region {
     return REGIONS.singleWhere((r) => r.id == id);
   }
 
+  //TODO: Make map images show location marker
+  //TODO: Make map image for each region
+  //TODO: Make sure location marker onscreen for each
+
   /// Enumeration of all regions
   ///
   /// This is the configuration for the app over which regions to handle
@@ -33,7 +37,7 @@ class Region {
       id: 1,
       number: 49,
       name: 'Stryker',
-      mapFile: './img/Fields49.svg',
+      mapFile: 'img/osm_region49_1500sq.png',
       lat: 37.737437,
       lon: -97.213361,
     ),
@@ -41,28 +45,28 @@ class Region {
         id: 2,
         number: 105,
         name: 'Southview',
-        mapFile: './img/Fields105.svg',
+        mapFile: 'img/osm_region49_1500sq.png',
         lat: 37.611328,
         lon: -97.367567),
     Region(
         id: 4,
         number: 208,
         name: 'West Wichita',
-        mapFile: './img/Fields208.svg',
+        mapFile: 'img/osm_region49_1500sq.png',
         lat: 37.842481,
         lon: -97.372607),
     Region(
         id: 5,
         number: 253,
         name: 'Valley Center',
-        mapFile: './img/Fields253.svg',
+        mapFile: 'img/osm_region49_1500sq.png',
         lat: 37.843271,
         lon: -97.365568),
     Region(
         id: 6,
         number: 491,
         name: 'Clearwater',
-        mapFile: './img/Fields491.svg',
+        mapFile: 'img/osm_region49_1500sq.png',
         lat: 37.503879,
         lon: -97.490616),
   };
