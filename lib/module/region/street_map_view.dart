@@ -20,7 +20,7 @@ class StreetMapView extends StatelessWidget {
     return Scaffold(
       appBar: buildNavBar('Region $regionNum', context),
       body: PhotoView(
-        imageProvider: AssetImage(_region.mapFile),
+        imageProvider: AssetImage(_region.streetMap),
         initialScale: 1.0,
         minScale: 1.0,
         maxScale: 1.0,

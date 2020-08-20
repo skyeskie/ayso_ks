@@ -8,7 +8,7 @@ import '../../widgets/nav_bar.dart';
 /// View for displaying the map of the fields for a specific region
 class FieldView extends StatelessWidget {
   /// Construct view based on region number
-  FieldView(this.regionNum) : mapName = Region.fromNumber(regionNum).mapFile;
+  FieldView(this.regionNum) : mapName = Region.fromNumber(regionNum).fieldMap;
 
   /// Region number for the current display
   final int regionNum;

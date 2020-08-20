@@ -9,7 +9,8 @@ class Region {
     @required this.id,
     @required this.number,
     @required this.name,
-    @required this.mapFile,
+    @required this.fieldMap,
+    @required this.streetMap,
     @required this.lat,
     @required this.lon,
   });
@@ -37,38 +38,47 @@ class Region {
       id: 1,
       number: 49,
       name: 'Stryker',
-      mapFile: 'img/osm_region49_1500sq.png',
+      fieldMap: 'img/Fields49.svg',
+      streetMap: 'img/osm_region49_1500sq.png',
       lat: 37.737437,
       lon: -97.213361,
     ),
     Region(
-        id: 2,
-        number: 105,
-        name: 'Southview',
-        mapFile: 'img/osm_region49_1500sq.png',
-        lat: 37.611328,
-        lon: -97.367567),
+      id: 2,
+      number: 105,
+      name: 'Southview',
+      fieldMap: 'img/Fields105.svg',
+      streetMap: 'img/osm_region49_1500sq.png',
+      lat: 37.611328,
+      lon: -97.367567,
+    ),
     Region(
-        id: 4,
-        number: 208,
-        name: 'West Wichita',
-        mapFile: 'img/osm_region49_1500sq.png',
-        lat: 37.842481,
-        lon: -97.372607),
+      id: 4,
+      number: 208,
+      name: 'West Wichita',
+      fieldMap: 'img/Fields208.svg',
+      streetMap: 'img/osm_region49_1500sq.png',
+      lat: 37.842481,
+      lon: -97.372607,
+    ),
     Region(
-        id: 5,
-        number: 253,
-        name: 'Valley Center',
-        mapFile: 'img/osm_region49_1500sq.png',
-        lat: 37.843271,
-        lon: -97.365568),
+      id: 5,
+      number: 253,
+      name: 'Valley Center',
+      fieldMap: 'img/Fields253.svg',
+      streetMap: 'img/osm_region49_1500sq.png',
+      lat: 37.843271,
+      lon: -97.365568,
+    ),
     Region(
-        id: 6,
-        number: 491,
-        name: 'Clearwater',
-        mapFile: 'img/osm_region49_1500sq.png',
-        lat: 37.503879,
-        lon: -97.490616),
+      id: 6,
+      number: 491,
+      name: 'Clearwater',
+      fieldMap: 'img/Fields491.svg',
+      streetMap: 'img/osm_region49_1500sq.png',
+      lat: 37.503879,
+      lon: -97.490616,
+    ),
   };
 
   /// Short ID number
@@ -88,7 +98,10 @@ class Region {
   final String name;
 
   /// Asset SVG that shows the map of the fields
-  final String mapFile;
+  final String fieldMap;
+
+  /// Asset image that shows the street map of the region
+  final String streetMap;
 
   /// Latitude where the fields are located
   final double lat;

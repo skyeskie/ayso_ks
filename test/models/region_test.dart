@@ -9,14 +9,16 @@ void main() {
       id: 10,
       number: 100,
       name: 'name',
-      mapFile: 'map',
+      fieldMap: 'map',
+      streetMap: 'road',
       lat: -10.5,
       lon: -20.5,
     );
     expect(r.id, 10);
     expect(r.number, 100);
     expect(r.name, 'name');
-    expect(r.mapFile, 'map');
+    expect(r.fieldMap, 'map');
+    expect(r.streetMap, 'road');
     expect(r.lat, -10.5);
     expect(r.lon, -20.5);
   });
