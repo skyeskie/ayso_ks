@@ -134,30 +134,54 @@ class _GameDetailViewState extends State<GameDetailView>
             type: haveHomeTeam ? VS.Away : VS.Ignore,
           ),
         if (haveAwayTeam) Spacer(),
-        Text(
-          'Region ${_game.region.number}',
-          style: Theme.of(context).textTheme.headline6,
-        ),
-        GFButton(
-          onPressed: () => Routing.sailor(
-            '/region/map',
-            params: {'regionNum': _game.region.number},
-          ),
-          icon: Icon(Icons.directions_car),
-          child: Text('Directions'),
+        Row(
+          children: [
+            Spacer(),
+            Expanded(
+              flex: 4,
+              child: Text(
+                'Region ${_game.region.number}',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+            ),
+            Expanded(
+              flex: 4,
+              child: GFButton(
+                onPressed: () => Routing.sailor(
+                  '/region/map',
+                  params: {'regionNum': _game.region.number},
+                ),
+                icon: Icon(Icons.directions_car),
+                child: Text('Directions'),
+              ),
+            ),
+            Spacer(),
+          ],
         ),
         Spacer(),
-        Text(
-          'Field ${_game.field}',
-          style: Theme.of(context).textTheme.headline6,
-        ),
-        GFButton(
-          onPressed: () => Routing.sailor(
-            '/region/field',
-            params: {'regionNum': _game.region.number},
-          ),
-          icon: Icon(Icons.map),
-          child: Text('Field Map'),
+        Row(
+          children: [
+            Spacer(),
+            Expanded(
+              flex: 4,
+              child: Text(
+                'Field ${_game.field}',
+                style: Theme.of(context).textTheme.headline6,
+              ),
+            ),
+            Expanded(
+              flex: 4,
+              child: GFButton(
+                onPressed: () => Routing.sailor(
+                  '/region/field',
+                  params: {'regionNum': _game.region.number},
+                ),
+                icon: Icon(Icons.map),
+                child: Text('Field Map'),
+              ),
+            ),
+            Spacer(),
+          ],
         ),
         Spacer(flex: 5),
       ],

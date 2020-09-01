@@ -35,7 +35,8 @@ class LargeIconButton extends StatelessWidget {
         label: label,
         onPressed: action, //SchedulesMenu
         padding: EdgeInsets.symmetric(
-          vertical: 15,
+          //TODO: Make this responsive (ie, 8-20)
+          vertical: 10,
         ),
       ),
     );

@@ -32,6 +32,7 @@ class TeamCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GFCard(
+      margin: EdgeInsets.all(8),
       title: GFListTile(
         titleText: teamLabel,
         subtitleText: team.code,

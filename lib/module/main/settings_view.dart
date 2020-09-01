@@ -64,8 +64,6 @@ class _SettingsViewState extends State<SettingsView> with SettingsInjection {
                   color: Colors.grey,
                 ),
             contentPadding: EdgeInsets.all(15),
-            helperText: 'This filters the current week schedule and '
-                'other parts of the app.',
             border: InputBorder.none,
           ),
           onChanged: (regionNum) =>

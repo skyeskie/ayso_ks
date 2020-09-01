@@ -34,7 +34,7 @@ class TwoTeamGameList extends StatelessWidget {
 
     return Expanded(
       child: ListView.builder(
-        itemExtent: 60,
+        itemExtent: 45,
         itemCount: listViewData.length,
         itemBuilder: (context, index) {
           print('Adding item $index');
@@ -43,7 +43,11 @@ class TwoTeamGameList extends StatelessWidget {
           // Bye info
           if (info.byesListing.isNotEmpty) {
             return ListTile(
-              title: Text('Byes', textAlign: TextAlign.center),
+              title: Text(
+                'Byes',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
               subtitle: Text(info.byesListing, textAlign: TextAlign.center),
             );
           }
@@ -51,7 +55,13 @@ class TwoTeamGameList extends StatelessWidget {
           //Date header
           if (info.isDateHeader) {
             return ListTile(
-              title: Align(child: Text(info.game.startTime.toMediumString())),
+              title: Align(
+                alignment: Alignment(-0.8, 0.9),
+                child: Text(
+                  info.game.startTime.toMediumString(),
+                  style: TextStyle(fontWeight: FontWeight.w600),
+                ),
+              ),
             );
           }
 

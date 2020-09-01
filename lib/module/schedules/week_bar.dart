@@ -26,6 +26,8 @@ class WeekBar extends StatelessWidget {
     return Container(
       color: Color.fromRGBO(220, 220, 220, 1.0),
       child: ListTile(
+        contentPadding: EdgeInsets.zero,
+        dense: true,
         leading: (week > 1)
             ? IconButton(
                 icon: Icon(Icons.arrow_back),
@@ -33,7 +35,10 @@ class WeekBar extends StatelessWidget {
               )
             : const SizedBox(height: 48, width: 48),
         title: Align(
-          child: Text('Week #$week'),
+          child: Text(
+            'Week #$week',
+            textScaleFactor: 1.5,
+          ),
         ),
         trailing: (week < maxWeeks)
             ? IconButton(

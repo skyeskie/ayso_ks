@@ -73,85 +73,103 @@ class _InitViewState extends State<InitView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Image.asset('img/MainLogo.png'),
-          const SizedBox(height: 10),
-          FutureBuilder(
-            future: _dataLoading,
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return GFCard(
-                  title: GFListTile(
-                    titleText: 'Error',
-                    icon: Icon(Icons.error_outline),
-                    description: Text(snapshot.error),
-                  ),
-                );
-              }
+    return SafeArea(
+      child: Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Center(
+                child: Image.asset('img/MainLogo.png'),
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  FutureBuilder(
+                    future: _dataLoading,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return GFCard(
+                          padding: EdgeInsets.all(0),
+                          content: GFListTile(
+                            titleText: 'Error',
+                            icon: Icon(Icons.error_outline),
+                            description: Text(snapshot.error),
+                          ),
+                        );
+                      }
 
-              if (snapshot.hasData) {
-                return GFCard(
-                  title: GFListTile(
-                    titleText: 'Loading Game Data',
-                    subtitleText: 'Success: Offline viewing enabled',
-                  ),
-                );
-              }
+                      if (snapshot.hasData) {
+                        return Card(
+                          child: ListTile(
+                            title: Text('Loading Game Data'),
+                            subtitle: Text('Success: Offline viewing enabled'),
+                          ),
+                        );
+                      }
 
-              return GFCard(
-                title: GFListTile(
-                  titleText: 'Loading Game Data',
-                  description: GFLoader(
-                    type: GFLoaderType.circle,
-                    loaderColorOne: Colors.blue,
-                    loaderColorTwo: Colors.blue,
-                    loaderColorThree: Colors.blue,
+                      return GFCard(
+                        padding: EdgeInsets.all(0),
+                        content: GFListTile(
+                          titleText: 'Loading Game Data',
+                          description: GFLoader(
+                            type: GFLoaderType.circle,
+                            loaderColorOne: Colors.blue,
+                            loaderColorTwo: Colors.blue,
+                            loaderColorThree: Colors.blue,
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                ),
-              );
-            },
-          ),
-          if (_showConfig) _buildConfig(context),
-        ],
+                  if (_showConfig) _buildConfig(context),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildConfig(BuildContext context) {
-    return GFCard(
-      title: GFListTile(
-        titleText: 'Setup App',
-        subtitleText: 'One-time setup to prepare the app for use',
-      ),
-      content: FormBuilderDropdown(
-        attribute: 'region',
-        onChanged: _setRegionNum,
-        decoration: InputDecoration(
-          hintText: 'Select your home region...',
-          helperText:
-              'Used to filter to a single region most places in the app',
-        ),
-        items: Region.REGIONS
-            .map((r) => DropdownMenuItem<int>(
-                  value: r.number,
-                  child: Text('Region ${r.number} (${r.name})'),
-                ))
-            .toList(growable: false),
-      ),
-      buttonBar: GFButtonBar(
+    return Card(
+      child: Column(
         children: [
-          GFButton(
-            onPressed: _finishDisabled ? null : _resumeNavigation,
-            child: Text('Finish'),
-            disabledColor: Colors.grey[300],
-            disabledTextColor: Colors.grey[500],
-          )
+          ListTile(
+            title: Text('Setup App'),
+            subtitle: Text('One-time setup'),
+          ),
+          FormBuilderDropdown(
+            attribute: 'region',
+            onChanged: _setRegionNum,
+            decoration: InputDecoration(
+              hintText: 'Select your home region...',
+              helperText:
+                  'Used to filter to a single region most places in the app',
+            ),
+            items: Region.REGIONS
+                .map((r) => DropdownMenuItem<int>(
+                      value: r.number,
+                      child: Text('Region ${r.number} (${r.name})'),
+                    ))
+                .toList(growable: false),
+          ),
+          GFButtonBar(
+            children: [
+              GFButton(
+                onPressed: _finishDisabled ? null : _resumeNavigation,
+                child: Text('Finish'),
+                disabledColor: Colors.grey[300],
+                disabledTextColor: Colors.grey[500],
+              )
+            ],
+          ),
         ],
       ),
     );

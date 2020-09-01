@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:getwidget/getwidget.dart';
 
 import '../../models/region.dart';
 import '../../routes_config.dart';
+import '../../widgets/large_icon_button.dart';
 
 /// Display tile/card for a region
 class RegionInfoTile extends StatelessWidget {
@@ -17,32 +17,48 @@ class RegionInfoTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GFCard(
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 50),
-      padding: EdgeInsets.symmetric(vertical: 2, horizontal: 10),
-      title: GFListTile(
-        titleText: 'Region ${region.number}',
-        subtitleText: region.name,
-      ),
-      content: GFButtonBar(
-        spacing: 40,
+    return Card(
+      child: Row(
         children: [
-          GFButton(
-            onPressed: () => Routing.sailor(
-              '/region/map',
-              params: {'regionNum': region.number},
+          Expanded(
+              flex: 1,
+              child: ListTile(
+                title: Text(
+                  'Region ${region.number}',
+                  textAlign: TextAlign.center,
+                ),
+                subtitle: Text(
+                  region.name,
+                  textAlign: TextAlign.center,
+                ),
+              )),
+          Expanded(
+            flex: 2,
+            //TODO(Responsive): Make buttons in-line
+            child: Column(
+              children: [
+                SizedBox(height: 5),
+                LargeIconButton(
+                  action: () => Routing.sailor(
+                    '/region/map',
+                    params: {'regionNum': region.number},
+                  ),
+                  icon: Icons.drive_eta,
+                  label: Text('Directions'),
+                ),
+                SizedBox(height: 3),
+                LargeIconButton(
+                  action: () => Routing.sailor(
+                    '/region/field',
+                    params: {'regionNum': region.number},
+                  ),
+                  icon: Icons.map,
+                  label: Text('Field Map'),
+                ),
+                SizedBox(height: 5),
+              ],
             ),
-            icon: Icon(Icons.drive_eta),
-            text: 'Directions',
-          ),
-          GFButton(
-            onPressed: () => Routing.sailor(
-              '/region/field',
-              params: {'regionNum': region.number},
-            ),
-            icon: Icon(Icons.map),
-            text: 'Field Map',
-          ),
+          )
         ],
       ),
     );

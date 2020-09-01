@@ -30,15 +30,16 @@ class SingleTeamGameListTile extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          Expanded(child: Text(game.startTime.toMediumString())),
-          if (game.isBye()) Expanded(child: Text('BYE')),
+          Expanded(child: Text(game.startTime.toMediumString()), flex: 3),
+          if (game.isBye()) Expanded(child: Text('BYE'), flex: 2),
           if (!game.isBye())
             Expanded(
+              flex: 2,
               child: Text('${game.home == teamId ? "vs" : "at"} '
                   '${game.getOpponent(teamId)}'),
             ),
-          Expanded(child: Text('Region ${game.region.number}')),
-          Expanded(child: Text('Field ${game.field}')),
+          Expanded(child: Text('Region ${game.region.number}'), flex: 2),
+          Expanded(child: Text('Field ${game.field}'), flex: 2),
         ],
       ),
     );

@@ -116,10 +116,14 @@ class _TeamScheduleState extends State<TeamScheduleView>
             ],
           ),
         ),
+        //Other options:
+        //- Table
+        //- Expanded for each row
+        //- Use ConstrainedBox (maybe with Flexible)
         ListView.builder(
           shrinkWrap: true,
           itemCount: _games?.length ?? 0,
-          itemExtent: 50,
+          itemExtent: 32,
           itemBuilder: (_, index) => SingleTeamGameListTile(
             game: _games[index],
             teamId: _team?.code,

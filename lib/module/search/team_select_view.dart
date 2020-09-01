@@ -77,6 +77,7 @@ class _TeamSelectViewState extends State<TeamSelectView> with TeamsInjection {
                   labelText: 'Region',
                   labelStyle: Theme.of(context).textTheme.headline6,
                   border: InputBorder.none,
+                  isDense: true,
                 ),
                 options: Region.REGIONS
                     .map(
@@ -91,6 +92,7 @@ class _TeamSelectViewState extends State<TeamSelectView> with TeamsInjection {
                 attribute: 'age',
                 initialValue: '',
                 spacing: 1,
+                runSpacing: -12,
                 shape: BeveledRectangleBorder(
                   borderRadius: BorderRadius.circular(5),
                 ),
@@ -98,6 +100,7 @@ class _TeamSelectViewState extends State<TeamSelectView> with TeamsInjection {
                   labelText: 'Age Group',
                   labelStyle: Theme.of(context).textTheme.headline6,
                   border: InputBorder.none,
+                  isDense: true,
                 ),
                 options: AgeGroup.AGES
                     .map(
@@ -114,6 +117,7 @@ class _TeamSelectViewState extends State<TeamSelectView> with TeamsInjection {
                 decoration: InputDecoration(
                   labelText: 'Gender',
                   labelStyle: Theme.of(context).textTheme.headline6,
+                  isDense: true,
                 ),
                 options: Gender.GENDERS
                     .map((g) => g.long)

@@ -45,15 +45,20 @@ class _FavoritesListViewState extends State<FavoritesListView>
             return Card(
               child: Column(
                 children: [
-                  Text('No saved teams'),
-                  Divider(height: 10),
+                  ListTile(
+                    title: Text('No saved teams', textAlign: TextAlign.center),
+                  ),
+                  SizedBox(height: 40),
+                  Divider(),
                   Text('Add some teams as favorites:'),
-                  FlatButton(
-                    child: Text('Find Team'),
+                  RaisedButton.icon(
+                    icon: Icon(Icons.person_search),
+                    label: Text('Find Team'),
                     onPressed: () => Routing.sailor('/search/teams'),
                   ),
                   Text('Click a team to view team page'),
                   Text('Click the star button in the top right'),
+                  Divider(),
                 ],
               ),
             );

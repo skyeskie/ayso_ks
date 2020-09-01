@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../dao/settings.dart';
@@ -11,66 +10,65 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        constraints: BoxConstraints.expand(),
+      body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Spacer(flex: 4),
-            SvgPicture.asset(
-              //TODO: Fix SVG (Only shows KS border, no other elements)
-              'img/KansasSoccerBall.svg',
-              alignment: Alignment.center,
-              fit: BoxFit.fitWidth,
-              semanticsLabel: 'Soccer Ball Logo',
+            Expanded(
+              flex: 2,
+              child: Image.asset(
+                'img/MainLogo.png',
+                alignment: Alignment.bottomCenter,
+                fit: BoxFit.fitWidth,
+                semanticLabel: 'AYSO Kansas',
+              ),
             ),
-            Image.asset(
-              'img/HomeText.png',
-              alignment: Alignment.center,
-              fit: BoxFit.fitWidth,
-              semanticLabel: 'AYSO Kansas',
-            ),
-            Spacer(flex: 2),
-            LargeIconButton(
-              icon: Icons.calendar_today,
-              label: Text('Schedules'),
-              action: () => GetIt.I.get<SettingsDAO>().getRegionNumber().then(
-                    (value) => Routing.sailor(
-                      '/schedules',
-                      params: {'regionNum': value},
-                    ),
+            Divider(),
+            Expanded(
+              flex: 3,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  LargeIconButton(
+                    icon: Icons.calendar_today,
+                    label: Text('Schedules'),
+                    action: _navSchedules,
                   ),
-            ),
-            Spacer(),
-            LargeIconButton(
-              icon: Icons.map,
-              label: Text('Region Info'),
-              action: () => Routing.sailor('/region'),
-            ),
-            Spacer(),
-            LargeIconButton(
-              icon: Icons.bookmark,
-              label: Text('My Teams'),
-              action: () => Routing.sailor('/schedules/favorites'),
-            ),
-            Spacer(),
-            LargeIconButton(
-              icon: Icons.rss_feed,
-              label: Text('Cancellations'),
-              action: () => Routing.sailor('/cancellations'),
-            ),
-            Spacer(),
-            LargeIconButton(
-              icon: Icons.settings,
-              label: Text('Settings'),
-              action: () => Routing.sailor('/settings'),
-            ),
-            Spacer(
-              flex: 10,
+                  LargeIconButton(
+                    icon: Icons.map,
+                    label: Text('Region Info'),
+                    action: () => Routing.sailor('/region'),
+                  ),
+                  LargeIconButton(
+                    icon: Icons.bookmark,
+                    label: Text('My Teams'),
+                    action: () => Routing.sailor('/schedules/favorites'),
+                  ),
+                  LargeIconButton(
+                    icon: Icons.rss_feed,
+                    label: Text('Cancellations'),
+                    action: () => Routing.sailor('/cancellations'),
+                  ),
+                  LargeIconButton(
+                    icon: Icons.settings,
+                    label: Text('Settings'),
+                    action: () => Routing.sailor('/settings'),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _navSchedules() {
+    GetIt.I.get<SettingsDAO>().getRegionNumber().then(
+          (value) => Routing.sailor(
+            '/schedules',
+            params: {'regionNum': value},
+          ),
+        );
   }
 }
