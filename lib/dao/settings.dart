@@ -98,6 +98,7 @@ class SettingsDataType {
   final String dataVersion;
 }
 
+/// Mixin for widget to automatically get reference to the Settings DAO
 mixin SettingsInjection<T extends StatefulWidget> on State<T> {
   /// Object to access settings
   final SettingsDAO settingsDAO = GetIt.I.get<SettingsDAO>();

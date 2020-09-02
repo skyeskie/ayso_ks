@@ -26,6 +26,7 @@ abstract class WeekCacheDAO {
   Future init(Iterable<DateTime> starts);
 }
 
+/// Mixin for widget to automatically get reference to the Week Cache
 mixin WeekCacheInjection<T extends StatefulWidget> on State<T> {
   /// Access for week cache
   final WeekCacheDAO weekCache = GetIt.I.get<WeekCacheDAO>();

@@ -43,6 +43,7 @@ abstract class TeamsDAO {
   Future add(Iterable<Team> teams);
 }
 
+/// Mixin for widget to automatically get reference to the Teams DAO
 mixin TeamsInjection<T extends StatefulWidget> on State<T> {
   /// Access for Team objects
   final TeamsDAO teamsDAO = GetIt.I.get<TeamsDAO>();

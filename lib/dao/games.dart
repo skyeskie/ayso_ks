@@ -51,6 +51,7 @@ abstract class GamesDAO {
   Future add(Iterable<Game> games);
 }
 
+/// Mixin for widget to automatically get reference to the Games DAO
 mixin GamesInjection<T extends StatefulWidget> on State<T> {
   /// Access for Game objects
   final GamesDAO gamesDAO = GetIt.I.get<GamesDAO>();

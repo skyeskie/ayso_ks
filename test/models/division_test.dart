@@ -72,16 +72,16 @@ void main() {
     final divisU10B =
         Division(gender: Gender.fromCode('B'), age: AgeGroup.fromCutoff(10));
     final divisU12G = Division.fromString('U12G');
-    final divisU5C = Division.fromString('U5C');
+    final divisU5C = Division.fromString('U8C');
 
     test('long display name', () {
-      expect(divisU5C.getDisplayName(), 'U5 Coed');
+      expect(divisU5C.getDisplayName(), 'U8 Coed');
       expect(divisU10B.getDisplayName(), 'U10 Boys');
       expect(divisU12G.getDisplayName(), 'U12 Girls');
     });
 
     test('short display name', () {
-      expect(divisU5C.shortDisplayName(), 'U5C');
+      expect(divisU5C.shortDisplayName(), 'U8C');
       expect(divisU10B.shortDisplayName(), 'U10B');
       expect(divisU12G.shortDisplayName(), 'U12G');
     });
