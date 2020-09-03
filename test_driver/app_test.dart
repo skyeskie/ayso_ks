@@ -2,12 +2,12 @@ import 'package:flutter_driver/flutter_driver.dart';
 import 'package:flutter_driver_helper/flutter_driver_helper.dart';
 import 'package:test/test.dart';
 
-import 'driver_actions.dart';
-import 'isolates_workaround.dart';
-import 'main_screens.dart';
-import 'region_screens.dart';
-import 'schedules_screens.dart';
-import 'screencam.dart';
+import 'screens/main_module.dart';
+import 'screens/region_module.dart';
+import 'screens/schedules_module.dart';
+import 'util/driver_actions.dart';
+import 'util/isolates_workaround.dart';
+import 'util/screencam.dart';
 
 void main() {
   group('AYSO App', () {
