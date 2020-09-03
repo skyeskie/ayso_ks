@@ -7,8 +7,8 @@ class Screencam implements Screenshoter {
   Screencam(
     this._driver,
     String baseScreensDir, {
-    this.enabled: true,
-    this.withIndices: true,
+    this.enabled = true,
+    this.withIndices = true,
   }) : _screensDir = '$baseScreensDir' {
     if (!enabled) return;
     Directory(_screensDir).createSync(recursive: true);
