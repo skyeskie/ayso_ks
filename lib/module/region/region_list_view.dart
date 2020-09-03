@@ -12,6 +12,7 @@ class RegionListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: ValueKey('RegionListView'),
       appBar: buildNavBar('Regions', context),
       body: ListView.builder(
         itemCount: regions.length,

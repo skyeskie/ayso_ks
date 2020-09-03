@@ -5,6 +5,7 @@ import 'package:test/test.dart';
 import 'driver_actions.dart';
 import 'isolates_workaround.dart';
 import 'main_screens.dart';
+import 'region_screens.dart';
 import 'schedules_screens.dart';
 import 'screencam.dart';
 
@@ -64,13 +65,48 @@ void main() {
         weekSchedulesScreen.prevWeek.tap(),
         CommonTestActions.findText(driver, 'Week #7'),
         screen.screenshot('Current week schedule'),
-        weekSchedulesScreen.home.tap(),
+      ]);
+    });
+
+    test('view game info', () async {
+      final homeScreen = HomeScreen(driver);
+      final gameScreen = GameDetailScreen(driver);
+
+      await runTestActions([
+        CommonTestActions.tapText(driver, '1702B vs 1706B'),
+        gameScreen.view.waitFor(),
+        screen.screenshot('Game detail'),
+        CommonTestActions.findText(driver, 'Oct 31, 12:15'),
+        CommonTestActions.findText(driver, 'Home Team'),
+        CommonTestActions.findText(driver, 'Away Team'),
+        gameScreen.home.tap(),
         homeScreen.view.waitFor(),
       ]);
     });
 
-    test('view game info', () async {}, skip: 'TODO');
-    test('view region info', () async {}, skip: 'TODO');
+    test('view region info', () async {
+      final homeScreen = HomeScreen(driver);
+      final regionListScreen = RegionListScreen(driver);
+      final streetMapScreen = StreetMapScreen(driver);
+      final fieldMapScreen = FieldScreen(driver);
+
+      await runTestActions([
+        homeScreen.region.tap(),
+        regionListScreen.view.waitFor(),
+        screen.screenshot('Region list'),
+        regionListScreen.roadMap(105).tap(),
+        streetMapScreen.view.waitFor(),
+        CommonTestActions.findText(driver, 'Region 105'),
+        streetMapScreen.pageBack.tap(),
+        regionListScreen.view.waitFor(),
+        regionListScreen.fieldMap(253).tap(),
+        fieldMapScreen.view.waitFor(),
+        CommonTestActions.findText(driver, 'Region 253 Fields'),
+        fieldMapScreen.home.tap(),
+        homeScreen.view.waitFor(),
+      ]);
+    });
+
     test('set favorite teams and view favorites', () async {}, skip: 'TODO');
     test('search for games', () async {}, skip: 'TODO');
 

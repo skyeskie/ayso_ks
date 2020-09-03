@@ -67,6 +67,7 @@ class _GameDetailViewState extends State<GameDetailView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: ValueKey('GameDetailView'),
       appBar: buildNavBar('Game Info', context),
       body: FutureBuilder(
         future: _ready.future,

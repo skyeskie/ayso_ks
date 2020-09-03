@@ -19,6 +19,7 @@ class FieldView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: ValueKey('FieldView'),
       appBar: buildNavBar('Region $regionNum Fields', context),
       body: PhotoView.customChild(
         child: SvgPicture.asset(

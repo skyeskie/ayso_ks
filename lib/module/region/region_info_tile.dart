@@ -39,6 +39,7 @@ class RegionInfoTile extends StatelessWidget {
               children: [
                 SizedBox(height: 5),
                 LargeIconButton(
+                  key: ValueKey('navRegion${region.number}-RoadMap'),
                   action: () => Routing.sailor(
                     '/region/map',
                     params: {'regionNum': region.number},
@@ -48,6 +49,7 @@ class RegionInfoTile extends StatelessWidget {
                 ),
                 SizedBox(height: 3),
                 LargeIconButton(
+                  key: ValueKey('navRegion${region.number}-FieldMap'),
                   action: () => Routing.sailor(
                     '/region/field',
                     params: {'regionNum': region.number},

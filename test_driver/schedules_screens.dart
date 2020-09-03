@@ -24,3 +24,13 @@ class WeekScheduleScreen extends BaseScreen {
   DWidget get prevWeek => dWidget('navPrevWeek');
   DWidget get nextWeek => dWidget('navNextWeek');
 }
+
+class GameDetailScreen extends BaseScreen {
+  GameDetailScreen(FlutterDriver driver) : super(driver);
+
+  DWidget get view => dWidget('GameDetailView');
+  DWidget get home => dWidget('navHome');
+
+  DWidget get roadMap => dWidget('navRoadMap');
+  DWidget get fieldMap => dWidget('navFieldMap');
+}

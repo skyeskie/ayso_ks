@@ -9,4 +9,11 @@ extension CommonTestActions on TestAction {
         },
         name: 'check for text "$text"',
       );
+
+  static TestAction tapText(FlutterDriver driver, String text) => TestAction(
+        () async {
+          await driver.tap(find.text(text));
+        },
+        name: 'tapping text "$text"',
+      );
 }

@@ -18,6 +18,7 @@ class StreetMapView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: ValueKey('StreetMapView'),
       appBar: buildNavBar('Region $regionNum', context),
       body: PhotoView(
         imageProvider: AssetImage(_region.streetMap),
