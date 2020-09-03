@@ -34,6 +34,7 @@ class _SettingsViewState extends State<SettingsView> with SettingsInjection {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: ValueKey('SettingsView'),
       appBar: buildNavBar('Settings', context),
       body: _settings == null
           ? _buildLoading(context)
@@ -72,6 +73,7 @@ class _SettingsViewState extends State<SettingsView> with SettingsInjection {
               .map((r) => FormBuilderFieldOption(
                     value: r.number,
                     child: Text('Region ${r.number} (${r.name})'),
+                    key: ValueKey('regionRadio_${r.number}'),
                   ))
               .toList(growable: false),
         ),

@@ -16,6 +16,7 @@ class SchedulesMenuView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
+      key: ValueKey('SchedulesMenu'),
       appBar: buildNavBar('Region $regionNumber', context),
       body: Container(
         constraints: BoxConstraints.expand(),
@@ -32,6 +33,7 @@ class SchedulesMenuView extends StatelessWidget {
             ),
             Spacer(flex: 5),
             Row(
+              key: ValueKey('headerRegionSchedules'),
               crossAxisAlignment: CrossAxisAlignment.baseline,
               textBaseline: TextBaseline.alphabetic,
               mainAxisSize: MainAxisSize.min,
@@ -53,24 +55,28 @@ class SchedulesMenuView extends StatelessWidget {
             ),
             Spacer(flex: 5),
             LargeIconButton(
+              key: ValueKey('navCurWeek'),
               icon: Icons.schedule,
               label: Text('This Week'),
               action: () => Routing.sailor('/schedules/week_current'),
             ),
             Spacer(flex: 2),
             LargeIconButton(
+              key: ValueKey('navTeamSelect'),
               icon: Icons.search,
               label: Text('Find Team'),
               action: () => Routing.sailor('/search/teams'),
             ),
             Spacer(flex: 2),
             LargeIconButton(
+              key: ValueKey('navSearch'),
               icon: Icons.search,
               label: Text('Advanced Search'),
               action: () => Routing.sailor('/search'),
             ),
             Spacer(flex: 2),
             LargeIconButton(
+              key: ValueKey('nameRoadMap'),
               icon: Icons.directions,
               label: Text('Directions'),
               action: () => Routing.sailor(
@@ -80,6 +86,7 @@ class SchedulesMenuView extends StatelessWidget {
             ),
             Spacer(flex: 2),
             LargeIconButton(
+              key: ValueKey('navFieldMap'),
               icon: Icons.map,
               label: Text('Field Map'),
               action: () => Routing.sailor(

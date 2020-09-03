@@ -12,6 +12,7 @@ AppBar buildNavBar(String title, BuildContext context) {
     centerTitle: true,
     actions: [
       IconButton(
+        key: ValueKey('navHome'),
         icon: const Icon(Icons.home),
         onPressed: () => Routing.sailor(
           '/',

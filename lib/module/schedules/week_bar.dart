@@ -30,6 +30,7 @@ class WeekBar extends StatelessWidget {
         dense: true,
         leading: (week > 1)
             ? IconButton(
+                key: ValueKey('navPrevWeek'),
                 icon: Icon(Icons.arrow_back),
                 onPressed: () => navigate(week - 1),
               )
@@ -42,6 +43,7 @@ class WeekBar extends StatelessWidget {
         ),
         trailing: (week < maxWeeks)
             ? IconButton(
+                key: ValueKey('navNextWeek'),
                 icon: Icon(Icons.arrow_forward),
                 onPressed: () => navigate(week + 1),
               )

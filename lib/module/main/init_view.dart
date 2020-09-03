@@ -146,6 +146,7 @@ class _InitViewState extends State<InitView> {
             subtitle: Text('One-time setup'),
           ),
           FormBuilderDropdown(
+            key: ValueKey('regionDropdown'),
             attribute: 'region',
             onChanged: _setRegionNum,
             decoration: InputDecoration(
@@ -154,15 +155,21 @@ class _InitViewState extends State<InitView> {
                   'Used to filter to a single region most places in the app',
             ),
             items: Region.REGIONS
-                .map((r) => DropdownMenuItem<int>(
-                      value: r.number,
-                      child: Text('Region ${r.number} (${r.name})'),
-                    ))
+                .map(
+                  (r) => DropdownMenuItem<int>(
+                    value: r.number,
+                    child: Text(
+                      'Region ${r.number} (${r.name})',
+                      key: ValueKey('regionDropdown_${r.number}'),
+                    ),
+                  ),
+                )
                 .toList(growable: false),
           ),
           GFButtonBar(
             children: [
               GFButton(
+                key: ValueKey('finishSubmit'),
                 onPressed: _finishDisabled ? null : _resumeNavigation,
                 child: Text('Finish'),
                 disabledColor: Colors.grey[300],

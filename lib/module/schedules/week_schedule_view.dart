@@ -43,6 +43,7 @@ class _WeekScheduleViewState extends State<WeekScheduleView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: ValueKey('WeekScheduleView'),
       appBar: buildNavBar('Region ${regionNum ?? ""} Schedule', context),
       body: Column(
         children: [

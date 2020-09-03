@@ -7,10 +7,11 @@ import 'package:flutter/material.dart';
 class LargeIconButton extends StatelessWidget {
   /// Create a button with [icon] and [label] with [action] callback on press
   const LargeIconButton({
+    Key key,
     @required this.icon,
     @required this.label,
     @required this.action,
-  });
+  }) : super(key: key);
 
   /// Icon to show - shortcut as [IconData] type
   ///
