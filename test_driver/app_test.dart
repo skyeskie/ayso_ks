@@ -19,7 +19,7 @@ void main() {
     setUpAll(() async {
       driver = await FlutterDriver.connect();
       isoWork = IsolatesWorkaround(driver);
-      screen = Screencam(driver, './build/screenshots', enabled: false);
+      screen = Screencam(driver, './build/screenshots');
       await isoWork.resumeIsolates();
     });
 
@@ -98,11 +98,13 @@ void main() {
         regionListScreen.roadMap(105).tap(),
         streetMapScreen.view.waitFor(),
         CommonTestActions.findText(driver, 'Region 105'),
+        screen.screenshot('Road map'),
         streetMapScreen.pageBack.tap(),
         regionListScreen.view.waitFor(),
         regionListScreen.fieldMap(253).tap(),
         fieldMapScreen.view.waitFor(),
         CommonTestActions.findText(driver, 'Region 253 Fields'),
+        screen.screenshot('Field map'),
         fieldMapScreen.home.tap(),
         homeScreen.view.waitFor(),
       ]);
@@ -118,6 +120,7 @@ void main() {
         homeScreen.myTeams.tap(),
         favoritesScreen.view.waitFor(),
         favoritesScreen.findTeam.waitFor(),
+        screen.screenshot('Favorites empty'),
         favoritesScreen.findTeam.tap(),
         teamSelectScreen.view.waitFor(),
         teamSelectScreen.regionOption(105).tap(),
@@ -129,6 +132,7 @@ void main() {
         teamSelectScreen.resultTeam('252B').waitFor(),
         teamSelectScreen.resultTeam('252B').tap(),
         teamScheduleScreen.view.waitFor(),
+        screen.screenshot('Team schedule'),
         CommonTestActions.findText(driver, 'Team 252B'),
         CommonTestActions.findText(driver, 'Favorite'),
         teamScheduleScreen.favoriteToggle.tap(),
@@ -172,6 +176,7 @@ void main() {
         favoritesScreen.view.waitFor(),
         favoritesScreen.findTeam.waitForAbsent(),
         favoritesScreen.favoriteTeam('252B').waitFor(),
+        screen.screenshot('Favorites schedule'),
         CommonTestActions.findText(driver, '1603G vs 1601G'),
         favoritesScreen.pageBack.tap(),
         homeScreen.view.waitFor(),
@@ -192,6 +197,7 @@ void main() {
         searchScreen.regionDropdown.tap(),
         searchScreen.regionOption(105).tap(),
         searchScreen.ageDropdown.tap(),
+        screen.screenshot('Advanced search'),
         searchScreen.ageOption(8).tap(),
         searchScreen.submit.tap(),
         searchResultsScreen.view.waitFor(),
@@ -200,6 +206,7 @@ void main() {
         CommonTestActions.findText(driver, '261B vs 565B'),
         searchResultsScreen.nextWeek.tap(),
         searchResultsScreen.prevWeek.waitFor(),
+        screen.screenshot('Search results'),
         CommonTestActions.findText(driver, '261B vs 262B'),
         searchResultsScreen.pageBack.tap(),
         searchScreen.view.waitFor(),
