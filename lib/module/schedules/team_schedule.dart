@@ -61,6 +61,7 @@ class _TeamScheduleState extends State<TeamScheduleView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: ValueKey('TeamScheduleView'),
       appBar: buildNavBar('Team Schedule', context),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10),
@@ -104,14 +105,15 @@ class _TeamScheduleState extends State<TeamScheduleView>
           buttonBar: GFButtonBar(
             children: [
               OutlineButton.icon(
+                key: ValueKey('favoriteToggle'),
                 icon: Icon(_favorite ? Icons.star : Icons.star_border),
                 label: Text(_favorite ? 'UnFavorite' : 'Favorite'),
                 onPressed: updateFavorite,
               ),
               OutlineButton.icon(
-                onPressed: _launchCall,
+                onPressed: _team.coachTel != null ? _launchCall : null,
                 icon: Icon(Icons.call),
-                label: Text(_team?.coachTel ?? ''),
+                label: Text('Call coach'),
               ),
             ],
           ),

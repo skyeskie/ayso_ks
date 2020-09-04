@@ -35,14 +35,14 @@ class Division {
   ///
   /// String example: 'U5B', combining AgeGroup ID (not cutoff) and
   /// one character for gender
-  Division.fromIdString(String display) {
+  Division.fromIdString(String display, {failWithNull = false}) {
     final matches = _fromString.firstMatch(display);
     if (matches == null) {
       throw ArgumentError('Invalid format for division code: "$display"');
     }
     age = AgeGroup.fromId(int.parse(matches.group(1)));
     gender = Gender.fromCode(matches.group(2));
-    if (age == null || gender == null) {
+    if ((age == null || gender == null) && !failWithNull) {
       throw ArgumentError('Unrecognized division: "$display"');
     }
   }

@@ -38,6 +38,7 @@ class JsonModel {
         startTime: DateTime.parse('${game['Jour']} ${game['Heur']}'),
         region: fieldParts.item1,
         field: fieldParts.item2,
+        division: Division.fromIdString(game['Divis'], failWithNull: true),
       ));
     }
   }

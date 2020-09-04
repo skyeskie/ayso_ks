@@ -33,6 +33,7 @@ class _FavoritesListViewState extends State<FavoritesListView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: ValueKey('FavoritesListView'),
       appBar: buildNavBar('My Teams', context),
       body: FutureBuilder(
         future: loaded,
@@ -52,6 +53,7 @@ class _FavoritesListViewState extends State<FavoritesListView>
                   Divider(),
                   Text('Add some teams as favorites:'),
                   RaisedButton.icon(
+                    key: ValueKey('navFindTeam'),
                     icon: Icon(Icons.person_search),
                     label: Text('Find Team'),
                     onPressed: () => Routing.sailor('/search/teams'),
@@ -91,6 +93,7 @@ class _FavoritesListViewState extends State<FavoritesListView>
             final team = myTeams.elementAt(index);
             return GridTile(
               child: OutlineButton(
+                key: ValueKey('navTeam_$team'),
                 child: Text('Team $team'),
                 onPressed: () => Routing.sailor(
                   '/schedules/team',

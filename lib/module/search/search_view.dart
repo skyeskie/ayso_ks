@@ -36,6 +36,7 @@ class _SearchViewState extends State<SearchView> with WeekCacheInjection {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: ValueKey('SearchView'),
       appBar: buildNavBar('Search Games', context),
       body: FormBuilder(
         key: _fb,
@@ -62,12 +63,16 @@ class _SearchViewState extends State<SearchView> with WeekCacheInjection {
                 ),
                 Spacer(),
                 FormBuilderDropdown(
+                  key: ValueKey('regionDropdown'),
                   attribute: 'regionNum',
                   decoration: InputDecoration(labelText: 'Region'),
                   items: Region.REGIONS
                       .map((r) => DropdownMenuItem<int>(
                             value: r.number,
-                            child: Text('${r.number} - ${r.name}'),
+                            child: Text(
+                              '${r.number} - ${r.name}',
+                              key: ValueKey('regionDropdown_${r.number}'),
+                            ),
                           ))
                       .toList(growable: false),
                 ),
@@ -81,12 +86,16 @@ class _SearchViewState extends State<SearchView> with WeekCacheInjection {
                   children: [
                     Expanded(
                       child: FormBuilderDropdown(
+                        key: ValueKey('ageDropdown'),
                         attribute: 'age',
                         decoration: InputDecoration(labelText: 'Age'),
                         items: AgeGroup.AGES
                             .map((ag) => DropdownMenuItem<String>(
                                   value: ag.toString(),
-                                  child: Text(ag.toString()),
+                                  child: Text(
+                                    ag.toString(),
+                                    key: ValueKey('ageDropdown_${ag.cutoff}'),
+                                  ),
                                 ))
                             .toList(growable: false),
                       ),
@@ -94,12 +103,16 @@ class _SearchViewState extends State<SearchView> with WeekCacheInjection {
                     SizedBox(width: 30),
                     Expanded(
                       child: FormBuilderDropdown(
+                        key: ValueKey('genderDropdown'),
                         attribute: 'gender',
                         decoration: InputDecoration(labelText: 'Gender'),
                         items: Gender.GENDERS
                             .map((g) => DropdownMenuItem<String>(
                                   value: g.long,
-                                  child: Text(g.long),
+                                  child: Text(
+                                    g.long,
+                                    key: ValueKey('genderDropdown_${g.short}'),
+                                  ),
                                 ))
                             .toList(growable: false),
                       ),
@@ -109,6 +122,7 @@ class _SearchViewState extends State<SearchView> with WeekCacheInjection {
                 Spacer(),
                 Align(
                   child: RaisedButton.icon(
+                    key: ValueKey('formSubmit'),
                     onPressed: submitForm,
                     icon: Icon(Icons.search),
                     label: Text('Go'),

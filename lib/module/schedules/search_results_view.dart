@@ -60,6 +60,7 @@ class _SearchResultsViewState extends State<SearchResultsView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: ValueKey('SearchResultsView'),
       appBar: buildNavBar('Search Results', context),
       body: Column(
         children: [

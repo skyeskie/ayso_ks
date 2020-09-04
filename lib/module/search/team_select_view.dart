@@ -45,6 +45,7 @@ class _TeamSelectViewState extends State<TeamSelectView> with TeamsInjection {
   Widget buildTeamTile(Team t) {
     return GridTile(
       child: RaisedButton(
+        key: ValueKey('teamResult_${t.code}'),
         onPressed: () => Routing.sailor(
           '/schedules/team',
           params: {'id': t.code},
@@ -57,6 +58,7 @@ class _TeamSelectViewState extends State<TeamSelectView> with TeamsInjection {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: ValueKey('TeamSelectView'),
       appBar: buildNavBar('Select Team', context),
       body: FormBuilder(
         key: _fb,
@@ -83,7 +85,10 @@ class _TeamSelectViewState extends State<TeamSelectView> with TeamsInjection {
                     .map(
                       (r) => FormBuilderFieldOption(
                         value: r.number,
-                        child: Text('${r.number}'),
+                        child: Text(
+                          '${r.number}',
+                          key: ValueKey('regionChip_${r.number}'),
+                        ),
                       ),
                     )
                     .toList(growable: false),
@@ -106,7 +111,10 @@ class _TeamSelectViewState extends State<TeamSelectView> with TeamsInjection {
                     .map(
                       (ag) => FormBuilderFieldOption(
                         value: ag.toString(),
-                        child: Text(ag.toString()),
+                        child: Text(
+                          ag.toString(),
+                          key: ValueKey('ageChip_${ag.cutoff}'),
+                        ),
                       ),
                     )
                     .toList(growable: false),
@@ -120,11 +128,13 @@ class _TeamSelectViewState extends State<TeamSelectView> with TeamsInjection {
                   isDense: true,
                 ),
                 options: Gender.GENDERS
-                    .map((g) => g.long)
                     .map(
                       (g) => FormBuilderFieldOption(
-                        value: g,
-                        child: Text(g),
+                        value: g.long,
+                        child: Text(
+                          g.long,
+                          key: ValueKey('genderChip_${g.short}'),
+                        ),
                       ),
                     )
                     .toList(growable: false),
@@ -149,6 +159,7 @@ class _TeamSelectViewState extends State<TeamSelectView> with TeamsInjection {
                   }
                   return Expanded(
                     child: GridView(
+                      key: ValueKey('scrollResultTeams'),
                       shrinkWrap: true,
                       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                         maxCrossAxisExtent: 150,

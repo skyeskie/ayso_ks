@@ -5,6 +5,7 @@ import 'package:test/test.dart';
 import 'screens/main_module.dart';
 import 'screens/region_module.dart';
 import 'screens/schedules_module.dart';
+import 'screens/search_module.dart';
 import 'util/driver_actions.dart';
 import 'util/isolates_workaround.dart';
 import 'util/screencam.dart';
@@ -107,8 +108,101 @@ void main() {
       ]);
     });
 
-    test('set favorite teams and view favorites', () async {}, skip: 'TODO');
-    test('search for games', () async {}, skip: 'TODO');
+    test('set favorite team from blank favorites', () async {
+      final homeScreen = HomeScreen(driver);
+      final favoritesScreen = FavoritesListScreen(driver);
+      final teamSelectScreen = TeamSelectScreen(driver);
+      final teamScheduleScreen = TeamScheduleScreen(driver);
+
+      await runTestActions([
+        homeScreen.myTeams.tap(),
+        favoritesScreen.view.waitFor(),
+        favoritesScreen.findTeam.waitFor(),
+        favoritesScreen.findTeam.tap(),
+        teamSelectScreen.view.waitFor(),
+        teamSelectScreen.regionOption(105).tap(),
+        teamSelectScreen.resultTeam('1701B').waitForAbsent(),
+        teamSelectScreen.ageGroupOption(10).tap(),
+        teamSelectScreen.resultTeam('241B').waitForAbsent(),
+        teamSelectScreen.genderOption('B').tap(),
+        teamSelectScreen.resultTeam('251G').waitForAbsent(),
+        teamSelectScreen.resultTeam('252B').waitFor(),
+        teamSelectScreen.resultTeam('252B').tap(),
+        teamScheduleScreen.view.waitFor(),
+        CommonTestActions.findText(driver, 'Team 252B'),
+        CommonTestActions.findText(driver, 'Favorite'),
+        teamScheduleScreen.favoriteToggle.tap(),
+        CommonTestActions.findText(driver, 'UnFavorite'),
+        //TODO: Verify present on POP
+        teamScheduleScreen.home.tap(),
+        homeScreen.view.waitFor(),
+      ]);
+    });
+
+    test('set favorite team from search', () async {
+      final homeScreen = HomeScreen(driver);
+      final teamSelectScreen = TeamSelectScreen(driver);
+      final teamScheduleScreen = TeamScheduleScreen(driver);
+      final schedulesMenuScreen = SchedulesMenuScreen(driver);
+
+      await runTestActions([
+        homeScreen.schedules.tap(),
+        schedulesMenuScreen.view.waitFor(),
+        schedulesMenuScreen.teamSelect.tap(),
+        teamSelectScreen.view.waitFor(),
+        teamSelectScreen.resultTeam('1601G').scrollUntilVisible(dyScroll: -150),
+        teamSelectScreen.resultTeam('1601G').tap(),
+        teamScheduleScreen.view.waitFor(),
+        teamScheduleScreen.favoriteToggle.tap(),
+        teamScheduleScreen.home.tap(),
+        homeScreen.view.waitFor(),
+      ]);
+    });
+
+    test('view favorite teams', () async {
+      final homeScreen = HomeScreen(driver);
+      final favoritesScreen = FavoritesListScreen(driver);
+
+      await runTestActions([
+        homeScreen.myTeams.tap(),
+        favoritesScreen.view.waitFor(),
+        favoritesScreen.findTeam.waitForAbsent(),
+        favoritesScreen.favoriteTeam('252B').waitFor(),
+        CommonTestActions.findText(driver, '1603G vs 1601G'),
+        favoritesScreen.pageBack.tap(),
+        homeScreen.view.waitFor(),
+      ]);
+    });
+
+    test('search for games', () async {
+      final homeScreen = HomeScreen(driver);
+      final schedulesMenuScreen = SchedulesMenuScreen(driver);
+      final searchScreen = SearchScreen(driver);
+      final searchResultsScreen = SearchResultsScreen(driver);
+
+      await runTestActions([
+        homeScreen.schedules.tap(),
+        schedulesMenuScreen.view.waitFor(),
+        schedulesMenuScreen.search.tap(),
+        searchScreen.view.waitFor(),
+        searchScreen.regionDropdown.tap(),
+        searchScreen.regionOption(105).tap(),
+        searchScreen.ageDropdown.tap(),
+        searchScreen.ageOption(8).tap(),
+        searchScreen.submit.tap(),
+        searchResultsScreen.view.waitFor(),
+        CommonTestActions.findText(driver, 'Region 105'),
+        CommonTestActions.findText(driver, 'Age U8'),
+        CommonTestActions.findText(driver, '261B vs 565B'),
+        searchResultsScreen.nextWeek.tap(),
+        searchResultsScreen.prevWeek.waitFor(),
+        CommonTestActions.findText(driver, '261B vs 262B'),
+        searchResultsScreen.pageBack.tap(),
+        searchScreen.view.waitFor(),
+        searchScreen.home.tap(),
+        homeScreen.view.waitFor(),
+      ]);
+    });
 
     test('change region and verify', () async {
       final homeScreen = HomeScreen(driver);
@@ -129,8 +223,28 @@ void main() {
         homeScreen.view.waitFor(),
       ]);
     });
-  });
-  test('remove team from favorites', () async {}, skip: 'TODO');
 
-  test('reset app - delete favorites', () async {}, skip: 'TODO');
+    test('remove team from favorites', () async {
+      final homeScreen = HomeScreen(driver);
+      final favoritesScreen = FavoritesListScreen(driver);
+      final teamScheduleScreen = TeamScheduleScreen(driver);
+
+      await runTestActions([
+        homeScreen.myTeams.tap(),
+        favoritesScreen.view.waitFor(),
+        favoritesScreen.findTeam.waitForAbsent(),
+        favoritesScreen.favoriteTeam('252B').tap(),
+        teamScheduleScreen.view.waitFor(),
+        teamScheduleScreen.favoriteToggle.tap(),
+        teamScheduleScreen.pageBack.tap(),
+        favoritesScreen.view.waitFor(),
+        favoritesScreen.findTeam.waitForAbsent(),
+        favoritesScreen.favoriteTeam('252B').waitForAbsent(),
+        favoritesScreen.pageBack.tap(),
+        homeScreen.view.waitFor(),
+      ]);
+    }, skip: 'TODO: Does not refresh on page back!');
+
+    test('reset app - delete favorites', () async {}, skip: 'TODO');
+  });
 }
