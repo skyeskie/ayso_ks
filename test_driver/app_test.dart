@@ -19,7 +19,7 @@ void main() {
     setUpAll(() async {
       driver = await FlutterDriver.connect();
       isoWork = IsolatesWorkaround(driver);
-      screen = Screencam(driver, './build/screenshots');
+      screen = Screencam(driver, './build/screenshots', enabled: false);
       await isoWork.resumeIsolates();
     });
 
@@ -133,8 +133,12 @@ void main() {
         CommonTestActions.findText(driver, 'Favorite'),
         teamScheduleScreen.favoriteToggle.tap(),
         CommonTestActions.findText(driver, 'UnFavorite'),
-        //TODO: Verify present on POP
-        teamScheduleScreen.home.tap(),
+        teamScheduleScreen.pageBack.tap(),
+        teamSelectScreen.view.waitFor(),
+        teamSelectScreen.pageBack.tap(),
+        favoritesScreen.view.waitFor(),
+        favoritesScreen.findTeam.waitForAbsent(),
+        favoritesScreen.pageBack.tap(),
         homeScreen.view.waitFor(),
       ]);
     });
@@ -243,7 +247,7 @@ void main() {
         favoritesScreen.pageBack.tap(),
         homeScreen.view.waitFor(),
       ]);
-    }, skip: 'TODO: Does not refresh on page back!');
+    });
 
     test('reset app - delete favorites', () async {}, skip: 'TODO');
   });

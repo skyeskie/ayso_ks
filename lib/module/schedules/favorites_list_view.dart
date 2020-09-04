@@ -30,6 +30,24 @@ class _FavoritesListViewState extends State<FavoritesListView>
     super.initState();
   }
 
+  Future _rebuildIfNecessary() async {
+    final teamIds = await settingsDAO.getSavedTeamIDs();
+    if (!_iterablesEqual(teamIds, myTeams)) {
+      myTeams = teamIds.toList(growable: false);
+      return gamesDAO.findForTeams(myTeams).then(
+            (itr) => setState(() {
+              myGames = itr.toList(growable: false);
+            }),
+          );
+    }
+  }
+
+  bool _iterablesEqual(Iterable a, Iterable b) {
+    final itr = b.iterator;
+    return a.every((e) => itr.moveNext() && e == itr.current) &&
+        !itr.moveNext();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +74,10 @@ class _FavoritesListViewState extends State<FavoritesListView>
                     key: ValueKey('navFindTeam'),
                     icon: Icon(Icons.person_search),
                     label: Text('Find Team'),
-                    onPressed: () => Routing.sailor('/search/teams'),
+                    onPressed: () async {
+                      await Routing.sailor('/search/teams');
+                      _rebuildIfNecessary();
+                    },
                   ),
                   Text('Click a team to view team page'),
                   Text('Click the star button in the top right'),
@@ -95,10 +116,13 @@ class _FavoritesListViewState extends State<FavoritesListView>
               child: OutlineButton(
                 key: ValueKey('navTeam_$team'),
                 child: Text('Team $team'),
-                onPressed: () => Routing.sailor(
-                  '/schedules/team',
-                  params: {'id': team},
-                ),
+                onPressed: () async {
+                  await Routing.sailor(
+                    '/schedules/team',
+                    params: {'id': team},
+                  );
+                  _rebuildIfNecessary();
+                },
               ),
             );
           },
