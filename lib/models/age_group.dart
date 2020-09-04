@@ -1,5 +1,7 @@
 import 'package:meta/meta.dart';
 
+import '../data_config.dart';
+
 /// Class describing an age grouping
 class AgeGroup {
   /// Constant constructor.
@@ -34,22 +36,13 @@ class AgeGroup {
   //TODO: Make Enum-like
   //https://dart-lang.github.io/linter/lints/exhaustive_cases.html
   /// Enumeration of all age groups used in app
-  static const Set<AgeGroup> AGES = {
-    AgeGroup(code: 1, cutoff: 19),
-    AgeGroup(code: 2, cutoff: 16),
-    AgeGroup(code: 3, cutoff: 14),
-    AgeGroup(code: 4, cutoff: 12),
-    AgeGroup(code: 5, cutoff: 10),
-    AgeGroup(code: 6, cutoff: 8),
-    AgeGroup(code: 7, cutoff: 6),
-    //AgeGroup(code: 8, cutoff: 5),
-  };
-
-  @override
+  // ignore: non_constant_identifier_names
+  static Set<AgeGroup> get AGES => DataConfig.ages;
 
   /// Show a displayable string
   ///
   /// String is like U10, meaning under-10
+  @override
   String toString() {
     return 'U$cutoff';
   }

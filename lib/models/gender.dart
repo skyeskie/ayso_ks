@@ -1,5 +1,7 @@
 import 'package:meta/meta.dart';
 
+import '../data_config.dart';
+
 /// Class describing a gender
 ///
 /// This is used for classification of teams
@@ -22,11 +24,7 @@ class Gender {
 
   /// Enumeration of all gender classifications used in app
   // ignore: non_constant_identifier_names
-  static const Set<Gender> GENDERS = {
-    Gender(short: 'B', long: 'Boys'),
-    Gender(short: 'G', long: 'Girls'),
-    Gender(short: 'C', long: 'Coed'),
-  };
+  static Set<Gender> get GENDERS => DataConfig.genders;
 
   /// Single-character representation of gender
   final String short;
