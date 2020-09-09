@@ -45,3 +45,8 @@ app.*.map.json
 
 coverage
 reports
+/.env
+
+# Use .gen.dart for compile-only
+# Use .g.dart for generated files to add to Git
+*_gen.dart

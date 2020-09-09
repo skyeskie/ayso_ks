@@ -1,0 +1,11 @@
+environment_config:
+  path: environment_config_gen.dart
+  fields:
+    TWITTER_API_KEY:
+      env_var: TWITTER_API_KEY
+    TWITTER_API_SECRET:
+      env_var: TWITTER_API_SECRET
+    TWITTER_ACCESS_TOKEN:
+      env_var: TWITTER_ACCESS_TOKEN
+    TWITTER_ACCESS_SECRET:
+      env_var: TWITTER_ACCESS_SECRET

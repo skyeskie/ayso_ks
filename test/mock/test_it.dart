@@ -13,6 +13,7 @@ import 'package:ayso_ks/service/backend_static.dart';
 import 'package:get_it/get_it.dart';
 
 import 'sailor_mock.dart';
+import 'twitter_mock.dart';
 
 // ignore: avoid_classes_with_only_static_members
 class TestIt {
@@ -76,4 +77,6 @@ class TestIt {
     fakeNav?.clear();
     I.reset();
   }
+
+  static void registerTwitter() => MockTwitterApi.register();
 }

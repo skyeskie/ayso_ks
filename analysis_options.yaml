@@ -5,6 +5,9 @@ analyzer:
     # Actually prefer ALL_CAPS
     constant_identifier_names: ignore
 
+  exclude:
+    - lib/*_gen.dart
+
 linter:
   rules:
     # Flutter rules not in [effective_dart]
