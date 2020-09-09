@@ -32,7 +32,6 @@ class _SearchViewState extends State<SearchView> with WeekCacheInjection {
     }
   }
 
-//TODO: Add cancel selection buttons
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,6 +65,7 @@ class _SearchViewState extends State<SearchView> with WeekCacheInjection {
                   key: ValueKey('regionDropdown'),
                   attribute: 'regionNum',
                   decoration: InputDecoration(labelText: 'Region'),
+                  allowClear: true,
                   items: Region.REGIONS
                       .map((r) => DropdownMenuItem<int>(
                             value: r.number,
@@ -89,6 +89,7 @@ class _SearchViewState extends State<SearchView> with WeekCacheInjection {
                         key: ValueKey('ageDropdown'),
                         attribute: 'age',
                         decoration: InputDecoration(labelText: 'Age'),
+                        allowClear: true,
                         items: AgeGroup.AGES
                             .map((ag) => DropdownMenuItem<String>(
                                   value: ag.toString(),
@@ -106,6 +107,7 @@ class _SearchViewState extends State<SearchView> with WeekCacheInjection {
                         key: ValueKey('genderDropdown'),
                         attribute: 'gender',
                         decoration: InputDecoration(labelText: 'Gender'),
+                        allowClear: true,
                         items: Gender.GENDERS
                             .map((g) => DropdownMenuItem<String>(
                                   value: g.long,
