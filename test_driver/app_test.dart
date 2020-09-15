@@ -19,7 +19,8 @@ void main() {
     setUpAll(() async {
       driver = await FlutterDriver.connect();
       isoWork = IsolatesWorkaround(driver);
-      screen = Screencam(driver, './build/screenshots');
+      //Put in options for screenshots
+      screen = Screencam(driver, './build/screenshots', enabled: false);
       await isoWork.resumeIsolates();
     });
 
@@ -231,6 +232,28 @@ void main() {
         scheduleMenuScreen.view.waitFor(),
         CommonTestActions.findText(driver, 'Region 208'),
         scheduleMenuScreen.pageBack.tap(),
+        homeScreen.view.waitFor(),
+      ]);
+    });
+
+    test('View cancellations', () async {
+      final homeScreen = HomeScreen(driver);
+      final cancelScreen = CancellationsScreen(driver);
+
+      const lastTweetCreated = '07:01 • 04.22.2017';
+      // 'All games at AYSO Region 49 for April 22 have been '
+      // 'cancelled because of wet fields.';
+
+      await runTestActions([
+        homeScreen.cancellations.tap(),
+        cancelScreen.view.waitFor(),
+        CommonTestActions.scrollForText(
+          driver,
+          cancelScreen.timeline,
+          lastTweetCreated,
+          amount: 500,
+        ),
+        cancelScreen.home.tap(),
         homeScreen.view.waitFor(),
       ]);
     });

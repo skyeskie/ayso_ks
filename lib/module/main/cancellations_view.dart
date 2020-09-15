@@ -39,13 +39,13 @@ class _CancellationsViewState extends State<CancellationsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: ValueKey('CancellationsView'),
       appBar: buildNavBar('Cancellations', context),
       body: FutureBuilder(
         future: tweets.future,
         builder: (context, snapshot) {
           if (snapshot.hasError) {
-            //TODO
-            return Text(snapshot.error);
+            return Text(snapshot.error.toString());
           }
 
           if (!snapshot.hasData) {
@@ -53,11 +53,14 @@ class _CancellationsViewState extends State<CancellationsView> {
           }
 
           return ListView.builder(
+            key: ValueKey('TwitterTimeline'),
             itemCount: snapshot.data.length,
             itemBuilder: (context, index) {
               final tweet = snapshot.data.elementAt(index);
-              print(jsonEncode(tweet).length);
-              return EmbeddedTweetView.fromTweet(Tweet.fromJson(tweet));
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                child: EmbeddedTweetView.fromTweet(Tweet.fromJson(tweet)),
+              );
             },
           );
         },

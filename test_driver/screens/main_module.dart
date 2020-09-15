@@ -1,3 +1,4 @@
+import 'package:flutter_driver/flutter_driver.dart';
 import 'package:flutter_driver/src/driver/driver.dart';
 import 'package:flutter_driver_helper/flutter_driver_helper.dart';
 
@@ -27,4 +28,13 @@ class SettingsScreen extends BaseScreen {
   DWidget get view => dWidget('SettingsView');
   DWidget get home => dWidget('navHome');
   DWidget formRegionValue(int region) => dWidget('regionRadio_$region');
+}
+
+class CancellationsScreen extends BaseScreen {
+  CancellationsScreen(FlutterDriver driver) : super(driver);
+
+  DWidget get view => dWidget('CancellationsView');
+  DWidget get home => dWidget('navHome');
+
+  SerializableFinder get timeline => find.byValueKey('TwitterTimeline');
 }

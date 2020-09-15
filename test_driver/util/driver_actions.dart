@@ -16,4 +16,18 @@ extension CommonTestActions on TestAction {
         },
         name: 'tapping text "$text"',
       );
+
+  static TestAction scrollForText(
+    FlutterDriver driver,
+    SerializableFinder scrollable,
+    String text, {
+    double amount = 300,
+  }) =>
+      TestAction(
+        () => driver.scrollUntilVisible(
+          scrollable,
+          find.text(text),
+          dyScroll: -amount,
+        ),
+      );
 }
