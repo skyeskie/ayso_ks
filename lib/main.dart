@@ -5,7 +5,7 @@ import 'module/main/app.dart';
 import 'routes_config.dart';
 
 void main() {
-  setupDependencyInjection();
+  DIConfig.setupDependencyInjection();
   Routing.createRoutes();
   runApp(AysoApp());
 }
