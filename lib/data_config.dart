@@ -8,6 +8,9 @@ import 'models/region.dart';
 /// Do not access this directly. Instead use the static accessor on the various
 /// model classes ([AgeGroup.AGES], [Gender.GENDERS], [Region.REGIONS])
 class DataConfig {
+  /// Twitter username to pull cancellations from
+  static const String twitterUsername = 'aysoks';
+
   /// Configuration of all age groupings
   ///
   /// See [AgeGroup] for code and cutoff description
