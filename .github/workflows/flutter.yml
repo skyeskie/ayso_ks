@@ -22,7 +22,7 @@ jobs:
       with:
         #Temporarily fix to 1.21 version, until flutter_form_builder and FormKey issue resolved
         flutter-version: '1.21.x'
-        #channel: 'beta' # ('dev', 'beta', 'stable')
+        channel: 'beta' # ('dev', 'beta', 'stable')
     # Setup
     - name: Install packages
       run: flutter pub get
