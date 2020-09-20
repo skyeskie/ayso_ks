@@ -20,7 +20,9 @@ jobs:
         java-version: '12.x'
     - uses: subosito/flutter-action@v1
       with:
-        channel: 'beta' # optional, default to: 'stable'
+        #Temporarily fix to 1.21 version, until flutter_form_builder and FormKey issue resolved
+        flutter-version: '1.21.x'
+        #channel: 'beta' # ('dev', 'beta', 'stable')
     # Setup
     - name: Install packages
       run: flutter pub get
