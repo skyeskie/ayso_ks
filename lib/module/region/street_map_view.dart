@@ -25,7 +25,7 @@ class StreetMapView extends StatelessWidget {
         initialScale: 1.0,
         minScale: 1.0,
         maxScale: 1.0,
-        basePosition: Alignment(0.0, -0.9),
+        basePosition: Alignment.center,
       ),
       floatingActionButton: RaisedButton.icon(
         onPressed: () => MapsLauncher.launchCoordinates(

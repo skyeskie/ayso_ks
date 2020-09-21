@@ -1,6 +1,7 @@
 @Tags(['model'])
 
 import 'package:ayso_ks/models/region.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -58,6 +59,16 @@ void main() {
       }
     });
 
-    //TODO? test('map files exist in assets', () {});
+    test('street map files exist in assets', () async {
+      TestWidgetsFlutterBinding.ensureInitialized();
+
+      final streetMaps = Region.REGIONS.map((e) => e.streetMap).toSet();
+      expect(streetMaps, hasLength(Region.REGIONS.length));
+
+      for (final file in streetMaps) {
+        // Will throw if not present
+        expect(await rootBundle.load(file), isNotNull);
+      }
+    });
   });
 }

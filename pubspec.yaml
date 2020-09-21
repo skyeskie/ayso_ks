@@ -55,5 +55,9 @@ flutter:
     - img/HomeText.png
     - img/KansasSoccerBall.svg
     - img/MainLogo.png
-    - img/osm_region49_1500sq.png
+    - img/osm_region49_1500sq_mk.png
+    - img/osm_region105_1500sq_mk.png
+    - img/osm_region208_1500sq_mk.png
+    - img/osm_region253_1500sq_mk.png
+    - img/osm_region491_1500sq_mk.png
     - res/data.json
