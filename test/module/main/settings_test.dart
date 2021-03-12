@@ -15,7 +15,9 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Loading...'), findsNothing);
 
-    final radioFinder = find.byType(FormBuilderRadioGroup);
+    final radioFinder = find.byWidgetPredicate(
+            (widget) => widget is FormBuilderRadioGroup<int>
+    );
     expect(radioFinder, findsOneWidget);
     final form = tester.firstState<FormBuilderState>(find.byType(FormBuilder))
       ..save();

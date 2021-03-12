@@ -55,8 +55,8 @@ class _SettingsViewState extends State<SettingsView> with SettingsInjection {
     return Column(
       children: [
         FormBuilderRadioGroup(
-          attribute: 'region',
-          orientation: GroupedRadioOrientation.vertical,
+          name: 'region',
+          orientation: OptionsOrientation.vertical,
           initialValue: _settings.regionNumber,
           decoration: InputDecoration(
             labelText: 'Home Region',

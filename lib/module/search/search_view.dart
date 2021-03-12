@@ -48,7 +48,7 @@ class _SearchViewState extends State<SearchView> with WeekCacheInjection {
                 Spacer(flex: 5),
                 FormBuilderSlider(
                   numberFormat: NumberFormat('###'),
-                  attribute: 'week',
+                  name: 'week',
                   min: 1,
                   max: _maxWeeks.toDouble(),
                   divisions: _maxWeeks - 1,
@@ -62,7 +62,7 @@ class _SearchViewState extends State<SearchView> with WeekCacheInjection {
                 ),
                 Spacer(),
                 FormBuilderDropdown(
-                  attribute: 'regionNum',
+                  name: 'regionNum',
                   decoration: InputDecoration(labelText: 'Region'),
                   items: Region.REGIONS
                       .map((r) => DropdownMenuItem<int>(
@@ -81,7 +81,7 @@ class _SearchViewState extends State<SearchView> with WeekCacheInjection {
                   children: [
                     Expanded(
                       child: FormBuilderDropdown(
-                        attribute: 'age',
+                        name: 'age',
                         decoration: InputDecoration(labelText: 'Age'),
                         items: AgeGroup.AGES
                             .map((ag) => DropdownMenuItem<String>(
@@ -94,7 +94,7 @@ class _SearchViewState extends State<SearchView> with WeekCacheInjection {
                     SizedBox(width: 30),
                     Expanded(
                       child: FormBuilderDropdown(
-                        attribute: 'gender',
+                        name: 'gender',
                         decoration: InputDecoration(labelText: 'Gender'),
                         items: Gender.GENDERS
                             .map((g) => DropdownMenuItem<String>(

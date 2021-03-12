@@ -130,7 +130,7 @@ class _InitViewState extends State<InitView> {
         subtitleText: 'One-time setup to prepare the app for use',
       ),
       content: FormBuilderDropdown(
-        attribute: 'region',
+        name: 'region',
         onChanged: _setRegionNum,
         decoration: InputDecoration(
           hintText: 'Select your home region...',
