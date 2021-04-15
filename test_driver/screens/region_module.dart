@@ -1,26 +1,19 @@
-import 'package:flutter_driver/src/driver/driver.dart';
 import 'package:flutter_driver_helper/flutter_driver_helper.dart';
 
-class RegionListScreen extends BaseScreen {
-  RegionListScreen(FlutterDriver driver) : super(driver);
+class RegionListScreen extends TestScreen {
+  TestWidget get view => tWidget('RegionListView');
+  TestWidget get home => tWidget('navHome');
 
-  DWidget get view => dWidget('RegionListView');
-  DWidget get home => dWidget('navHome');
-
-  DWidget roadMap(int regionNum) => dWidget('navRegion$regionNum-RoadMap');
-  DWidget fieldMap(int regionNum) => dWidget('navRegion$regionNum-FieldMap');
+  TestWidget roadMap(int regionNum) => tWidget('navRegion$regionNum-RoadMap');
+  TestWidget fieldMap(int regionNum) => tWidget('navRegion$regionNum-FieldMap');
 }
 
-class StreetMapScreen extends BaseScreen {
-  StreetMapScreen(FlutterDriver driver) : super(driver);
-
-  DWidget get view => dWidget('StreetMapView');
-  DWidget get home => dWidget('navHome');
+class StreetMapScreen extends TestScreen {
+  TestWidget get view => tWidget('StreetMapView');
+  TestWidget get home => tWidget('navHome');
 }
 
-class FieldScreen extends BaseScreen {
-  FieldScreen(FlutterDriver driver) : super(driver);
-
-  DWidget get view => dWidget('FieldView');
-  DWidget get home => dWidget('navHome');
+class FieldScreen extends TestScreen {
+  TestWidget get view => tWidget('FieldView');
+  TestWidget get home => tWidget('navHome');
 }

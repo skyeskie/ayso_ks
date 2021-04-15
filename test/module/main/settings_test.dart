@@ -4,6 +4,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../mock/test_it.dart';
+import '../../util/form_builder_finder.dart';
 
 void main() {
   tearDown(TestIt.clean);
@@ -15,7 +16,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Loading...'), findsNothing);
 
-    final radioFinder = find.byType(FormBuilderRadioGroup);
+    final radioFinder = find.formBuilderAttribute('region');
     expect(radioFinder, findsOneWidget);
     final form = tester.firstState<FormBuilderState>(find.byType(FormBuilder))
       ..save();

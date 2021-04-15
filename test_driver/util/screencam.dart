@@ -33,7 +33,7 @@ class Screencam implements Screenshoter {
 
   @override
   TestAction screenshot(String name) =>
-      TestAction(() => saveScreen(name), name: 'take screenshot $name');
+      TestAction((tester) => saveScreen(name), name: 'take screenshot $name');
 }
 
 //

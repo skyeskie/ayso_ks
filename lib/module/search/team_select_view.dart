@@ -22,6 +22,10 @@ class _TeamSelectViewState extends State<TeamSelectView> with TeamsInjection {
 
   ValueNotifier<Iterable<Team>> teams = ValueNotifier<Iterable<Team>>([]);
 
+  int _region;
+  String _age;
+  String _gender;
+
   @override
   void initState() {
     print('initState');
@@ -29,15 +33,13 @@ class _TeamSelectViewState extends State<TeamSelectView> with TeamsInjection {
     super.initState();
   }
 
-  void refilterTeams(Map<String, dynamic> newVal) {
-    final region = newVal['region'];
-    final age = newVal['age'];
-    final gender = newVal['gender'];
+  void refilterTeams(Function updateValue) {
+    updateValue();
     teamsDAO
         .findTeams(
-          regionNumber: (region == 0) ? null : region,
-          ageString: (age == '') ? null : age,
-          genderLong: (gender == '') ? null : gender,
+          regionNumber: (_region == 0) ? null : _region,
+          ageString: (_age == '') ? null : _age,
+          genderLong: (_gender == '') ? null : _gender,
         )
         .then((value) => teams.value = value);
   }
@@ -62,14 +64,13 @@ class _TeamSelectViewState extends State<TeamSelectView> with TeamsInjection {
       appBar: buildNavBar('Select Team', context),
       body: FormBuilder(
         key: _fb,
-        onChanged: refilterTeams,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               FormBuilderChoiceChip(
-                attribute: 'region',
+                name: 'region',
                 initialValue: 0,
                 spacing: 1,
                 shape: BeveledRectangleBorder(
@@ -81,6 +82,7 @@ class _TeamSelectViewState extends State<TeamSelectView> with TeamsInjection {
                   border: InputBorder.none,
                   isDense: true,
                 ),
+                onChanged: (v) => refilterTeams(() { _region = v;}),
                 options: Region.REGIONS
                     .map(
                       (r) => FormBuilderFieldOption(
@@ -94,7 +96,7 @@ class _TeamSelectViewState extends State<TeamSelectView> with TeamsInjection {
                     .toList(growable: false),
               ),
               FormBuilderChoiceChip(
-                attribute: 'age',
+                name: 'age',
                 initialValue: '',
                 spacing: 1,
                 runSpacing: -12,
@@ -107,6 +109,7 @@ class _TeamSelectViewState extends State<TeamSelectView> with TeamsInjection {
                   border: InputBorder.none,
                   isDense: true,
                 ),
+                onChanged: (v) => refilterTeams(() { _age = v;}),
                 options: AgeGroup.AGES
                     .map(
                       (ag) => FormBuilderFieldOption(
@@ -120,13 +123,14 @@ class _TeamSelectViewState extends State<TeamSelectView> with TeamsInjection {
                     .toList(growable: false),
               ),
               FormBuilderChoiceChip(
-                attribute: 'gender',
+                name: 'gender',
                 initialValue: '',
                 decoration: InputDecoration(
                   labelText: 'Gender',
                   labelStyle: Theme.of(context).textTheme.headline6,
                   isDense: true,
                 ),
+                onChanged: (v) => refilterTeams(() { _gender = v;}),
                 options: Gender.GENDERS
                     .map(
                       (g) => FormBuilderFieldOption(

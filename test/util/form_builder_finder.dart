@@ -21,70 +21,61 @@ class FormBuilderFinder extends MatchFinder {
   bool matches(Element candidate) {
     final widget = candidate.widget;
     if (widget is FormBuilderCheckbox) {
-      return widget.attribute == attribute;
+      return widget.name == attribute;
     }
     if (widget is FormBuilderCheckboxGroup) {
-      return widget.attribute == attribute;
+      return widget.name == attribute;
     }
     if (widget is FormBuilderChipsInput) {
-      return widget.attribute == attribute;
+      return widget.name == attribute;
     }
     if (widget is FormBuilderChoiceChip) {
-      return widget.attribute == attribute;
-    }
-    if (widget is FormBuilderCountryPicker) {
-      return widget.attribute == attribute;
+      return widget.name == attribute;
     }
     if (widget is FormBuilderDateRangePicker) {
-      return widget.attribute == attribute;
+      return widget.name == attribute;
     }
     if (widget is FormBuilderDateTimePicker) {
-      return widget.attribute == attribute;
+      return widget.name == attribute;
     }
     if (widget is FormBuilderDropdown) {
-      return widget.attribute == attribute;
+      return widget.name == attribute;
     }
     if (widget is FormBuilderFilterChip) {
-      return widget.attribute == attribute;
-    }
-    if (widget is FormBuilderImagePicker) {
-      return widget.attribute == attribute;
-    }
-    if (widget is FormBuilderPhoneField) {
-      return widget.attribute == attribute;
+      return widget.name == attribute;
     }
     if (widget is FormBuilderRadioGroup) {
-      return widget.attribute == attribute;
+      return widget.name == attribute;
     }
     if (widget is FormBuilderRadioGroup) {
-      return widget.attribute == attribute;
+      return widget.name == attribute;
     }
     if (widget is FormBuilderRangeSlider) {
-      return widget.attribute == attribute;
+      return widget.name == attribute;
     }
-    if (widget is FormBuilderRate) {
-      return widget.attribute == attribute;
+    if (widget is FormBuilderRating) {
+      return widget.name == attribute;
     }
     if (widget is FormBuilderSegmentedControl) {
-      return widget.attribute == attribute;
+      return widget.name == attribute;
     }
     if (widget is FormBuilderSignaturePad) {
-      return widget.attribute == attribute;
+      return widget.name == attribute;
     }
     if (widget is FormBuilderSlider) {
-      return widget.attribute == attribute;
+      return widget.name == attribute;
     }
     if (widget is FormBuilderSwitch) {
-      return widget.attribute == attribute;
+      return widget.name == attribute;
     }
     if (widget is FormBuilderTextField) {
-      return widget.attribute == attribute;
+      return widget.name == attribute;
     }
     if (widget is FormBuilderTouchSpin) {
-      return widget.attribute == attribute;
+      return widget.name == attribute;
     }
     if (widget is FormBuilderTypeAhead) {
-      return widget.attribute == attribute;
+      return widget.name == attribute;
     }
     return false;
   }

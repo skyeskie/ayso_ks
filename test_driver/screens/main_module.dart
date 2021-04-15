@@ -1,40 +1,30 @@
-import 'package:flutter_driver/flutter_driver.dart';
-import 'package:flutter_driver/src/driver/driver.dart';
 import 'package:flutter_driver_helper/flutter_driver_helper.dart';
 
-class InitScreen extends BaseScreen {
-  InitScreen(FlutterDriver driver) : super(driver);
-
-  DWidget get formRegion => dWidget('regionDropdown');
-  DWidget formRegionValue(int region) => dWidget('regionDropdown_$region');
-  DWidget get formSubmit => dWidget('finishSubmit');
+class InitScreen extends TestScreen {
+  TestWidget get formRegion => tWidget('regionDropdown');
+  TestWidget formRegionValue(int region) => tWidget('regionDropdown_$region');
+  TestWidget get formSubmit => tWidget('finishSubmit');
 }
 
-class HomeScreen extends BaseScreen {
-  HomeScreen(FlutterDriver driver) : super(driver);
+class HomeScreen extends TestScreen {
+  TestWidget get view => tWidget('HomeView');
 
-  DWidget get view => dWidget('HomeView');
-
-  DWidget get schedules => dWidget('navSchedules');
-  DWidget get region => dWidget('navRegion');
-  DWidget get myTeams => dWidget('navFavorites');
-  DWidget get cancellations => dWidget('navCancellations');
-  DWidget get settings => dWidget('navSettings');
+  TestWidget get schedules => tWidget('navSchedules');
+  TestWidget get region => tWidget('navRegion');
+  TestWidget get myTeams => tWidget('navFavorites');
+  TestWidget get cancellations => tWidget('navCancellations');
+  TestWidget get settings => tWidget('navSettings');
 }
 
-class SettingsScreen extends BaseScreen {
-  SettingsScreen(FlutterDriver driver) : super(driver);
-
-  DWidget get view => dWidget('SettingsView');
-  DWidget get home => dWidget('navHome');
-  DWidget formRegionValue(int region) => dWidget('regionRadio_$region');
+class SettingsScreen extends TestScreen {
+  TestWidget get view => tWidget('SettingsView');
+  TestWidget get home => tWidget('navHome');
+  TestWidget formRegionValue(int region) => tWidget('regionRadio_$region');
 }
 
-class CancellationsScreen extends BaseScreen {
-  CancellationsScreen(FlutterDriver driver) : super(driver);
+class CancellationsScreen extends TestScreen {
+  TestWidget get view => tWidget('CancellationsView');
+  TestWidget get home => tWidget('navHome');
 
-  DWidget get view => dWidget('CancellationsView');
-  DWidget get home => dWidget('navHome');
-
-  SerializableFinder get timeline => find.byValueKey('TwitterTimeline');
+  TestWidget get timeline => tWidget('TwitterTimeline');
 }

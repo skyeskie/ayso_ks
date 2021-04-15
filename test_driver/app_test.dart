@@ -1,123 +1,106 @@
-import 'package:flutter_driver/flutter_driver.dart';
 import 'package:flutter_driver_helper/flutter_driver_helper.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
+import 'package:integration_test/integration_test.dart';
 
+import 'app.dart' as app_test;
 import 'screens/main_module.dart';
 import 'screens/region_module.dart';
 import 'screens/schedules_module.dart';
 import 'screens/search_module.dart';
 import 'util/driver_actions.dart';
-import 'util/isolates_workaround.dart';
-import 'util/screencam.dart';
 
 void main() {
+  IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+
   group('AYSO App', () {
-    FlutterDriver driver;
-    IsolatesWorkaround isoWork;
-    Screenshoter screen;
+    final screen = Screenshoter(0, './build/screenshots', enabled: false);
+
+    final initScreen = InitScreen();
+    final homeScreen = HomeScreen();
+    final scheduleMenuScreen = SchedulesMenuScreen();
+    final weekSchedulesScreen = WeekScheduleScreen();
+    final gameScreen = GameDetailScreen();
+    final regionListScreen = RegionListScreen();
+    final streetMapScreen = StreetMapScreen();
+    final fieldMapScreen = FieldScreen();
+    final favoritesScreen = FavoritesListScreen();
+    final teamSelectScreen = TeamSelectScreen();
+    final teamScheduleScreen = TeamScheduleScreen();
+    final schedulesMenuScreen = SchedulesMenuScreen();
+    final searchScreen = SearchScreen();
+    final searchResultsScreen = SearchResultsScreen();
+    final cancelScreen = CancellationsScreen();
+    final settingsScreen = SettingsScreen();
+    const lastTweetCreated = '07:01 • 04.22.2017';
 
     setUpAll(() async {
-      driver = await FlutterDriver.connect();
-      isoWork = IsolatesWorkaround(driver);
       //Put in options for screenshots
-      screen = Screencam(driver, './build/screenshots', enabled: false);
-      await isoWork.resumeIsolates();
+      // screen = Screencam(driver, './build/screenshots', enabled: false);
     });
 
-    tearDownAll(() async {
-      if (driver != null) {
-        await driver.close();
-        await isoWork.tearDown();
-      }
+    tearDown(() async {
+      GetIt.I.reset();
     });
 
-    test('check flutter driver health', () async {
-      final health = await driver.checkHealth();
-      print(health.status);
-    });
+    IntegrationTestRun('fill init form', app_test.main, actions: [
+      initScreen.formRegion.waitFor(),
+      initScreen.formRegion.tap(),
+      initScreen.formRegionValue(49).waitFor(),
+      initScreen.formRegionValue(49).tap(),
+      screen.screenshot('Initial configuration'),
+      initScreen.formSubmit.tap(),
+      homeScreen.view.waitFor(),
+      screen.screenshot('Home screen'),
+    ]).run();
 
-    test('fill init form', () async {
-      final initScreen = InitScreen(driver);
-      final homeScreen = HomeScreen(driver);
-
-      await runTestActions([
-        initScreen.formRegion.waitFor(),
-        initScreen.formRegion.tap(),
-        initScreen.formRegionValue(49).waitFor(),
-        initScreen.formRegionValue(49).tap(),
-        screen.screenshot('Initial configuration'),
-        initScreen.formSubmit.tap(),
-        homeScreen.view.waitFor(),
-        screen.screenshot('Home screen'),
-      ]);
-    });
-
-    test('view previous week schedule', () async {
-      final homeScreen = HomeScreen(driver);
-      final scheduleMenuScreen = SchedulesMenuScreen(driver);
-      final weekSchedulesScreen = WeekScheduleScreen(driver);
-
-      await runTestActions([
+    IntegrationTestRun('view previous week schedule', app_test.main, actions: [
         homeScreen.schedules.tap(),
         scheduleMenuScreen.view.waitFor(),
         screen.screenshot('Schedules menu'),
-        CommonTestActions.findText(driver, 'Region 49'),
+        CommonTestActions.findText('Region 49'),
         scheduleMenuScreen.week.tap(),
-        CommonTestActions.findText(driver, 'Week #8'),
+        CommonTestActions.findText('Week #8'),
         weekSchedulesScreen.prevWeek.tap(),
-        CommonTestActions.findText(driver, 'Week #7'),
+        CommonTestActions.findText('Week #7'),
         screen.screenshot('Current week schedule'),
-      ]);
-    });
+      ]).run();
 
-    test('view game info', () async {
-      final homeScreen = HomeScreen(driver);
-      final gameScreen = GameDetailScreen(driver);
-
-      await runTestActions([
-        CommonTestActions.tapText(driver, '1702B vs 1706B'),
+    IntegrationTestRun('view game info', app_test.main, actions: [
+      homeScreen.schedules.tap(),
+      scheduleMenuScreen.view.waitFor(),
+      scheduleMenuScreen.week.tap(),
+      weekSchedulesScreen.prevWeek.tap(),
+        CommonTestActions.tapText('1702B vs 1706B'),
         gameScreen.view.waitFor(),
         screen.screenshot('Game detail'),
-        CommonTestActions.findText(driver, 'Oct 31, 12:15'),
-        CommonTestActions.findText(driver, 'Home Team'),
-        CommonTestActions.findText(driver, 'Away Team'),
+        CommonTestActions.findText('Oct 31, 12:15'),
+        CommonTestActions.findText('Home Team'),
+        CommonTestActions.findText('Away Team'),
         gameScreen.home.tap(),
         homeScreen.view.waitFor(),
-      ]);
-    });
+      ]).run();
 
-    test('view region info', () async {
-      final homeScreen = HomeScreen(driver);
-      final regionListScreen = RegionListScreen(driver);
-      final streetMapScreen = StreetMapScreen(driver);
-      final fieldMapScreen = FieldScreen(driver);
-
-      await runTestActions([
+    IntegrationTestRun('view region info', app_test.main, actions: [
         homeScreen.region.tap(),
         regionListScreen.view.waitFor(),
         screen.screenshot('Region list'),
         regionListScreen.roadMap(105).tap(),
         streetMapScreen.view.waitFor(),
-        CommonTestActions.findText(driver, 'Region 105'),
+        CommonTestActions.findText('Region 105'),
         screen.screenshot('Road map'),
         streetMapScreen.pageBack.tap(),
         regionListScreen.view.waitFor(),
         regionListScreen.fieldMap(253).tap(),
         fieldMapScreen.view.waitFor(),
-        CommonTestActions.findText(driver, 'Region 253 Fields'),
+        CommonTestActions.findText('Region 253 Fields'),
         screen.screenshot('Field map'),
         fieldMapScreen.home.tap(),
         homeScreen.view.waitFor(),
-      ]);
-    });
+      ]).run('fieldMap 253 throws error');
 
-    test('set favorite team from blank favorites', () async {
-      final homeScreen = HomeScreen(driver);
-      final favoritesScreen = FavoritesListScreen(driver);
-      final teamSelectScreen = TeamSelectScreen(driver);
-      final teamScheduleScreen = TeamScheduleScreen(driver);
-
-      await runTestActions([
+    IntegrationTestRun('set favorite team from blank favorites',
+            app_test.main, actions: [
         homeScreen.myTeams.tap(),
         favoritesScreen.view.waitFor(),
         favoritesScreen.findTeam.waitFor(),
@@ -134,10 +117,10 @@ void main() {
         teamSelectScreen.resultTeam('252B').tap(),
         teamScheduleScreen.view.waitFor(),
         screen.screenshot('Team schedule'),
-        CommonTestActions.findText(driver, 'Team 252B'),
-        CommonTestActions.findText(driver, 'Favorite'),
+        CommonTestActions.findText('Team 252B'),
+        CommonTestActions.findText('Favorite'),
         teamScheduleScreen.favoriteToggle.tap(),
-        CommonTestActions.findText(driver, 'UnFavorite'),
+        CommonTestActions.findText('UnFavorite'),
         teamScheduleScreen.pageBack.tap(),
         teamSelectScreen.view.waitFor(),
         teamSelectScreen.pageBack.tap(),
@@ -145,52 +128,37 @@ void main() {
         favoritesScreen.findTeam.waitForAbsent(),
         favoritesScreen.pageBack.tap(),
         homeScreen.view.waitFor(),
-      ]);
-    });
+      ]).run();
 
-    test('set favorite team from search', () async {
-      final homeScreen = HomeScreen(driver);
-      final teamSelectScreen = TeamSelectScreen(driver);
-      final teamScheduleScreen = TeamScheduleScreen(driver);
-      final schedulesMenuScreen = SchedulesMenuScreen(driver);
-
-      await runTestActions([
+    IntegrationTestRun('set favorite team from search',
+            app_test.main, actions: [
         homeScreen.schedules.tap(),
         schedulesMenuScreen.view.waitFor(),
         schedulesMenuScreen.teamSelect.tap(),
         teamSelectScreen.view.waitFor(),
-        teamSelectScreen.resultTeam('1601G').scrollUntilVisible(dyScroll: -150),
+        //ERROR
+        teamSelectScreen.resultTeam('1601G').scrollUntilVisible(
+            -150, scrollable: teamSelectScreen.results.finderSingle
+        ),
         teamSelectScreen.resultTeam('1601G').tap(),
         teamScheduleScreen.view.waitFor(),
         teamScheduleScreen.favoriteToggle.tap(),
         teamScheduleScreen.home.tap(),
         homeScreen.view.waitFor(),
-      ]);
-    });
+      ]).run('scrollUntilVisible not working');
 
-    test('view favorite teams', () async {
-      final homeScreen = HomeScreen(driver);
-      final favoritesScreen = FavoritesListScreen(driver);
-
-      await runTestActions([
+    IntegrationTestRun('view favorite teams', app_test.main, actions: [
         homeScreen.myTeams.tap(),
         favoritesScreen.view.waitFor(),
         favoritesScreen.findTeam.waitForAbsent(),
         favoritesScreen.favoriteTeam('252B').waitFor(),
         screen.screenshot('Favorites schedule'),
-        CommonTestActions.findText(driver, '1603G vs 1601G'),
+        CommonTestActions.findText('1603G vs 1601G'),
         favoritesScreen.pageBack.tap(),
         homeScreen.view.waitFor(),
-      ]);
-    });
+      ]).run('depends on "set favorite team" test');
 
-    test('search for games', () async {
-      final homeScreen = HomeScreen(driver);
-      final schedulesMenuScreen = SchedulesMenuScreen(driver);
-      final searchScreen = SearchScreen(driver);
-      final searchResultsScreen = SearchResultsScreen(driver);
-
-      await runTestActions([
+    IntegrationTestRun('search for games', app_test.main, actions: [
         homeScreen.schedules.tap(),
         schedulesMenuScreen.view.waitFor(),
         schedulesMenuScreen.search.tap(),
@@ -202,26 +170,20 @@ void main() {
         searchScreen.ageOption(8).tap(),
         searchScreen.submit.tap(),
         searchResultsScreen.view.waitFor(),
-        CommonTestActions.findText(driver, 'Region 105'),
-        CommonTestActions.findText(driver, 'Age U8'),
-        CommonTestActions.findText(driver, '261B vs 565B'),
+        CommonTestActions.findText('Region 105'),
+        CommonTestActions.findText('Age U8'),
+        CommonTestActions.findText('261B vs 565B'),
         searchResultsScreen.nextWeek.tap(),
         searchResultsScreen.prevWeek.waitFor(),
         screen.screenshot('Search results'),
-        CommonTestActions.findText(driver, '261B vs 262B'),
+        CommonTestActions.findText('261B vs 262B'),
         searchResultsScreen.pageBack.tap(),
         searchScreen.view.waitFor(),
         searchScreen.home.tap(),
         homeScreen.view.waitFor(),
-      ]);
-    });
+      ]).run();
 
-    test('change region and verify', () async {
-      final homeScreen = HomeScreen(driver);
-      final scheduleMenuScreen = SchedulesMenuScreen(driver);
-      final settingsScreen = SettingsScreen(driver);
-
-      await runTestActions([
+    IntegrationTestRun('change region and verify', app_test.main, actions: [
         homeScreen.settings.tap(),
         settingsScreen.view.waitFor(),
         settingsScreen.formRegionValue(208).tap(),
@@ -230,40 +192,27 @@ void main() {
         homeScreen.view.waitFor(),
         homeScreen.schedules.tap(),
         scheduleMenuScreen.view.waitFor(),
-        CommonTestActions.findText(driver, 'Region 208'),
+        CommonTestActions.findText('Region 208'),
         scheduleMenuScreen.pageBack.tap(),
         homeScreen.view.waitFor(),
-      ]);
-    });
+      ]).run();
 
-    test('View cancellations', () async {
-      final homeScreen = HomeScreen(driver);
-      final cancelScreen = CancellationsScreen(driver);
+    // 'All games at AYSO Region 49 for April 22 have been '
+    // 'cancelled because of wet fields.';
 
-      const lastTweetCreated = '07:01 • 04.22.2017';
-      // 'All games at AYSO Region 49 for April 22 have been '
-      // 'cancelled because of wet fields.';
-
-      await runTestActions([
+    IntegrationTestRun('View cancellations', app_test.main, actions: [
         homeScreen.cancellations.tap(),
         cancelScreen.view.waitFor(),
         CommonTestActions.scrollForText(
-          driver,
-          cancelScreen.timeline,
+          cancelScreen.timeline.finderSingle,
           lastTweetCreated,
           amount: 500,
         ),
         cancelScreen.home.tap(),
         homeScreen.view.waitFor(),
-      ]);
-    });
+      ]).run('need to redo scroll');
 
-    test('remove team from favorites', () async {
-      final homeScreen = HomeScreen(driver);
-      final favoritesScreen = FavoritesListScreen(driver);
-      final teamScheduleScreen = TeamScheduleScreen(driver);
-
-      await runTestActions([
+    IntegrationTestRun('remove team from favorites', app_test.main, actions: [
         homeScreen.myTeams.tap(),
         favoritesScreen.view.waitFor(),
         favoritesScreen.findTeam.waitForAbsent(),
@@ -276,9 +225,9 @@ void main() {
         favoritesScreen.favoriteTeam('252B').waitForAbsent(),
         favoritesScreen.pageBack.tap(),
         homeScreen.view.waitFor(),
-      ]);
-    });
+      ]).run();
 
-    test('reset app - delete favorites', () async {}, skip: 'TODO');
+    IntegrationTestRun('reset app - delete favorites', app_test.main, actions: [
+      ]).run('TODO');
   });
 }

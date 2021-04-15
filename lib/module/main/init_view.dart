@@ -148,7 +148,7 @@ class _InitViewState extends State<InitView> {
             padding: EdgeInsets.symmetric(horizontal: 15),
             child: FormBuilderDropdown(
               key: ValueKey('regionDropdown'),
-              attribute: 'region',
+              name: 'region',
               onChanged: _setRegionNum,
               decoration: InputDecoration(
                 hintText: 'Select your home region...',
