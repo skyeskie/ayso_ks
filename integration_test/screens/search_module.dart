@@ -1,5 +1,4 @@
 import 'package:flutter_driver_helper/flutter_driver_helper.dart';
-import 'package:flutter_driver_helper/flutter_driver_helper_legacy.dart';
 
 class SearchScreen extends TestScreen {
   TestWidget get view => tWidget('SearchView');
