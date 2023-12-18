@@ -8,6 +8,8 @@ import 'models/region.dart';
 /// Do not access this directly. Instead use the static accessor on the various
 /// model classes ([AgeGroup.AGES], [Gender.GENDERS], [Region.REGIONS])
 class DataConfig {
+  static const String updateUrl = '';
+
   /// Twitter username to pull cancellations from
   static const String twitterUsername = 'aysoks';
 

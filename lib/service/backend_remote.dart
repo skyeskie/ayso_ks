@@ -1,24 +1,24 @@
 import 'dart:collection';
 
-import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
 
+import '../data_config.dart';
 import '../models/game.dart';
 import '../models/team.dart';
 import '../util/date_calc.dart';
 import 'backend_interface.dart';
 import 'json_model.dart';
 
-/// Data implementation that extracts data from a Json file in Assets
-///
-/// Specific file is configured as "res/data.json"
-class BackendJsonAsset implements BackendInterface {
+class BackendRemote extends BackendInterface {
   JsonModel _json;
-
+  
   Future<JsonModel> _init() async {
-    _json ??= await rootBundle.loadStructuredData<JsonModel>(
-      'res/data.json',
-      JsonModel.parse, // ignore: unnecessary_lambdas
-    );
+    if(_json == null) {
+      final response = await http.post(DataConfig.updateUrl, body: {
+      });
+      _json = JsonModel.fromJsonString(response.body);
+    }
+
     return Future.value(_json);
   }
 
